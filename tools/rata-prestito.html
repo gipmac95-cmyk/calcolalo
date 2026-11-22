@@ -1,0 +1,62 @@
+<!--
+title: Calcolo rata prestito e finanziamento: rata, interessi e TAEG
+h1: Rata del prestito o finanziamento
+desc: Calcola la rata mensile di un prestito personale o di un finanziamento auto, gli interessi totali e il TAEG reale comprese le spese.
+card: Rata mensile, interessi e TAEG reale di un prestito.
+icon: 💳
+cat: Casa
+updated: 2026-11-22
+order: 12
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pr_imp">Importo richiesto</label><div class="inp"><input id="pr_imp" type="number" inputmode="decimal" value="15000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="pr_tan">TAN</label><div class="inp"><input id="pr_tan" type="number" inputmode="decimal" value="7.9" step="0.1" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="pr_mesi">Durata</label><div class="inp"><input id="pr_mesi" type="number" inputmode="numeric" value="60" step="6" min="1" max="120"><span class="suf">mesi</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pr_istr">Spese di istruttoria</label><div class="inp"><input id="pr_istr" type="number" inputmode="decimal" value="150" step="10" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="pr_inc">Spese mensili di incasso</label><div class="inp"><input id="pr_inc" type="number" inputmode="decimal" value="2" step="0.5" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="field"><label for="pr_alt">Altre spese una tantum <span class="hint">(es. polizza obbligatoria, imposta di bollo)</span></label><div class="inp"><input id="pr_alt" type="number" inputmode="decimal" value="16" step="1" min="0"><span class="suf">€</span></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Rata mensile</div>
+    <div class="big" id="pr_rata">–</div>
+    <div class="range" id="pr_taeg">–</div>
+    <div class="lines">
+      <div class="ln"><span>Interessi totali</span><b id="pr_int">–</b></div>
+      <div class="ln"><span>Spese totali</span><b id="pr_sp">–</b></div>
+      <div class="ln"><span>Totale da restituire</span><b id="pr_tot">–</b></div>
+      <div class="ln"><span>Costo totale del prestito</span><b id="pr_costo">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Confronta le offerte</div>
+    <div class="links" id="pr_links"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola la rata di un prestito?</h2>
+  <p>Con l'ammortamento alla francese la rata è sempre uguale: rata = importo × i / (1 − (1 + i)<sup>−n</sup>), dove i è il TAN diviso 12 e n il numero di mesi. All'inizio la rata è fatta soprattutto di interessi, poi cresce la quota di capitale.</p>
+  <h2>Che differenza c'è tra TAN e TAEG?</h2>
+  <p>Il TAN è il tasso di interesse puro. Il TAEG è il costo reale del prestito, perché comprende anche le spese di istruttoria, di incasso rata e le altre spese obbligatorie. Per confrontare due offerte guarda sempre il TAEG: un TAN basso con spese alte può costare più di un TAN alto senza spese.</p>
+  <h2>Conviene il finanziamento in concessionaria?</h2>
+  <p>Dipende dal TAEG e dalle condizioni. Le offerte "a tasso zero" spesso hanno TAEG diverso da zero per le spese, oppure una maxirata finale. Confronta sempre l'offerta della concessionaria con un prestito personale e con il prezzo in caso di pagamento in contanti.</p>
+</article>
+<script>
+function calcPR(){
+  const P=val('pr_imp'),n=Math.max(1,Math.round(val('pr_mesi'))),i=val('pr_tan')/100/12,inc=val('pr_inc'),one=val('pr_istr')+val('pr_alt');
+  if(P<=0){['pr_rata','pr_int','pr_sp','pr_tot','pr_costo'].forEach(x=>$(x).textContent='–');$('pr_taeg').textContent='–';return}
+  const rata=i===0?P/n:P*i/(1-Math.pow(1+i,-n)),interessi=rata*n-P,spese=one+inc*n;
+  // TAEG: tasso annuo r tale che (P - spese iniziali) = somma (rata+inc)/(1+r)^(k/12)
+  const net=P-one,pay=rata+inc;let lo=0,hi=2;
+  for(let k=0;k<100;k++){const r=(lo+hi)/2,m=Math.pow(1+r,1/12)-1;let pv=0;for(let t=1;t<=n;t++)pv+=pay/Math.pow(1+m,t);if(pv>net)lo=r;else hi=r}
+  const taeg=(lo+hi)/2*100;
+  $('pr_rata').textContent=eur(rata+inc);$('pr_taeg').textContent='TAEG stimato: '+num(taeg,2)+'% · TAN '+num(val('pr_tan'),2)+'%';
+  $('pr_int').textContent=eur(interessi);$('pr_sp').textContent=eur(spese);$('pr_tot').textContent=eur((rata+inc)*n+one);$('pr_costo').textContent=eur(interessi+spese);
+}
+$('pr_links').innerHTML=lk([['https://www.segugio.it/','Segugio.it','Confronto prestiti personali'],['https://www.facile.it/','Facile.it','Confronto prestiti personali'],['https://www.sostariffe.it/','SOStariffe.it','Confronto prestiti personali']]);
+on(['pr_imp','pr_tan','pr_mesi','pr_istr','pr_inc','pr_alt'],calcPR);calcPR();
+</script>

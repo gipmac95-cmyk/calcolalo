@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quanto costa un&#x27;auto all&#x27;anno – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/costo-auto-anno/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">📊</span><b>Quanto costa un&#x27;auto all&#x27;anno</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="row2">
+      <div class="field"><label for="ca_km">Km all'anno</label><div class="inp"><input id="ca_km" type="number" inputmode="numeric" value="12000" step="500" min="0"><span class="suf">km</span></div></div>
+      <div class="field"><label for="ca_alim">Alimentazione</label><div class="inp"><select id="ca_alim"><option value="b" selected>Benzina</option><option value="d">Diesel</option><option value="g">GPL</option><option value="e">Elettrica</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_cons" id="ca_consl">Consumo medio</label><div class="inp"><input id="ca_cons" type="number" inputmode="decimal" value="6.5" step="0.1" min="0"><span class="suf" id="ca_conss">L/100 km</span></div></div>
+      <div class="field"><label for="ca_prezzo" id="ca_prezzol">Prezzo carburante</label><div class="inp"><input id="ca_prezzo" type="number" inputmode="decimal" value="1.95" step="0.01" min="0"><span class="suf" id="ca_prezzos">€/L</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_ass">Assicurazione RC auto</label><div class="inp"><input id="ca_ass" type="number" inputmode="decimal" value="550" step="10" min="0"><span class="suf">€/anno</span></div></div>
+      <div class="field"><label for="ca_bollo">Bollo</label><div class="inp"><input id="ca_bollo" type="number" inputmode="decimal" value="180" step="5" min="0"><span class="suf">€/anno</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_man">Manutenzione e tagliandi</label><div class="inp"><input id="ca_man" type="number" inputmode="decimal" value="350" step="10" min="0"><span class="suf">€/anno</span></div></div>
+      <div class="field"><label for="ca_gomme">Prezzo di un treno di 4 gomme</label><div class="inp"><input id="ca_gomme" type="number" inputmode="decimal" value="400" step="10" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_val">Valore attuale dell'auto</label><div class="inp"><input id="ca_val" type="number" inputmode="decimal" value="12000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="ca_park">Parcheggi, pedaggi, lavaggi</label><div class="inp"><input id="ca_park" type="number" inputmode="decimal" value="250" step="10" min="0"><span class="suf">€/anno</span></div></div>
+    </div>
+    <p class="note">Valori iniziali: benzina al prezzo medio self di novembre 2026, assicurazione tra la media IVASS e quella dei nuovi contratti, bollo di un'auto Euro 6 da circa 70 kW. Il bollo esatto lo calcoli con il calcolatore dedicato.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Costo totale all'anno</div>
+    <div class="big" id="ca_anno">–</div>
+    <div class="range" id="ca_mese">–</div>
+    <div class="lines" id="ca_lines"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Quanto costa mantenere un'auto in Italia?</h2>
+  <p>Tra carburante, assicurazione, bollo, manutenzione, gomme e revisione, un'auto costa in genere alcune migliaia di euro all'anno. A questo va aggiunta la svalutazione: la perdita di valore dell'auto è spesso la voce più alta, anche se non si vede finché non la vendi.</p>
+  <h2>Come si calcola la svalutazione?</h2>
+  <p>Il calcolatore stima che un'auto usata perda circa il 10% del suo valore ogni anno, più una quota legata ai chilometri. Le auto nuove perdono di più nei primi anni. Per una stima più precisa del valore della tua auto usa il calcolatore "Quanto vale la mia auto".</p>
+  <h2>Come si riduce il costo dell'auto?</h2>
+  <p>Le voci su cui si risparmia di più sono l'assicurazione, confrontando ogni anno i preventivi, e il carburante, scegliendo i distributori più economici e una guida fluida. Una manutenzione regolare evita guasti costosi e mantiene più alto il valore di rivendita.</p>
+</article>
+<p class="embed-credit">Calcolatore gratuito di <a href="https://vuoisaperequantocosta.it/costo-auto-anno/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+const CA={b:['Consumo medio','L/100 km','Prezzo benzina','€/L',6.5,1.95],d:['Consumo medio','L/100 km','Prezzo gasolio','€/L',5.5,2.20],g:['Consumo medio','L/100 km','Prezzo GPL','€/L',8,0.80],e:['Consumo medio','kWh/100 km','Prezzo ricarica medio','€/kWh',16,0.45]};
+let caAlim='b';
+$('ca_alim').addEventListener('change',()=>{caAlim=$('ca_alim').value;const c=CA[caAlim];$('ca_consl').textContent=c[0];$('ca_conss').textContent=c[1];$('ca_prezzol').textContent=c[2];$('ca_prezzos').textContent=c[3];$('ca_cons').value=c[4];$('ca_prezzo').value=c[5];
+  if(caAlim==='e'){$('ca_bollo').value=0;$('ca_man').value=200}calcCA()});
+function calcCA(){
+  const km=val('ca_km'),carb=km*val('ca_cons')/100*val('ca_prezzo'),gom=val('ca_gomme')*km/40000,rev=79.02/2,sval=val('ca_val')*0.10+km*0.02;
+  const V=[['Carburante o ricarica',carb],['Assicurazione',val('ca_ass')],['Bollo',val('ca_bollo')],['Manutenzione',val('ca_man')],['Gomme',gom],['Revisione (ogni 2 anni)',rev],['Parcheggi, pedaggi, lavaggi',val('ca_park')],['Svalutazione stimata',sval]];
+  const tot=V.reduce((s,x)=>s+x[1],0),vivi=tot-sval;
+  $('ca_anno').textContent=eur0(tot);$('ca_mese').textContent=eur0(tot/12)+' al mese · '+(km>0?eur(tot/km)+' al km':'–');
+  $('ca_lines').innerHTML=V.map(([t,v])=>`<div class="ln"><span>${t}</span><b>${eur0(v)}</b></div>`).join('')+`<div class="ln" style="font-weight:600"><span>Spese vive senza svalutazione</span><b>${eur0(vivi)}</b></div>`;
+}
+on(['ca_km','ca_cons','ca_prezzo','ca_ass','ca_bollo','ca_man','ca_gomme','ca_val','ca_park'],calcCA);calcCA();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

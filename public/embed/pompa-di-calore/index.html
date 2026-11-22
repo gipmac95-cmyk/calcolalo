@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pompa di calore o caldaia? – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/pompa-di-calore/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">♨️</span><b>Pompa di calore o caldaia?</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pc_smc">Gas consumato in un anno per riscaldamento e acqua calda</label><div class="inp"><input id="pc_smc" type="number" inputmode="numeric" value="1000" step="50" min="0"><span class="suf">Smc</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="pc_gas">Prezzo gas tutto compreso</label><div class="inp"><input id="pc_gas" type="number" inputmode="decimal" value="1.768" step="0.01" min="0"><span class="suf">€/Smc</span></div></div>
+      <div class="field"><label for="pc_rend">Caldaia attuale</label><div class="inp"><select id="pc_rend"><option value="0.80">Vecchia (oltre 15 anni)</option><option value="0.90" selected>Tradizionale</option><option value="0.98">A condensazione</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pc_luce">Prezzo luce tutto compreso</label><div class="inp"><input id="pc_luce" type="number" inputmode="decimal" value="0.4343" step="0.005" min="0"><span class="suf">€/kWh</span></div></div>
+      <div class="field"><label for="pc_scop">Efficienza della pompa (SCOP)</label><div class="inp"><select id="pc_scop"><option value="2.6">Bassa – radiatori ad alta temperatura</option><option value="3.2" selected>Media – radiatori</option><option value="4">Alta – pavimento radiante, casa isolata</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pc_costo">Costo pompa di calore installata</label><div class="inp"><input id="pc_costo" type="number" inputmode="decimal" value="10000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="pc_inc">Incentivo o detrazione</label><div class="inp"><input id="pc_inc" type="number" inputmode="numeric" value="0" step="5" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="note">Prezzi iniziali di luce e gas: riferimento ARERA per il cliente tipo in tutela (luce ottobre–dicembre 2026, gas ottobre 2026). Con un'offerta luce dedicata alla pompa di calore o con i pannelli solari il risparmio cresce. Le detrazioni fiscali e il Conto Termico cambiano spesso: verifica la percentuale aggiornata prima di decidere.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="pc_win">–</div>
+    <div class="big" id="pc_save">–</div>
+    <div class="range" id="pc_pay">–</div>
+    <div class="lines">
+      <div class="ln"><span>Spesa annua con la caldaia</span><b id="pc_cald">–</b></div>
+      <div class="ln"><span>Spesa annua con la pompa di calore</span><b id="pc_pdc">–</b></div>
+      <div class="ln"><span>Calore utile necessario</span><b id="pc_heat">–</b></div>
+      <div class="ln"><span>Elettricità consumata dalla pompa</span><b id="pc_kwh">–</b></div>
+      <div class="ln"><span>Costo netto dell'investimento</span><b id="pc_net">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Link utili</div>
+    <div class="links" id="pc_links"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come funziona il confronto?</h2>
+  <p>Dal gas che consumi oggi ricaviamo quanto calore serve davvero alla tua casa: ogni metro cubo di gas contiene circa 10,7 kWh di energia, di cui la caldaia ne trasforma in calore una parte, secondo il suo rendimento. La pompa di calore produce lo stesso calore usando elettricità: con uno SCOP di 3,2 per ogni kWh di elettricità restituisce 3,2 kWh di calore.</p>
+  <h2>Quando conviene la pompa di calore?</h2>
+  <p>Conviene di più nelle case ben isolate, con pavimento radiante o radiatori grandi che lavorano a bassa temperatura, e quando il prezzo della luce è basso rispetto a quello del gas, per esempio con un'offerta dedicata o con i pannelli fotovoltaici. Con radiatori piccoli e casa poco isolata l'efficienza scende e il risparmio si riduce.</p>
+</article>
+<p class="embed-credit">Calcolatore gratuito di <a href="https://vuoisaperequantocosta.it/pompa-di-calore/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcPC(){
+  const smc=val('pc_smc'),heat=smc*10.7*(+$('pc_rend').value),kwh=heat/(+$('pc_scop').value);
+  const cald=smc*val('pc_gas'),pdc=kwh*val('pc_luce'),save=cald-pdc,net=val('pc_costo')*(1-Math.min(100,val('pc_inc'))/100);
+  $('pc_cald').textContent=eur0(cald);$('pc_pdc').textContent=eur0(pdc);$('pc_heat').textContent=num(heat,0)+' kWh';$('pc_kwh').textContent=num(kwh,0)+' kWh';$('pc_net').textContent=eur0(net);
+  if(save>0){$('pc_win').textContent='Con la pompa di calore risparmi ogni anno';$('pc_save').textContent=eur0(save);$('pc_pay').textContent=net>0?"L'investimento si ripaga in circa "+num(net/save,1)+' anni':'Nessun costo da ripagare'}
+  else{$('pc_win').textContent='Con questi prezzi la pompa di calore costa di più ogni anno';$('pc_save').textContent='+'+eur0(-save);$('pc_pay').textContent="Prova con un prezzo della luce più basso o un'efficienza maggiore"}
+}
+$('pc_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Confronta le offerte luce, anche per pompe di calore'],['https://www.gse.it/','GSE – Conto Termico','Incentivi per pompe di calore e impianti efficienti']]);
+on(['pc_smc','pc_gas','pc_rend','pc_luce','pc_scop','pc_costo','pc_inc'],calcPC);calcPC();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

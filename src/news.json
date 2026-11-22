@@ -1,6 +1,31 @@
 [
   {
     "date": "2026-11-22",
+    "text": "Nuovo: calcolo tredicesima 2026 lorda e netta, con IRPEF senza detrazioni come in busta paga.",
+    "url": "/tredicesima/"
+  },
+  {
+    "date": "2026-11-22",
+    "text": "Nuovo: calcolo IMU con il saldo da pagare entro il 16 dicembre 2026.",
+    "url": "/imu/"
+  },
+  {
+    "date": "2026-11-22",
+    "text": "Nuovo: assegno unico 2026, da 58,30 a 203,80 euro per figlio minorenne in base all'ISEE.",
+    "url": "/assegno-unico/"
+  },
+  {
+    "date": "2026-11-22",
+    "text": "Nuovi: costo dell'auto all'anno, auto elettrica o benzina, rata del prestito e pompa di calore o caldaia.",
+    "url": "/costo-auto-anno/"
+  },
+  {
+    "date": "2026-11-22",
+    "text": "Costo viaggio aggiornato con la benzina a 1,95 €/L, prezzo medio self di novembre 2026.",
+    "url": "/costo-viaggio/"
+  },
+  {
+    "date": "2026-11-22",
     "text": "Nuovo: preventivo tagliando e manutenzione per auto e moto, con ricambi e manodopera separati.",
     "url": "/preventivo-manutenzione/"
   },

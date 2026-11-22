@@ -1,0 +1,56 @@
+<!--
+title: Calcolo tredicesima 2026: quanto prendi netto a dicembre
+h1: Tredicesima 2026
+desc: Calcola la tredicesima lorda e netta 2026 in base allo stipendio e ai mesi lavorati, con contributi INPS e IRPEF senza detrazioni, come in busta paga.
+card: Tredicesima lorda e netta, in base ai mesi lavorati.
+icon: 🎄
+cat: Lavoro
+updated: 2026-11-22
+order: 5
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="tr_lordo">Retribuzione lorda mensile</label><div class="inp"><input id="tr_lordo" type="number" inputmode="decimal" value="2000" step="50" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="tr_mesi">Mesi lavorati nel 2026</label><div class="inp"><input id="tr_mesi" type="number" inputmode="numeric" value="12" min="1" max="12" step="1"><span class="suf">mesi</span></div></div>
+      <div class="field"><label for="tr_mens">Mensilità all'anno</label><div class="inp"><select id="tr_mens"><option value="13" selected>13</option><option value="14">14 (con quattordicesima)</option></select></div></div>
+    </div>
+    <div class="field"><label for="tr_contr">Contributi INPS a tuo carico</label><div class="inp"><input id="tr_contr" type="number" inputmode="decimal" value="9.19" step="0.01" min="0"><span class="suf">%</span></div></div>
+    <p class="note">Conta un mese se hai lavorato almeno 15 giorni in quel mese. I contributi sono di solito il 9,19% (5,84% per gli apprendisti).</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Tredicesima netta stimata</div>
+    <div class="big" id="tr_netto">–</div>
+    <div class="range" id="tr_perc">–</div>
+    <div class="lines">
+      <div class="ln"><span>Tredicesima lorda</span><b id="tr_l">–</b></div>
+      <div class="ln"><span>Contributi INPS</span><b id="tr_inps">–</b></div>
+      <div class="ln"><span>Imponibile IRPEF</span><b id="tr_imp">–</b></div>
+      <div class="ln"><span>IRPEF trattenuta</span><b id="tr_irpef">–</b></div>
+      <div class="ln"><span>Aliquota IRPEF applicata</span><b id="tr_aliq">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola la tredicesima?</h2>
+  <p>La tredicesima lorda vale un dodicesimo della retribuzione lorda mensile per ogni mese lavorato: con 12 mesi è pari a uno stipendio lordo intero. Dal lordo si tolgono i contributi INPS a carico del lavoratore e, sul resto, l'IRPEF secondo gli scaglioni 2026: 23% fino a 28.000 euro, 33% da 28.000 a 50.000 euro e 43% oltre.</p>
+  <h2>Perché la tredicesima netta è più bassa dello stipendio?</h2>
+  <p>Sulla tredicesima non si applicano le detrazioni per lavoro dipendente né quelle per i familiari a carico, che sono già distribuite sulle mensilità ordinarie. Per questo l'IRPEF si paga per intero, all'aliquota del proprio scaglione, e il netto risulta più basso di quello di un mese normale. Le addizionali regionali e comunali non vengono trattenute sulla tredicesima.</p>
+  <h2>Quando arriva la tredicesima?</h2>
+  <p>Di solito con la busta paga di dicembre, in genere entro il 24 dicembre. I tempi esatti dipendono dal contratto collettivo e dall'azienda. Nel 2026 non è prevista una detassazione della tredicesima: si applicano le regole ordinarie.</p>
+</article>
+<script>
+function irpefT(R){let t=Math.min(R,28000)*0.23;if(R>28000)t+=(Math.min(R,50000)-28000)*0.33;if(R>50000)t+=(R-50000)*0.43;return Math.max(0,t)}
+function calcTR(){
+  const m=val('tr_lordo'),mesi=Math.min(12,Math.max(0,Math.round(val('tr_mesi')))),c=val('tr_contr')/100,mens=+$('tr_mens').value;
+  const lordo=m*mesi/12,inps=lordo*c,imp=lordo-inps;
+  const Rann=m*mens*(1-c);           // imponibile annuo stimato, tredicesima compresa
+  const irpef=irpefT(Rann)-irpefT(Rann-imp),netto=imp-irpef;
+  $('tr_netto').textContent=eur(netto);$('tr_perc').textContent=lordo>0?'Ti resta il '+num(netto/lordo*100,1)+'% del lordo':'–';
+  $('tr_l').textContent=eur(lordo);$('tr_inps').textContent='− '+eur(inps);$('tr_imp').textContent=eur(imp);$('tr_irpef').textContent='− '+eur(irpef);
+  $('tr_aliq').textContent=imp>0?num(irpef/imp*100,1)+'%':'–';
+}
+on(['tr_lordo','tr_mesi','tr_mens','tr_contr'],calcTR);calcTR();
+</script>

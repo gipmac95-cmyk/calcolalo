@@ -1,0 +1,63 @@
+<!--
+title: Calcolo assegno unico 2026: importo per figlio in base all'ISEE
+h1: Assegno unico 2026
+desc: Stima l'assegno unico per i figli 2026 in base all'ISEE, al numero e all'età dei figli, con le principali maggiorazioni previste dall'INPS.
+card: Importo mensile per figli in base all'ISEE, con maggiorazioni.
+icon: 👶
+cat: Lavoro
+updated: 2026-11-22
+order: 40
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="au_isee">ISEE del nucleo familiare <span class="hint">(lascia vuoto se non lo presenti)</span></label><div class="inp"><input id="au_isee" type="number" inputmode="decimal" value="25000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="lbl-t">Figli a carico</div>
+    <div class="row2">
+      <div class="field"><label for="au_0">Sotto 1 anno</label><div class="inp"><input id="au_0" type="number" inputmode="numeric" value="0" min="0" step="1"></div></div>
+      <div class="field"><label for="au_13">Da 1 a 3 anni</label><div class="inp"><input id="au_13" type="number" inputmode="numeric" value="1" min="0" step="1"></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="au_min">Da 3 a 17 anni</label><div class="inp"><input id="au_min" type="number" inputmode="numeric" value="1" min="0" step="1"></div></div>
+      <div class="field"><label for="au_mag">Da 18 a 20 anni <span class="hint">(studenti, lavoro a basso reddito…)</span></label><div class="inp"><input id="au_mag" type="number" inputmode="numeric" value="0" min="0" step="1"></div></div>
+    </div>
+    <label class="check"><input id="au_lav" type="checkbox" checked> Entrambi i genitori lavorano</label>
+    <label class="check"><input id="au_mam" type="checkbox"> La madre ha meno di 21 anni</label>
+    <p class="note">Non sono incluse le maggiorazioni per figli con disabilità. Per l'importo esatto usa il simulatore dell'INPS.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Assegno unico mensile stimato</div>
+    <div class="big" id="au_tot">–</div>
+    <div class="range" id="au_anno">–</div>
+    <div class="lines" id="au_lines"></div>
+    <div style="margin-top:16px;font-weight:600">Link utili</div>
+    <div class="links" id="au_links"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Quanto vale l'assegno unico nel 2026?</h2>
+  <p>Per ogni figlio minorenne l'importo base va da 203,80 euro al mese con ISEE fino a 17.468,51 euro, a 58,30 euro con ISEE pari o superiore a 46.582,71 euro o senza ISEE. Per i figli tra 18 e 20 anni va da 99,10 a 29,10 euro. Tra le due soglie l'importo scende in modo graduale.</p>
+  <h2>Quali sono le maggiorazioni?</h2>
+  <p>Per i figli sotto un anno l'importo aumenta del 50%; lo stesso vale per i figli tra 1 e 3 anni nelle famiglie con almeno tre figli e ISEE fino a 46.582,71 euro. Ci sono poi maggiorazioni dal terzo figlio in poi, per ogni figlio se entrambi i genitori lavorano, per le madri con meno di 21 anni e un importo forfettario di 150 euro al mese per i nuclei con almeno quattro figli.</p>
+  <h2>Serve l'ISEE?</h2>
+  <p>No, l'assegno spetta anche senza ISEE, ma in quel caso si riceve l'importo minimo. Presentando un ISEE aggiornato entro il 30 giugno si recuperano anche gli arretrati da marzo.</p>
+</article>
+<script>
+const T1=17468.51,T2=46582.71;
+function sc(isee,max,min){if(isee===null)return min;if(isee<=T1)return max;if(isee>=T2)return min;return max-(isee-T1)/(T2-T1)*(max-min)}
+function calcAU(){
+  const raw=$('au_isee').value.trim(),isee=raw===''?null:val('au_isee');
+  const n0=Math.max(0,Math.round(val('au_0'))),n13=Math.max(0,Math.round(val('au_13'))),nm=Math.max(0,Math.round(val('au_min'))),n18=Math.max(0,Math.round(val('au_mag')));
+  const nTot=n0+n13+nm+n18,minori=n0+n13+nm;
+  const baseMin=sc(isee,203.80,58.30),base18=sc(isee,99.10,29.10),terzo=sc(isee,99.10,17.40),lav=$('au_lav').checked?sc(isee,34.90,0):0;
+  const low=isee!==null&&isee<=T2;
+  let b=n0*baseMin*1.5+n13*baseMin*(nTot>=3&&low?1.5:1)+nm*baseMin+n18*base18;
+  const mT=Math.max(0,nTot-2)*terzo,mL=minori*lav,mM=$('au_mam').checked?minori*23.30:0,m4=nTot>=4?150:0,tot=b+mT+mL+mM+m4;
+  $('au_tot').textContent=nTot?eur(tot):'–';$('au_anno').textContent=nTot?'circa '+eur0(tot*12)+' all\'anno':'Inserisci almeno un figlio';
+  const L=[['Importo base per i figli',b],['Maggiorazione dal terzo figlio',mT],['Entrambi i genitori lavorano',mL],['Madre under 21',mM],['Nucleo con 4 o più figli',m4]].filter(x=>x[1]>0.004);
+  $('au_lines').innerHTML=nTot?L.map(([t,v])=>`<div class="ln"><span>${t}</span><b>${eur(v)}</b></div>`).join('')+`<div class="ln" style="opacity:.8;font-size:13px"><span>Base per figlio minorenne con il tuo ISEE</span><b>${eur(baseMin)}</b></div>`:'';
+}
+$('au_links').innerHTML=lk([['https://www.inps.it/','INPS','Domanda, simulatore, importi ufficiali e ISEE precompilato']]);
+on(['au_isee','au_0','au_13','au_min','au_mag','au_lav','au_mam'],calcAU);calcAU();
+</script>

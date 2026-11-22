@@ -1,0 +1,71 @@
+<!--
+title: Calcolo IMU 2026: acconto e saldo del 16 dicembre
+h1: Calcolo IMU e saldo di dicembre
+desc: Calcola l'IMU 2026 di seconde case, negozi e altri immobili dalla rendita catastale, con acconto di giugno e saldo da pagare entro il 16 dicembre 2026.
+card: IMU annua, acconto e saldo del 16 dicembre dalla rendita catastale.
+icon: 🏛️
+cat: Casa
+updated: 2026-11-22
+order: 15
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="im_rend">Rendita catastale <span class="hint">(dalla visura, non rivalutata)</span></label><div class="inp"><input id="im_rend" type="number" inputmode="decimal" value="600" step="10" min="0"><span class="suf">€</span></div></div>
+    <div class="field"><label for="im_cat">Categoria catastale</label><div class="inp"><select id="im_cat">
+      <option value="160" selected>Abitazioni A/2, A/3, A/4, A/5, A/6, A/7 e pertinenze C/2, C/6, C/7 (×160)</option>
+      <option value="160L">Abitazioni di lusso A/1, A/8, A/9 (×160)</option>
+      <option value="80">Uffici A/10 e D/5 (×80)</option>
+      <option value="140">B, C/3, C/4, C/5 – laboratori, collegi (×140)</option>
+      <option value="55">Negozi e botteghe C/1 (×55)</option>
+      <option value="65">Capannoni, alberghi e altri D (×65)</option></select></div></div>
+    <div class="field"><label for="im_uso">Uso dell'immobile</label><div class="inp"><select id="im_uso"><option value="altro" selected>Seconda casa, affittato o altro uso</option><option value="princ">Abitazione principale (dove vivi e hai la residenza)</option></select></div></div>
+    <div class="row2">
+      <div class="field"><label for="im_aliq">Aliquota del Comune 2026</label><div class="inp"><input id="im_aliq" type="number" inputmode="decimal" value="1.06" step="0.01" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="im_aliq25">Aliquota 2025 <span class="hint">(per l'acconto)</span></label><div class="inp"><input id="im_aliq25" type="number" inputmode="decimal" value="1.06" step="0.01" min="0"><span class="suf">%</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="im_quota">Quota di possesso</label><div class="inp"><input id="im_quota" type="number" inputmode="decimal" value="100" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="field"><label for="im_mesi">Mesi di possesso nel 2026</label><div class="inp"><input id="im_mesi" type="number" inputmode="numeric" value="12" step="1" min="0" max="12"><span class="suf">mesi</span></div></div>
+    </div>
+    <p class="note">L'aliquota la trovi nella delibera IMU del tuo Comune, pubblicata sul sito del Comune o del Dipartimento delle Finanze. L'aliquota base nazionale è 0,86%, il massimo ordinario 1,06%.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Saldo da pagare entro il 16 dicembre 2026</div>
+    <div class="big" id="im_saldo">–</div>
+    <div class="range" id="im_note">–</div>
+    <div class="lines">
+      <div class="ln"><span>Base imponibile</span><b id="im_base">–</b></div>
+      <div class="ln"><span>IMU annua 2026</span><b id="im_anno">–</b></div>
+      <div class="ln"><span>Acconto di giugno</span><b id="im_acc">–</b></div>
+      <div class="ln"><span>Detrazione abitazione principale</span><b id="im_det">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="tips"><h3>Prima di pagare</h3><ul>
+  <li>Controlla l'aliquota esatta del tuo Comune: molti applicano aliquote diverse per immobili affittati, a canone concordato o dati in comodato a un figlio.</li>
+  <li>Si paga con il modello F24 (codice tributo 3918 per gli altri fabbricati, 3912 per l'abitazione principale di lusso). Gli importi si arrotondano all'euro.</li>
+  <li>Se hai pagato tutto a giugno in un'unica rata, a dicembre paghi solo l'eventuale conguaglio dovuto a un aumento dell'aliquota.</li>
+</ul></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola l'IMU?</h2>
+  <p>Si parte dalla rendita catastale, la si aumenta del 5% e la si moltiplica per il coefficiente della categoria (160 per le abitazioni). Il risultato è la base imponibile, a cui si applica l'aliquota del Comune. Esempio: rendita 600 € × 1,05 × 160 = 100.800 € di base imponibile; con aliquota 1,06% l'IMU annua è 1.068,48 €.</p>
+  <h2>Quando si paga il saldo IMU 2026?</h2>
+  <p>L'acconto scadeva il 16 giugno 2026 ed era calcolato con le aliquote del 2025. Il saldo va pagato entro mercoledì 16 dicembre 2026 ed è il conguaglio con le aliquote deliberate per il 2026: se il Comune non le ha cambiate, è la metà dell'imposta annua.</p>
+  <h2>Sull'abitazione principale si paga l'IMU?</h2>
+  <p>No, l'abitazione principale e le sue pertinenze (una per categoria C/2, C/6 e C/7) sono esenti. Fanno eccezione le abitazioni di lusso, nelle categorie A/1, A/8 e A/9, che pagano con un'aliquota ridotta e una detrazione di 200 euro.</p>
+</article>
+<script>
+function calcIM(){
+  const rend=val('im_rend'),cv=$('im_cat').value,coef=parseFloat(cv),lusso=cv==='160L',princ=$('im_uso').value==='princ';
+  const q=val('im_quota')/100,mesi=Math.min(12,Math.max(0,val('im_mesi')))/12,base=rend*1.05*coef;
+  if(princ&&!lusso){$('im_saldo').textContent='0,00 €';$('im_note').textContent="L'abitazione principale non di lusso è esente dall'IMU";
+    $('im_base').textContent=eur(base);['im_anno','im_acc'].forEach(i=>$(i).textContent='0,00 €');$('im_det').textContent='–';return}
+  const det=princ&&lusso?200*mesi*q:0;
+  const anno=Math.max(0,base*val('im_aliq')/100*q*mesi-det),acc=Math.max(0,(base*val('im_aliq25')/100*q*mesi-det)/2),saldo=Math.max(0,anno-acc);
+  $('im_saldo').textContent=eur(Math.round(saldo));$('im_note').textContent='Arrotondato all\'euro, come in F24 · scadenza 16 dicembre 2026';
+  $('im_base').textContent=eur(base);$('im_anno').textContent=eur(anno);$('im_acc').textContent=eur(acc);$('im_det').textContent=det?'− '+eur(det):'–';
+}
+on(['im_rend','im_cat','im_uso','im_aliq','im_aliq25','im_quota','im_mesi'],calcIM);calcIM();
+</script>
