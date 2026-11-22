@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://contaspese.it/sitemap.xml
+Sitemap: https://vuoisaperequantocosta.it/sitemap.xml
