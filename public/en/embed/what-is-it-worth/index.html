@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is it worth? – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/what-is-it-worth/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">🔎</span><b>What is it worth?</b></div>
+<div class="panel" style="margin-bottom:20px">
+  <form id="qv_form" class="search" style="max-width:none" role="search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="qv_q" type="search" placeholder="What do you want to value? e.g. iPhone 13, road bike, North Face jacket…" autocomplete="off" aria-label="Item to search" style="padding-right:120px">
+    <button class="btn btn-primary" type="submit" style="position:absolute;right:6px;top:6px;bottom:6px">Search</button>
+  </form>
+  <div id="qv_sugg" style="margin-top:12px"></div>
+</div>
+<div id="qv_body">
+<div class="layout">
+  <div class="panel">
+    <h2>1. Check real second-hand prices</h2>
+    <div class="links" id="qv_used"></div>
+    <h2 style="margin-top:18px">New price</h2>
+    <div class="links" id="qv_new"></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Rough second-hand estimate</div>
+    <div class="big" id="qv_est">–</div>
+    <div class="range" id="qv_rng">Enter the new price</div>
+    <div class="lines" style="color:var(--ink)">
+      <div class="field"><label for="qv_new_p" style="color:#fff">New price</label><div class="inp"><input id="qv_new_p" type="number" inputmode="decimal" placeholder="e.g. 300" min="0" step="1"><span class="suf">€</span></div></div>
+      <div class="row2">
+        <div class="field"><label for="qv_age" style="color:#fff">Age</label><div class="inp"><select id="qv_age"><option value="0">Under 1 year</option><option value="1" selected>1–2 years</option><option value="3">3–5 years</option><option value="6">Over 5 years</option></select></div></div>
+        <div class="field"><label for="qv_cond" style="color:#fff">Condition</label><div class="inp"><select id="qv_cond"><option value="1.15">New with tags</option><option value="1" selected>Excellent condition</option><option value="0.85">Good condition</option><option value="0.65">Signs of wear</option></select></div></div>
+      </div>
+      <div class="field" style="margin:0"><label for="qv_type" style="color:#fff">What kind of item is it?</label><div class="inp"><select id="qv_type"><option value="tech">Electronics and phones</option><option value="moda">Clothes, shoes, bags</option><option value="casa" selected>Home, furniture, sports, other</option><option value="lusso">Designer or collectable</option></select></div></div>
+    </div>
+    <div class="small">A rough rule based on how fast each category loses value on average. For an accurate price, compare with real listings and sales.</div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px">
+  <h2>2. Work out the market average</h2>
+  <div class="layout" style="gap:16px">
+    <div class="field" style="margin:0"><label for="qv_prices">Prices you found in listings or sales <span class="hint">(one per line)</span></label><div class="inp"><textarea id="qv_prices" rows="6" style="width:100%;padding:12px;border:1px solid #d5d1c8;border-radius:11px;font:inherit;font-size:16px;resize:vertical" placeholder="e.g.&#10;120&#10;135&#10;99.90&#10;150"></textarea></div></div>
+    <div>
+      <div class="lbl-t">Market price (median)</div>
+      <div style="font-size:34px;font-weight:800;letter-spacing:-.02em;color:var(--brand)" id="qv_med">–</div>
+      <div class="note" id="qv_info">Paste at least 3 prices to get a benchmark.</div>
+      <div class="note" id="qv_sell" style="font-size:15px;color:var(--ink-2)"></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="tips"><h3>Tips for selling at the right price</h3><ul>
+  <li>On eBay look at <b>completed</b> sales: those are the prices actually paid. On Vinted and Subito you see asking prices, usually a bit higher.</li>
+  <li>Only compare items identical to yours: same model, same size or capacity, same condition.</li>
+  <li>Clear photos, an honest description and the original box push the price up.</li>
+</ul></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How does it work?</h2>
+  <p>Type the name of the item: we take you straight to results on the main second-hand sites and to new prices. If you enter the new price, we give a rough estimate based on age, condition and type of item: electronics lose value fast, while designer clothing and collectables hold it better. Finally you can paste the prices you find to get the market average, without outliers.</p>
+</article>
+<p class="embed-credit">Free calculator by <a href="https://vuoisaperequantocosta.it/en/what-is-it-worth/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+const MAP=[[/\b(car|cars|auto|vehicle|fiat|panda|golf|volkswagen|bmw|audi|toyota|ford|renault|peugeot|opel|citroen)\b/,'used-car-value','What is my car worth'],
+ [/pok[eé]mon|charizard|pikachu|cards?\b/,'pokemon-card-value','What is my Pokémon card worth'],
+ [/\b(game|games|video ?games?|ps[1-5]|playstation|xbox|nintendo|switch|game ?boy|wii|sega)\b/,'video-game-value','What is my video game worth'],
+ [/bollo|car tax/,'car-tax-bollo','Italian car tax (bollo)'],[/ownership|transfer/,'car-ownership-transfer-cost','Car ownership transfer cost'],[/salary|payslip|\bral\b|net pay/,'net-salary-italy','Italian net salary'],
+ [/mortgage/,'mortgage-calculator','Mortgage calculator'],[/\bloan\b/,'loan-calculator','Loan calculator'],[/\btfr\b|severance/,'tfr-severance-pay','TFR severance pay'],[/\bvat\b|\biva\b/,'italian-vat-calculator','Italian VAT calculator'],
+ [/trip|petrol|fuel|toll/,'road-trip-fuel-cost','Road trip fuel cost'],[/percent|discount/,'percentage-calculator','Percentages and discounts'],[/split|expenses|bill/,'split-expenses','Split expenses']];
+const DEP={tech:[0.85,0.65,0.45,0.25],moda:[0.6,0.45,0.35,0.25],casa:[0.75,0.6,0.45,0.3],lusso:[0.9,0.8,0.7,0.6]},AIDX={0:0,1:1,3:2,6:3};
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+function search(q){
+  q=q.trim();$('qv_body').style.opacity=q?1:.55;
+  const e=qs(q||'');
+  $('qv_used').innerHTML=q?lk([[`https://www.vinted.it/catalog?search_text=${e}`,'Vinted','Private listings: clothes, home, games, electronics'],
+    [`https://www.ebay.com/sch/i.html?_nkw=${e}&LH_Sold=1&LH_Complete=1`,'eBay – completed sales','Prices actually paid'],
+    [`https://www.subito.it/annunci-italia/vendita/usato/?q=${e}`,'Subito.it','Listings across Italy'],
+    [`https://www.facebook.com/marketplace/search/?query=${e}`,'Facebook Marketplace','Listings near you']]):'<p class="note">Type what you want to value and press Search.</p>';
+  $('qv_new').innerHTML=q?lk([[`https://www.idealo.it/prechcat.html?q=${e}`,'Idealo','Shop price comparison'],[`https://www.amazon.it/s?k=${e}`,'Amazon','New price']]):'';
+  const low=q.toLowerCase(),hits=MAP.filter(([r])=>r.test(low));
+  $('qv_sugg').innerHTML=hits.length?'<div class="lbl-t">We have a dedicated calculator:</div><div class="chips" style="justify-content:flex-start">'+hits.slice(0,3).map(([,s,t])=>`<a class="chip on" href="/en/${s}/">${t} →</a>`).join('')+'</div>':'';
+  if(q&&history.replaceState)history.replaceState(null,'','?q='+e);
+  document.title=q?`What is ${q} worth? Second-hand price`:document.title;
+}
+function est(){const p=val('qv_new_p');if(!p){$('qv_est').textContent='–';$('qv_rng').textContent='Enter the new price';return}
+  const r=DEP[$('qv_type').value][AIDX[$('qv_age').value]]*(+$('qv_cond').value),v=Math.min(p,p*r);
+  $('qv_est').textContent=eur0(v);$('qv_rng').textContent='Range: '+eur0(v*0.8)+' – '+eur0(Math.min(p,v*1.2))}
+function mkt(){const st=priceStats(parsePrices($('qv_prices').value));
+  if(!st){$('qv_med').textContent='–';$('qv_info').textContent='Paste at least 3 prices to get a benchmark.';$('qv_sell').textContent='';return}
+  $('qv_med').textContent=eur(st.med);
+  $('qv_info').textContent=`Average ${eur(st.avg)} · from ${eur(st.min)} to ${eur(st.max)} · ${st.used} prices`+(st.used<st.n?` (${st.n-st.used} outliers removed)`:'');
+  $('qv_sell').innerHTML=`Suggested selling price: <b>${eur(st.med)}</b> · for a quick sale: <b>${eur(st.fast)}</b>`}
+$('qv_form').addEventListener('submit',e=>{e.preventDefault();search($('qv_q').value)});
+on(['qv_new_p','qv_age','qv_cond','qv_type'],est);on(['qv_prices'],mkt);
+const q0=new URLSearchParams(location.search).get('q')||'';$('qv_q').value=q0;search(q0);est();mkt();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

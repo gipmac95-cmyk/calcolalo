@@ -1,0 +1,42 @@
+<!--
+title: Car ownership transfer cost in Italy 2026 (passaggio di proprietà): IPT, ACI fees and stamp duty
+h1: Used car ownership transfer cost
+desc: How much it costs to transfer ownership of a used car in Italy in 2026 (passaggio di proprietà): provincial transfer tax (IPT), ACI fees, Motorizzazione fees and stamp duties.
+card: IPT, ACI fees and stamp duty when buying a used car.
+icon: 🔑
+cat: Auto
+updated: 2026-11-22
+order: 30
+alt: passaggio-proprieta
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pp_kw">Engine power <span class="hint">(registration document, field P.2)</span></label><div class="inp"><input id="pp_kw" type="number" inputmode="decimal" value="66" step="1" min="0"><span class="suf">kW</span></div></div>
+    <div class="field"><label for="pp_magg">Surcharge of your province of residence</label><div class="inp"><select id="pp_magg"><option value="0">None (0%)</option><option value="10">10%</option><option value="20">20%</option><option value="30" selected>30% (the most common)</option></select></div></div>
+    <label class="check"><input id="pp_aut" type="checkbox" checked> Include signature authentication (€16)</label>
+    <p class="note">The calculation only includes the costs set by law. Vehicle paperwork agencies and ACI offices add their own service fee.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Total transfer cost</div><div class="big" id="pp_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>IPT (provincial transfer tax)</span><b id="pp_ipt">–</b></div>
+      <div class="ln"><span>ACI fees</span><b>27,00 €</b></div>
+      <div class="ln"><span>Motorizzazione fees</span><b>10,20 €</b></div>
+      <div class="ln"><span>Stamp duty on the application</span><b>32,00 €</b></div>
+      <div class="ln"><span>Stamp duty on the Documento Unico</span><b>16,00 €</b></div>
+      <div class="ln"><span>Stamp duty on authentication</span><b id="pp_autv">16,00 €</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How is the IPT calculated?</h2>
+  <p>For cars up to 53 kW the IPT (Imposta Provinciale di Trascrizione) is a flat €150.81. Above 53 kW you pay €3.5119 for every kW of the car's total power. Provinces can raise the amount by up to 30%, and most of them do.</p>
+  <h2>Who pays for the ownership transfer?</h2>
+  <p>The law does not say: usually the buyer pays, but buyer and seller can agree otherwise. It's best to write it down in the sale agreement.</p>
+</article>
+<script>
+function calcPP(){const kw=val('pp_kw'),m=+$('pp_magg').value,ipt=(kw<=53?150.81:3.5119*kw)*(1+m/100),aut=$('pp_aut').checked?16:0;
+  $('pp_ipt').textContent=eur(ipt);$('pp_autv').textContent=eur(aut);$('pp_tot').textContent=eur(ipt+85.20+aut)}
+on(['pp_kw','pp_magg','pp_aut'],calcPP);calcPP();
+</script>

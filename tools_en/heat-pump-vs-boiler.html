@@ -1,0 +1,62 @@
+<!--
+title: Heat pump or gas boiler in Italy: which is cheaper? Savings and payback calculator
+h1: Heat pump or gas boiler?
+desc: Compare what you spend heating your home in Italy with a gas boiler and with a heat pump, at current electricity and gas prices, and how many years the investment takes to pay back.
+card: Heating costs compared and years to pay back.
+icon: ♨️
+cat: Casa
+updated: 2026-11-22
+order: 35
+new: si
+alt: pompa-di-calore
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pc_smc">Gas used in a year for heating and hot water</label><div class="inp"><input id="pc_smc" type="number" inputmode="numeric" value="1000" step="50" min="0"><span class="suf">Smc</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="pc_gas">All-in gas price</label><div class="inp"><input id="pc_gas" type="number" inputmode="decimal" value="1.768" step="0.01" min="0"><span class="suf">€/Smc</span></div></div>
+      <div class="field"><label for="pc_rend">Current boiler</label><div class="inp"><select id="pc_rend"><option value="0.80">Old (over 15 years)</option><option value="0.90" selected>Standard</option><option value="0.98">Condensing</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pc_luce">All-in electricity price</label><div class="inp"><input id="pc_luce" type="number" inputmode="decimal" value="0.4343" step="0.005" min="0"><span class="suf">€/kWh</span></div></div>
+      <div class="field"><label for="pc_scop">Heat pump efficiency (SCOP)</label><div class="inp"><select id="pc_scop"><option value="2.6">Low – high-temperature radiators</option><option value="3.2" selected>Medium – radiators</option><option value="4">High – underfloor heating, insulated home</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pc_costo">Installed heat pump cost</label><div class="inp"><input id="pc_costo" type="number" inputmode="decimal" value="10000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="pc_inc">Incentive or tax deduction</label><div class="inp"><input id="pc_inc" type="number" inputmode="numeric" value="0" step="5" min="0" max="100"><span class="suf">%</span></div></div>
+    </div>
+    <p class="note">Starting electricity and gas prices: ARERA reference for the typical protected customer (electricity October–December 2026, gas October 2026). With a dedicated heat pump electricity tariff or solar panels the saving grows. Italian tax deductions and the Conto Termico incentive change often: check the current percentage before deciding.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="pc_win">–</div>
+    <div class="big" id="pc_save">–</div>
+    <div class="range" id="pc_pay">–</div>
+    <div class="lines">
+      <div class="ln"><span>Yearly cost with the boiler</span><b id="pc_cald">–</b></div>
+      <div class="ln"><span>Yearly cost with the heat pump</span><b id="pc_pdc">–</b></div>
+      <div class="ln"><span>Useful heat needed</span><b id="pc_heat">–</b></div>
+      <div class="ln"><span>Electricity used by the heat pump</span><b id="pc_kwh">–</b></div>
+      <div class="ln"><span>Net cost of the investment</span><b id="pc_net">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Useful links</div>
+    <div class="links" id="pc_links"></div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How does the comparison work?</h2>
+  <p>From the gas you use today we work out how much heat your home really needs: each cubic metre of gas contains about 10.7 kWh of energy, part of which the boiler turns into heat depending on its efficiency. The heat pump produces the same heat using electricity: with a SCOP of 3.2 it delivers 3.2 kWh of heat for every kWh of electricity.</p>
+  <h2>When is a heat pump worth it?</h2>
+  <p>It pays off most in well-insulated homes with underfloor heating or large radiators working at low temperature, and when electricity is cheap compared with gas, for example with a dedicated tariff or solar panels. With small radiators and a poorly insulated home efficiency drops and so does the saving.</p>
+</article>
+<script>
+function calcPC(){
+  const smc=val('pc_smc'),heat=smc*10.7*(+$('pc_rend').value),kwh=heat/(+$('pc_scop').value);
+  const cald=smc*val('pc_gas'),pdc=kwh*val('pc_luce'),save=cald-pdc,net=val('pc_costo')*(1-Math.min(100,val('pc_inc'))/100);
+  $('pc_cald').textContent=eur0(cald);$('pc_pdc').textContent=eur0(pdc);$('pc_heat').textContent=num(heat,0)+' kWh';$('pc_kwh').textContent=num(kwh,0)+' kWh';$('pc_net').textContent=eur0(net);
+  if(save>0){$('pc_win').textContent='With a heat pump you save every year';$('pc_save').textContent=eur0(save);$('pc_pay').textContent=net>0?'The investment pays back in about '+num(net/save,1)+' years':'Nothing to pay back'}
+  else{$('pc_win').textContent='At these prices the heat pump costs more every year';$('pc_save').textContent='+'+eur0(-save);$('pc_pay').textContent='Try a lower electricity price or higher efficiency'}
+}
+$('pc_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Compare electricity offers, including heat pump tariffs'],['https://www.gse.it/','GSE – Conto Termico','Italian incentives for heat pumps and efficient systems']]);
+on(['pc_smc','pc_gas','pc_rend','pc_luce','pc_scop','pc_costo','pc_inc'],calcPC);calcPC();
+</script>

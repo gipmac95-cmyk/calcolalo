@@ -1,0 +1,66 @@
+<!--
+title: How much does it cost to run a car in Italy in 2026? Full annual cost calculator
+h1: Annual cost of running a car
+desc: Work out the real cost of your car in Italy per year, per month and per kilometre: fuel, insurance, car tax, servicing, tyres, MOT and depreciation.
+card: Fuel, insurance, car tax, servicing and depreciation.
+icon: 📊
+cat: Auto
+updated: 2026-11-22
+order: 12
+new: si
+alt: costo-auto-anno
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="row2">
+      <div class="field"><label for="ca_km">Km per year</label><div class="inp"><input id="ca_km" type="number" inputmode="numeric" value="12000" step="500" min="0"><span class="suf">km</span></div></div>
+      <div class="field"><label for="ca_alim">Fuel type</label><div class="inp"><select id="ca_alim"><option value="b" selected>Petrol</option><option value="d">Diesel</option><option value="g">LPG</option><option value="e">Electric</option></select></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_cons" id="ca_consl">Average consumption</label><div class="inp"><input id="ca_cons" type="number" inputmode="decimal" value="6.5" step="0.1" min="0"><span class="suf" id="ca_conss">L/100 km</span></div></div>
+      <div class="field"><label for="ca_prezzo" id="ca_prezzol">Fuel price</label><div class="inp"><input id="ca_prezzo" type="number" inputmode="decimal" value="1.95" step="0.01" min="0"><span class="suf" id="ca_prezzos">€/L</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_ass">Car insurance (RC auto)</label><div class="inp"><input id="ca_ass" type="number" inputmode="decimal" value="550" step="10" min="0"><span class="suf">€/year</span></div></div>
+      <div class="field"><label for="ca_bollo">Car tax (bollo)</label><div class="inp"><input id="ca_bollo" type="number" inputmode="decimal" value="180" step="5" min="0"><span class="suf">€/year</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_man">Servicing and maintenance</label><div class="inp"><input id="ca_man" type="number" inputmode="decimal" value="350" step="10" min="0"><span class="suf">€/year</span></div></div>
+      <div class="field"><label for="ca_gomme">Price of a set of 4 tyres</label><div class="inp"><input id="ca_gomme" type="number" inputmode="decimal" value="400" step="10" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ca_val">Current value of the car</label><div class="inp"><input id="ca_val" type="number" inputmode="decimal" value="12000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="ca_park">Parking, tolls, car washes</label><div class="inp"><input id="ca_park" type="number" inputmode="decimal" value="250" step="10" min="0"><span class="suf">€/year</span></div></div>
+    </div>
+    <p class="note">Starting values: petrol at the Italian average self-service price for November 2026, insurance between the IVASS average and the average for new policies, car tax for a Euro 6 car of about 70 kW. You can work out your exact car tax with the dedicated calculator.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Total cost per year</div>
+    <div class="big" id="ca_anno">–</div>
+    <div class="range" id="ca_mese">–</div>
+    <div class="lines" id="ca_lines"></div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How much does it cost to keep a car in Italy?</h2>
+  <p>Between fuel, insurance, car tax (bollo), servicing, tyres and the MOT (revisione), a car usually costs a few thousand euros a year in Italy. On top of that comes depreciation: the loss in value is often the biggest cost, even though you don't see it until you sell.</p>
+  <h2>How is depreciation calculated?</h2>
+  <p>The calculator assumes a used car loses about 10% of its value each year, plus a share linked to mileage. New cars lose more in the first years. For a more precise estimate of your car's value use the "What is my car worth?" calculator.</p>
+  <h2>How can I cut the cost of my car?</h2>
+  <p>The biggest savings are on insurance, by comparing quotes every year, and on fuel, by choosing the cheapest stations and driving smoothly. Regular servicing avoids expensive breakdowns and keeps resale value higher.</p>
+</article>
+<script>
+const CA={b:['Average consumption','L/100 km','Petrol price','€/L',6.5,1.95],d:['Average consumption','L/100 km','Diesel price','€/L',5.5,2.20],g:['Average consumption','L/100 km','LPG price','€/L',8,0.80],e:['Average consumption','kWh/100 km','Average charging price','€/kWh',16,0.45]};
+let caAlim='b';
+$('ca_alim').addEventListener('change',()=>{caAlim=$('ca_alim').value;const c=CA[caAlim];$('ca_consl').textContent=c[0];$('ca_conss').textContent=c[1];$('ca_prezzol').textContent=c[2];$('ca_prezzos').textContent=c[3];$('ca_cons').value=c[4];$('ca_prezzo').value=c[5];
+  if(caAlim==='e'){$('ca_bollo').value=0;$('ca_man').value=200}calcCA()});
+function calcCA(){
+  const km=val('ca_km'),carb=km*val('ca_cons')/100*val('ca_prezzo'),gom=val('ca_gomme')*km/40000,rev=79.02/2,sval=val('ca_val')*0.10+km*0.02;
+  const V=[['Fuel or charging',carb],['Insurance',val('ca_ass')],['Car tax (bollo)',val('ca_bollo')],['Servicing',val('ca_man')],['Tyres',gom],['MOT (every 2 years)',rev],['Parking, tolls, car washes',val('ca_park')],['Estimated depreciation',sval]];
+  const tot=V.reduce((s,x)=>s+x[1],0),vivi=tot-sval;
+  $('ca_anno').textContent=eur0(tot);$('ca_mese').textContent=eur0(tot/12)+' per month · '+(km>0?eur(tot/km)+' per km':'–');
+  $('ca_lines').innerHTML=V.map(([t,v])=>`<div class="ln"><span>${t}</span><b>${eur0(v)}</b></div>`).join('')+`<div class="ln" style="font-weight:600"><span>Running costs excluding depreciation</span><b>${eur0(vivi)}</b></div>`;
+}
+on(['ca_km','ca_cons','ca_prezzo','ca_ass','ca_bollo','ca_man','ca_gomme','ca_val','ca_park'],calcCA);calcCA();
+</script>

@@ -1,0 +1,78 @@
+<!--
+title: What is my Pokémon card worth? Real price and market average
+h1: What is my Pokémon card worth?
+desc: Find out what a Pokémon card is worth: open real sales and offers for the same card and work out the average market price and a suggested selling price.
+card: Real card prices from sales and Cardmarket.
+icon: 🃏
+cat: Collezionismo
+updated: 2026-11-22
+order: 20
+new: si
+alt: valore-carte-pokemon
+-->
+<div class="layout">
+  <div class="panel">
+    <h2>1. Your card</h2>
+    <div class="row2">
+      <div class="field"><label for="k_nome">Card name</label><div class="inp"><input id="k_nome" type="text" value="Charizard ex" placeholder="e.g. Pikachu" autocomplete="off"></div></div>
+      <div class="field"><label for="k_num">Number <span class="hint">(bottom of the card, e.g. 199/165)</span></label><div class="inp"><input id="k_num" type="text" value="199/165" placeholder="e.g. 025/165" autocomplete="off"></div></div>
+    </div>
+    <div class="field"><label for="k_set">Set <span class="hint">(optional)</span></label><div class="inp"><input id="k_set" type="text" value="151" placeholder="e.g. Paldea Evolved" autocomplete="off"></div></div>
+    <div class="row2">
+      <div class="field"><label for="k_lang">Language</label><div class="inp"><select id="k_lang"><option value="ita">Italian</option><option value="eng" selected>English</option><option value="jap">Japanese</option><option value="">Other</option></select></div></div>
+      <div class="field"><label for="k_cond">Condition</label><div class="inp"><select id="k_cond"><option value="">Near Mint</option><option value="">Excellent / Good</option><option value="">Played</option><option value="PSA 10">Graded PSA 10</option><option value="PSA 9">Graded PSA 9</option><option value="PSA 8">Graded PSA 8</option><option value="graded">Graded (other grade)</option></select></div></div>
+    </div>
+    <h2 style="margin-top:8px">2. Check real prices</h2>
+    <div class="links" id="k_links" style="margin-bottom:16px"></div>
+    <h2>3. Work out the market average</h2>
+    <div class="field"><label for="k_prices">Prices of recent sales or offers <span class="hint">(one per line)</span></label><div class="inp"><textarea id="k_prices" rows="5" style="width:100%;padding:12px;border:1px solid #d5d1c8;border-radius:11px;font:inherit;font-size:16px;resize:vertical" placeholder="e.g.&#10;12.50&#10;14&#10;11.90">95
+102
+89.90
+110
+98</textarea></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Market price (median)</div>
+    <div class="big" id="k_med">–</div>
+    <div class="range" id="k_rng">–</div>
+    <div class="lines">
+      <div class="ln"><span>Average</span><b id="k_avg">–</b></div>
+      <div class="ln"><span>Suggested selling price</span><b id="k_sell">–</b></div>
+      <div class="ln"><span>For a quick sale</span><b id="k_fast">–</b></div>
+      <div class="ln"><span>Prices counted</span><b id="k_n">–</b></div>
+    </div>
+    <div class="small" id="k_tip"></div>
+  </div>
+</div>
+<div class="tips"><h3>Tips to get it right</h3><ul>
+  <li>Check the <b>number</b> at the bottom of the card: the same card can exist in different versions (regular, reverse holo, full art) at very different prices.</li>
+  <li>On Cardmarket look at the "price trend" and filter by the same language and condition as your card.</li>
+  <li>A graded card (PSA, BGS, CGC) is worth much more than the same "raw" card: only compare with the same grade.</li>
+</ul></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>Why do prices change so much?</h2>
+  <p>Card values depend on rarity, condition, language and current demand: a new set release or collectors' interest in a particular Pokémon can move prices within days. The most reliable reference is recent real sales of the same card. The calculator automatically removes outliers (less than half or more than double the median).</p>
+  <h2>How is condition graded?</h2>
+  <p>Near Mint means practically perfect, as if fresh from the pack. Excellent and Good mean small marks on the edges or back. A card with creases, obvious scratches or damaged corners is "played" and worth much less.</p>
+</article>
+<script>
+function linkHtml(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+function calcK(){
+  const nome=$('k_nome').value.trim(),n=$('k_num').value.trim(),set=$('k_set').value.trim(),lang=$('k_lang').value,cond=$('k_cond').value;
+  const base=(nome+' '+n).trim(),langW=lang==='ita'?' ita':lang==='jap'?' japanese':'';
+  const gr=cond==='graded'?' graded':cond?' '+cond:'';
+  $('k_links').innerHTML=nome?linkHtml([
+    [`https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=${qs(nome+' '+set)}`,'Cardmarket','The European card market, with price trends'],
+    [`https://www.ebay.it/sch/i.html?_nkw=${qs(base+langW+gr)}&LH_Sold=1&LH_Complete=1`,'eBay – completed sales','Prices it actually sold for'],
+    [`https://www.vinted.it/catalog?search_text=${qs('pokemon '+base)}`,'Vinted','Private listings'],
+    [`https://www.pricecharting.com/search-products?q=${qs('pokemon '+base)}&type=prices`,'PriceCharting','Price history over time (in US dollars)']]):'';
+  const st=priceStats(parsePrices($('k_prices').value));
+  if(!st){['k_med','k_avg','k_sell','k_fast','k_n'].forEach(i=>$(i).textContent='–');$('k_rng').textContent='Enter at least one price';$('k_tip').textContent='';return}
+  $('k_med').textContent=eur(st.med);$('k_rng').textContent='From '+eur(st.min)+' to '+eur(st.max);
+  $('k_avg').textContent=eur(st.avg);$('k_sell').textContent=eur(st.med);$('k_fast').textContent=eur(st.fast);
+  $('k_n').textContent=st.used+(st.used<st.n?' ('+(st.n-st.used)+' outliers removed)':'');
+  $('k_tip').textContent=st.used<5?'With at least 5 recent prices the average is more reliable.':'';
+}
+on(['k_nome','k_num','k_set','k_lang','k_cond','k_prices'],calcK);calcK();
+</script>

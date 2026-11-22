@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IMU property tax and December balance – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/imu-property-tax/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">🏛️</span><b>IMU property tax and December balance</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="im_rend">Cadastral income (rendita catastale) <span class="hint">(from the visura, not revalued)</span></label><div class="inp"><input id="im_rend" type="number" inputmode="decimal" value="600" step="10" min="0"><span class="suf">€</span></div></div>
+    <div class="field"><label for="im_cat">Cadastral category</label><div class="inp"><select id="im_cat">
+      <option value="160" selected>Homes A/2, A/3, A/4, A/5, A/6, A/7 and annexes C/2, C/6, C/7 (×160)</option>
+      <option value="160L">Luxury homes A/1, A/8, A/9 (×160)</option>
+      <option value="80">Offices A/10 and D/5 (×80)</option>
+      <option value="140">B, C/3, C/4, C/5 – workshops, institutions (×140)</option>
+      <option value="55">Shops C/1 (×55)</option>
+      <option value="65">Warehouses, hotels and other D (×65)</option></select></div></div>
+    <div class="field"><label for="im_uso">Use of the property</label><div class="inp"><select id="im_uso"><option value="altro" selected>Second home, rented out or other use</option><option value="princ">Main home (where you live and are resident)</option></select></div></div>
+    <div class="row2">
+      <div class="field"><label for="im_aliq">Municipal rate 2026</label><div class="inp"><input id="im_aliq" type="number" inputmode="decimal" value="1.06" step="0.01" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="im_aliq25">Rate 2025 <span class="hint">(for the June instalment)</span></label><div class="inp"><input id="im_aliq25" type="number" inputmode="decimal" value="1.06" step="0.01" min="0"><span class="suf">%</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="im_quota">Ownership share</label><div class="inp"><input id="im_quota" type="number" inputmode="decimal" value="100" step="1" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="field"><label for="im_mesi">Months owned in 2026</label><div class="inp"><input id="im_mesi" type="number" inputmode="numeric" value="12" step="1" min="0" max="12"><span class="suf">months</span></div></div>
+    </div>
+    <p class="note">You can find the rate in your municipality's IMU resolution (delibera IMU), published on the Comune's website or the Finance Department's website. The national base rate is 0.86%, the ordinary maximum 1.06%.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Balance due by 16 December 2026</div>
+    <div class="big" id="im_saldo">–</div>
+    <div class="range" id="im_note">–</div>
+    <div class="lines">
+      <div class="ln"><span>Taxable value</span><b id="im_base">–</b></div>
+      <div class="ln"><span>Yearly IMU 2026</span><b id="im_anno">–</b></div>
+      <div class="ln"><span>June instalment</span><b id="im_acc">–</b></div>
+      <div class="ln"><span>Main home deduction</span><b id="im_det">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="tips"><h3>Before you pay</h3><ul>
+  <li>Check your municipality's exact rate: many apply different rates for rented properties, regulated-rent contracts or homes lent to a child.</li>
+  <li>You pay with the F24 form (tax code 3918 for other buildings, 3912 for a luxury main home). Amounts are rounded to the nearest euro.</li>
+  <li>If you paid the whole amount in June, in December you only pay any top-up due to a rate increase.</li>
+</ul></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How is IMU calculated?</h2>
+  <p>Start from the cadastral income (rendita catastale), increase it by 5% and multiply it by the category coefficient (160 for homes). The result is the taxable value, to which the municipal rate applies. Example: income €600 × 1.05 × 160 = €100,800 taxable value; at a 1.06% rate yearly IMU is €1,068.48.</p>
+  <h2>When is the 2026 IMU balance due?</h2>
+  <p>The first instalment was due on 16 June 2026 and was calculated with the 2025 rates. The balance must be paid by Wednesday 16 December 2026 and settles the difference with the rates set for 2026: if your municipality hasn't changed them, it is half the yearly tax.</p>
+  <h2>Do you pay IMU on your main home?</h2>
+  <p>No, your main home and its annexes (one each in categories C/2, C/6 and C/7) are exempt. The exception is luxury homes in categories A/1, A/8 and A/9, which pay at a reduced rate with a €200 deduction.</p>
+</article>
+<p class="embed-credit">Free calculator by <a href="https://vuoisaperequantocosta.it/en/imu-property-tax/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcIM(){
+  const rend=val('im_rend'),cv=$('im_cat').value,coef=parseFloat(cv),lusso=cv==='160L',princ=$('im_uso').value==='princ';
+  const q=val('im_quota')/100,mesi=Math.min(12,Math.max(0,val('im_mesi')))/12,base=rend*1.05*coef;
+  if(princ&&!lusso){$('im_saldo').textContent='0,00 €';$('im_note').textContent='A non-luxury main home is exempt from IMU';
+    $('im_base').textContent=eur(base);['im_anno','im_acc'].forEach(i=>$(i).textContent='0,00 €');$('im_det').textContent='–';return}
+  const det=princ&&lusso?200*mesi*q:0;
+  const anno=Math.max(0,base*val('im_aliq')/100*q*mesi-det),acc=Math.max(0,(base*val('im_aliq25')/100*q*mesi-det)/2),saldo=Math.max(0,anno-acc);
+  $('im_saldo').textContent=eur(Math.round(saldo));$('im_note').textContent='Rounded to the euro, as on the F24 form · due 16 December 2026';
+  $('im_base').textContent=eur(base);$('im_anno').textContent=eur(anno);$('im_acc').textContent=eur(acc);$('im_det').textContent=det?'− '+eur(det):'–';
+}
+on(['im_rend','im_cat','im_uso','im_aliq','im_aliq25','im_quota','im_mesi'],calcIM);calcIM();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

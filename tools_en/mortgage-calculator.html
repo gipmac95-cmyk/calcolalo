@@ -1,0 +1,54 @@
+<!--
+title: Italian mortgage calculator: monthly payment, interest and amortisation schedule
+h1: Mortgage calculator
+desc: Calculate the monthly payment of a fixed-rate mortgage in Italy with French amortisation, the total interest and the year-by-year amortisation schedule.
+card: Monthly payment, total interest and amortisation schedule.
+icon: 🏠
+cat: Casa
+updated: 2026-11-22
+order: 10
+alt: rata-mutuo
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="m_imp">Mortgage amount</label><div class="inp"><input id="m_imp" type="number" inputmode="decimal" value="150000" step="1000" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="m_tasso">Annual rate (TAN)</label><div class="inp"><input id="m_tasso" type="number" inputmode="decimal" value="3.2" step="0.05" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="m_anni">Term</label><div class="inp"><input id="m_anni" type="number" inputmode="numeric" value="25" step="1" min="1" max="40"><span class="suf">years</span></div></div>
+    </div>
+    <p class="note">The calculation does not include arrangement fees, valuation, insurance and substitute tax, which are part of the APR (TAEG).</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Monthly payment</div>
+    <div class="big" id="m_rata">–</div>
+    <div class="lines">
+      <div class="ln"><span>Number of payments</span><b id="m_n">–</b></div>
+      <div class="ln"><span>Total interest</span><b id="m_int">–</b></div>
+      <div class="ln"><span>Total repaid</span><b id="m_totale">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px;overflow-x:auto">
+  <h2>Yearly amortisation schedule</h2>
+  <table class="amort"><thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="m_tab"></tbody></table>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How is the mortgage payment calculated?</h2>
+  <p>With French amortisation, the standard in Italy, the payment stays the same for the whole term. In the early years it is mostly interest, then the principal share grows. The formula is: payment = P × i / (1 − (1 + i)<sup>−n</sup>), where P is the principal, i the monthly rate and n the number of payments.</p>
+  <h2>What is the difference between TAN and TAEG?</h2>
+  <p>TAN is the nominal interest rate on the loan. TAEG (the Italian APR) also includes the extra costs and is the right figure to compare offers from different banks.</p>
+</article>
+<script>
+function calcM(){
+  const C=val('m_imp'),t=val('m_tasso'),anni=Math.round(val('m_anni')),n=anni*12,i=t/100/12;
+  if(C<=0||n<=0){['m_rata','m_n','m_int','m_totale'].forEach(x=>$(x).textContent='–');$('m_tab').innerHTML='';return}
+  const rata=i===0?C/n:C*i/(1-Math.pow(1+i,-n));
+  $('m_rata').textContent=eur(rata);$('m_n').textContent=n;$('m_int').textContent=eur(rata*n-C);$('m_totale').textContent=eur(rata*n);
+  let deb=C,rows='';
+  for(let y=1;y<=anni;y++){let qc=0,qi=0;for(let m=0;m<12;m++){const int=deb*i,cap=rata-int;qi+=int;qc+=cap;deb-=cap}
+    rows+=`<tr><td>${y}</td><td>${eur(qc)}</td><td>${eur(qi)}</td><td>${eur(Math.max(0,deb))}</td></tr>`}
+  $('m_tab').innerHTML=rows;
+}
+on(['m_imp','m_tasso','m_anni'],calcM);calcM();
+</script>

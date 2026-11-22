@@ -1,0 +1,63 @@
+<!--
+title: Personal loan and car finance calculator for Italy: payment, interest and APR (TAEG)
+h1: Loan and car finance calculator
+desc: Calculate the monthly payment of a personal loan or car finance in Italy, the total interest and the real APR (TAEG) including fees.
+card: Monthly payment, interest and real APR of a loan.
+icon: 💳
+cat: Casa
+updated: 2026-11-22
+order: 12
+new: si
+alt: rata-prestito
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pr_imp">Loan amount</label><div class="inp"><input id="pr_imp" type="number" inputmode="decimal" value="15000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="pr_tan">TAN</label><div class="inp"><input id="pr_tan" type="number" inputmode="decimal" value="7.9" step="0.1" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="pr_mesi">Term</label><div class="inp"><input id="pr_mesi" type="number" inputmode="numeric" value="60" step="6" min="1" max="120"><span class="suf">months</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="pr_istr">Arrangement fee</label><div class="inp"><input id="pr_istr" type="number" inputmode="decimal" value="150" step="10" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="pr_inc">Monthly collection fee</label><div class="inp"><input id="pr_inc" type="number" inputmode="decimal" value="2" step="0.5" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="field"><label for="pr_alt">Other one-off costs <span class="hint">(e.g. compulsory insurance, stamp duty)</span></label><div class="inp"><input id="pr_alt" type="number" inputmode="decimal" value="16" step="1" min="0"><span class="suf">€</span></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Monthly payment</div>
+    <div class="big" id="pr_rata">–</div>
+    <div class="range" id="pr_taeg">–</div>
+    <div class="lines">
+      <div class="ln"><span>Total interest</span><b id="pr_int">–</b></div>
+      <div class="ln"><span>Total fees</span><b id="pr_sp">–</b></div>
+      <div class="ln"><span>Total to repay</span><b id="pr_tot">–</b></div>
+      <div class="ln"><span>Total cost of the loan</span><b id="pr_costo">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Compare offers</div>
+    <div class="links" id="pr_links"></div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How is a loan payment calculated?</h2>
+  <p>With French amortisation the payment is always the same: payment = amount × i / (1 − (1 + i)<sup>−n</sup>), where i is the TAN divided by 12 and n the number of months. At first the payment is mostly interest, then the principal share grows.</p>
+  <h2>What is the difference between TAN and TAEG?</h2>
+  <p>TAN is the nominal interest rate. TAEG (the Italian APR) is the real cost of the loan, because it also includes arrangement fees, payment collection fees and other compulsory costs. To compare two offers always look at the TAEG: a low TAN with high fees can cost more than a higher TAN with no fees.</p>
+  <h2>Is dealer car finance a good deal?</h2>
+  <p>It depends on the TAEG and the terms. "Zero interest" offers often have a TAEG above zero because of fees, or a large balloon payment at the end. Always compare the dealer's offer with a personal loan and with the cash price.</p>
+</article>
+<script>
+function calcPR(){
+  const P=val('pr_imp'),n=Math.max(1,Math.round(val('pr_mesi'))),i=val('pr_tan')/100/12,inc=val('pr_inc'),one=val('pr_istr')+val('pr_alt');
+  if(P<=0){['pr_rata','pr_int','pr_sp','pr_tot','pr_costo'].forEach(x=>$(x).textContent='–');$('pr_taeg').textContent='–';return}
+  const rata=i===0?P/n:P*i/(1-Math.pow(1+i,-n)),interessi=rata*n-P,spese=one+inc*n;
+  // TAEG: tasso annuo r tale che (P - spese iniziali) = somma (rata+inc)/(1+r)^(k/12)
+  const net=P-one,pay=rata+inc;let lo=0,hi=2;
+  for(let k=0;k<100;k++){const r=(lo+hi)/2,m=Math.pow(1+r,1/12)-1;let pv=0;for(let t=1;t<=n;t++)pv+=pay/Math.pow(1+m,t);if(pv>net)lo=r;else hi=r}
+  const taeg=(lo+hi)/2*100;
+  $('pr_rata').textContent=eur(rata+inc);$('pr_taeg').textContent='Estimated APR (TAEG): '+num(taeg,2)+'% · TAN '+num(val('pr_tan'),2)+'%';
+  $('pr_int').textContent=eur(interessi);$('pr_sp').textContent=eur(spese);$('pr_tot').textContent=eur((rata+inc)*n+one);$('pr_costo').textContent=eur(interessi+spese);
+}
+$('pr_links').innerHTML=lk([['https://www.segugio.it/','Segugio.it','Compare personal loans in Italy'],['https://www.facile.it/','Facile.it','Compare personal loans in Italy'],['https://www.sostariffe.it/','SOStariffe.it','Compare personal loans in Italy']]);
+on(['pr_imp','pr_tan','pr_mesi','pr_istr','pr_inc','pr_alt'],calcPR);calcPR();
+</script>

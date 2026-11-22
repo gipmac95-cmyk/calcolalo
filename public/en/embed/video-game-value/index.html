@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is my video game worth? – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/video-game-value/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">🎮</span><b>What is my video game worth?</b></div>
+<div class="layout">
+  <div class="panel">
+    <h2>1. Your game</h2>
+    <div class="field"><label for="g_tit">Title</label><div class="inp"><input id="g_tit" type="text" value="Super Mario 64" placeholder="e.g. The Legend of Zelda" autocomplete="off"></div></div>
+    <div class="row2">
+      <div class="field"><label for="g_plat">Console</label><div class="inp"><select id="g_plat">
+        <option>PS5</option><option>PS4</option><option>PS3</option><option>PS2</option><option value="PS1">PlayStation 1</option><option>PSP</option><option>PS Vita</option>
+        <option>Xbox Series X</option><option>Xbox One</option><option>Xbox 360</option><option>Xbox</option>
+        <option>Nintendo Switch</option><option>Wii U</option><option>Wii</option><option>GameCube</option><option selected>Nintendo 64</option><option>Super Nintendo</option><option>NES</option>
+        <option>Nintendo 3DS</option><option>Nintendo DS</option><option>Game Boy Advance</option><option>Game Boy Color</option><option>Game Boy</option>
+        <option>Sega Mega Drive</option><option>Sega Saturn</option><option>Dreamcast</option><option>PC</option><option value="">Other</option></select></div></div>
+      <div class="field"><label for="g_cond">Condition</label><div class="inp"><select id="g_cond"><option value="sigillato">New, sealed</option><option value="completo" selected>Complete (box and manual)</option><option value="solo">Disc or cartridge only</option></select></div></div>
+    </div>
+    <h2 style="margin-top:8px">2. Check real prices</h2>
+    <div class="links" id="g_links" style="margin-bottom:16px"></div>
+    <h2>3. Work out the market average</h2>
+    <div class="field"><label for="g_prices">Prices of recent sales you found <span class="hint">(one per line)</span></label><div class="inp"><textarea id="g_prices" rows="5" style="width:100%;padding:12px;border:1px solid #d5d1c8;border-radius:11px;font:inherit;font-size:16px;resize:vertical" placeholder="e.g.&#10;45&#10;52.50&#10;48&#10;39.90">45
+52.50
+48
+39.90
+60</textarea></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Market price (median of sales)</div>
+    <div class="big" id="g_med">–</div>
+    <div class="range" id="g_rng">–</div>
+    <div class="lines">
+      <div class="ln"><span>Average</span><b id="g_avg">–</b></div>
+      <div class="ln"><span>Suggested selling price</span><b id="g_sell">–</b></div>
+      <div class="ln"><span>For a quick sale</span><b id="g_fast">–</b></div>
+      <div class="ln"><span>Sales counted</span><b id="g_n">–</b></div>
+    </div>
+    <div class="small" id="g_tip"></div>
+  </div>
+</div>
+<div class="tips"><h3>Tips for the right price</h3><ul>
+  <li>Look at <b>completed</b> sales, not listings: what counts is the price the game actually sold for.</li>
+  <li>Only compare copies in the same condition and the same version (PAL or NTSC, special or standard edition).</li>
+  <li>For retro games the box and manual make a big difference: a complete copy can be worth twice the cartridge alone.</li>
+</ul></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>Why don't you give a fixed price?</h2>
+  <p>Used video game values change a lot and fast: new editions, reprints and collecting trends can push prices up or down within weeks. That's why the most reliable price is the average of recent real sales of the same game in the same condition. The calculator automatically removes outliers (less than half or more than double the median).</p>
+  <h2>Where is the best place to sell?</h2>
+  <p>Private listing sites such as Subito and Vinted often get you the most. Platforms with fees such as eBay reach more buyers, but you have to subtract the fee. Second-hand shops pay on the spot, but much less than market value.</p>
+</article>
+<p class="embed-credit">Free calculator by <a href="https://vuoisaperequantocosta.it/en/video-game-value/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function linkHtml(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+function calcG(){
+  const tit=$('g_tit').value.trim(),plat=$('g_plat').value,cond=$('g_cond').value;
+  const extra=cond==='sigillato'?' sealed':cond==='completo'?' complete':'';
+  const q=(tit+' '+plat).trim();
+  $('g_links').innerHTML=tit?linkHtml([
+    [`https://www.ebay.it/sch/i.html?_nkw=${qs(q+extra)}&LH_Sold=1&LH_Complete=1`,'eBay – completed sales','The best reference: what it actually sold for'],
+    [`https://www.subito.it/annunci-italia/vendita/usato/?q=${qs(q)}`,'Subito.it','Private listings in Italy'],
+    [`https://www.vinted.it/catalog?search_text=${qs(q)}`,'Vinted','Private listings'],
+    [`https://www.pricecharting.com/search-products?q=${qs(q)}&type=prices`,'PriceCharting','Price history over time (in US dollars)']]):'';
+  const st=priceStats(parsePrices($('g_prices').value));
+  if(!st){['g_med','g_avg','g_sell','g_fast','g_n'].forEach(i=>$(i).textContent='–');$('g_rng').textContent='Enter at least one price';$('g_tip').textContent='';return}
+  $('g_med').textContent=eur(st.med);$('g_rng').textContent='From '+eur(st.min)+' to '+eur(st.max);
+  $('g_avg').textContent=eur(st.avg);$('g_sell').textContent=eur(Math.round(st.med));$('g_fast').textContent=eur(Math.round(st.fast));
+  $('g_n').textContent=st.used+(st.used<st.n?' ('+(st.n-st.used)+' outliers removed)':'');
+  $('g_tip').textContent=st.used<5?'With at least 5 recent sales the average is more reliable.':'';
+}
+on(['g_tit','g_plat','g_cond','g_prices'],calcG);calcG();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

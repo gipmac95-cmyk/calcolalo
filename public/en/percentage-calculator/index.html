@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Percentage and discount calculator: percentages, change and sale price</title>
+<meta name="description" content="Four calculators in one: percentage of a number, what percent one number is of another, percentage change and discounted price.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/percentage-calculator/">
+<link rel="alternate" hreflang="it" href="https://vuoisaperequantocosta.it/percentuali/"><link rel="alternate" hreflang="en" href="https://vuoisaperequantocosta.it/en/percentage-calculator/"><link rel="alternate" hreflang="x-default" href="https://vuoisaperequantocosta.it/percentuali/">
+<meta property="og:title" content="Percentage and discount calculator: percentages, change and sale price">
+<meta property="og:description" content="Four calculators in one: percentage of a number, what percent one number is of another, percentage change and discounted price.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/en/percentage-calculator/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#0e6b63">
+<meta name="google-site-verification" content="kYwrCokb8RvZCkuNno2ew4Bu0Jja8ny4wfENO5Qc8x8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vuoisaperequantocosta.it/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://vuoisaperequantocosta.it/en/#utilita"}, {"@type": "ListItem", "position": 3, "name": "Percentages and discounts", "item": "https://vuoisaperequantocosta.it/en/percentage-calculator/"}]}, {"@type": "WebApplication", "name": "Percentages and discounts", "url": "https://vuoisaperequantocosta.it/en/percentage-calculator/", "description": "Four calculators in one: percentage of a number, what percent one number is of another, percentage change and discounted price.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "en", "dateModified": "2026-11-23", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do you calculate a percentage?", "acceptedAnswer": {"@type": "Answer", "text": "To find 20% of 250, multiply 250 by 20 and divide by 100: the result is 50. To find what percent 45 is of 180, calculate 45 ÷ 180 × 100 = 25%."}}]}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/en/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><div class="hdr-r"><nav class="main-nav"><a href="/en/#auto">Car</a><a href="/en/#casa">Home</a><a href="/en/#lavoro">Work</a><a href="/en/#collezionismo">Collectibles</a><a href="/en/#utilita" class=on>Tools</a></nav><a class="lang-switch" href="/percentuali/" hreflang="it" lang="it" title="Versione italiana" aria-label="Versione italiana"><svg width="20" height="14" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg><span>IT</span></a></div></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/en/">Home</a> › <a href="/en/#utilita">Tools</a></div>
+<h1><span class="ic">％</span>Percentages and discounts</h1>
+<p class="lead">Four calculators in one: percentage of a number, what percent one number is of another, percentage change and discounted price.</p>
+<p class="upd">🗓️ Updated on 23 November 2026</p></div>
+<div class="panel" style="max-width:680px">
+  <div class="mini"><h3>What is X% of a number?</h3><div class="inline"><input id="p1a" type="number" inputmode="decimal" value="20" aria-label="percentage"> % of <input id="p1b" type="number" inputmode="decimal" value="250" aria-label="number"></div><div class="out" id="p1o">–</div></div>
+  <div class="mini"><h3>What percent is one number of another?</h3><div class="inline"><input id="p2a" type="number" inputmode="decimal" value="45" aria-label="part"> out of <input id="p2b" type="number" inputmode="decimal" value="180" aria-label="total"></div><div class="out" id="p2o">–</div></div>
+  <div class="mini"><h3>Percentage change (increase or decrease)</h3><div class="inline">From <input id="p3a" type="number" inputmode="decimal" value="80" aria-label="starting value"> to <input id="p3b" type="number" inputmode="decimal" value="100" aria-label="final value"></div><div class="out" id="p3o">–</div></div>
+  <div class="mini"><h3>Discounted price</h3><div class="inline">Price <input id="p4a" type="number" inputmode="decimal" value="59.90" aria-label="price"> € with <input id="p4b" type="number" inputmode="decimal" value="30" aria-label="discount"> % off</div><div class="out" id="p4o">–</div></div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How do you calculate a percentage?</h2>
+  <p>To find 20% of 250, multiply 250 by 20 and divide by 100: the result is 50. To find what percent 45 is of 180, calculate 45 ÷ 180 × 100 = 25%.</p>
+</article>
+<details class="embed-box"><summary>🧩 Add this calculator to your website or blog</summary>
+<p>Copy this code and paste it into your page: the calculator will appear on your site, free and always up to date.</p>
+<textarea id="emb_code" readonly rows="4">&lt;iframe data-vsqc src=&quot;https://vuoisaperequantocosta.it/en/embed/percentage-calculator/&quot; title=&quot;Percentages and discounts&quot; width=&quot;100%&quot; height=&quot;900&quot; loading=&quot;lazy&quot; style=&quot;border:0;max-width:760px;display:block&quot;&gt;&lt;/iframe&gt;&lt;p style=&quot;font-size:13px;max-width:760px&quot;&gt;Calculator by &lt;a href=&quot;https://vuoisaperequantocosta.it/en/percentage-calculator/&quot;&gt;VuoiSapereQuantoCosta.it – Percentages and discounts&lt;/a&gt;&lt;/p&gt;&lt;script&gt;addEventListener(&quot;message&quot;,function(e){if(e.origin!==&quot;https://vuoisaperequantocosta.it&quot;||!e.data||!e.data.vsqcH)return;document.querySelectorAll(&quot;iframe[data-vsqc]&quot;).forEach(function(f){if(f.contentWindow===e.source)f.style.height=e.data.vsqcH+&quot;px&quot;})})&lt;/script&gt;</textarea>
+<button type="button" class="btn" onclick="var t=document.getElementById('emb_code');t.select();try{navigator.clipboard.writeText(t.value).catch(function(){})}catch(e){};this.textContent='Code copied!'">Copy the code</button></details>
+<section class="related"><h2>More calculators</h2><div class="grid"><a class="card c-utilita" href="/en/what-is-it-worth/"><span class="ic">🔎</span><span><h3>What is it worth?<span class="new">New</span></h3><p>Search any item and find out what it is worth used.</p></span></a><a class="card c-utilita" href="/en/split-expenses/"><span class="ic">👥</span><span><h3>Split expenses</h3><p>Who owes whom after a dinner or a holiday.</p></span></a><a class="card c-auto" href="/en/used-car-value/"><span class="ic">🚗</span><span><h3>What is my car worth?<span class="new">New</span></h3><p>Used car value estimate and real listings to compare.</p></span></a><a class="card c-auto" href="/en/car-running-costs/"><span class="ic">📊</span><span><h3>Annual cost of running a car<span class="new">New</span></h3><p>Fuel, insurance, car tax, servicing and depreciation.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/en/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Free calculators, no sign-up needed, to find out in seconds what things really cost in Italy. Everything you type stays in your browser.</p></div>
+<div><h4>Car</h4><a href="/en/used-car-value/">What is my car worth?</a><a href="/en/car-running-costs/">Annual cost of running a car</a><a href="/en/electric-vs-petrol/">Electric or petrol car?</a><a href="/en/car-service-cost/">Car and motorbike service cost</a><a href="/en/car-tax-bollo/">Italian car tax (bollo auto)</a><a href="/en/car-ownership-transfer-cost/">Used car ownership transfer cost</a><a href="/en/road-trip-fuel-cost/">Road trip cost by car</a></div><div><h4>Home</h4><a href="/en/mortgage-calculator/">Mortgage calculator</a><a href="/en/loan-calculator/">Loan and car finance calculator</a><a href="/en/imu-property-tax/">IMU property tax and December balance</a><a href="/en/electricity-bill/">Electricity bill</a><a href="/en/gas-bill/">Gas bill</a><a href="/en/heat-pump-vs-boiler/">Heat pump or gas boiler?</a><a href="/en/home-internet-cost/">Real cost of home internet</a></div><div><h4>Work</h4><a href="/en/thirteenth-month-pay/">13th-month pay (tredicesima) 2026</a><a href="/en/net-salary-italy/">Italian net salary calculator 2026</a><a href="/en/tfr-severance-pay/">TFR severance pay calculator</a><a href="/en/italian-vat-calculator/">Italian VAT (IVA) calculator</a><a href="/en/child-benefit-assegno-unico/">Italian child benefit (assegno unico) 2026</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · Results are estimates and do not replace advice from a professional. · <a href="/en/privacy/" style="display:inline;color:#b7bec8">Privacy and cookies</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Cookie settings</a></div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcP(){
+  const a1=val('p1a'),b1=val('p1b');$('p1o').textContent='= '+num(a1*b1/100,4);
+  const a2=val('p2a'),b2=val('p2b');$('p2o').textContent=b2?'= '+num(a2/b2*100,2)+'%':'–';
+  const a3=val('p3a'),b3=val('p3b');if(a3){const d=(b3-a3)/Math.abs(a3)*100;$('p3o').textContent=(d>=0?'+':'')+num(d,2)+'% '+(d>=0?'(increase)':'(decrease)')}else $('p3o').textContent='–';
+  const a4=val('p4a'),b4=val('p4b');$('p4o').textContent='= '+eur(a4*(1-b4/100))+'  (you save '+eur(a4*b4/100)+')';
+}
+on(['p1a','p1b','p2a','p2b','p3a','p3b','p4a','p4b'],calcP);calcP();
+(function(){
+  const hEl=document.querySelector('.tool-head h1');const h1=hEl?[...hEl.childNodes].filter(n=>!(n.classList&&n.classList.contains('ic'))).map(n=>n.textContent).join(''):document.title;
+  const box=document.createElement('div');box.className='share';
+  const EN=(document.documentElement.lang||'').startsWith('en');
+  box.innerHTML='<span>'+(EN?'Share the result':'Condividi il risultato')+'</span><a class="btn wa" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg> WhatsApp</a><button type="button" class="btn cp">'+(EN?'Copy link':'Copia link')+'</button>';
+  const target=document.querySelector('.result')||document.querySelector('.panel');
+  if(!target)return;target.appendChild(box);
+  const url=()=>location.origin+location.pathname+location.search;
+  box.querySelector('.wa').addEventListener('click',function(){
+    const lbl=(document.querySelector('.result .lbl')||{}).textContent,big=(document.querySelector('.result .big')||{}).textContent;
+    const t=big&&big.trim()!=='–'&&lbl?(EN?`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Work out yours for free 👉 ${url()}`:`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Calcola il tuo gratis qui 👉 ${url()}`):(EN?`Check out this free calculator: ${h1.trim()} 👉 ${url()}`:`Guarda questo calcolatore gratuito: ${h1.trim()} 👉 ${url()}`);
+    this.href='https://wa.me/?text='+encodeURIComponent(t);
+    try{if(window.gtag)gtag('event','share',{method:'whatsapp',content_type:'calcolatore',item_id:location.pathname})}catch(e){}
+  });
+  box.querySelector('.cp').addEventListener('click',function(){
+    const b=this;const done=()=>{b.textContent=EN?'Link copied!':'Link copiato!';setTimeout(()=>b.textContent=EN?'Copy link':'Copia link',2000)};
+    try{navigator.clipboard.writeText(url()).then(done,done)}catch(e){done()}
+    try{if(window.gtag)gtag('event','share',{method:'copy_link',item_id:location.pathname})}catch(e){}
+  });
+})();
+
+</script>
+<div id="ck" class="ck" role="dialog" aria-live="polite" aria-label="Cookie" hidden>
+<p><b>We only use cookies for anonymous visit statistics</b>, with Google Analytics, if you agree. Your calculations always stay on your device. <a href="/en/privacy/">Privacy and cookies</a></p>
+<div class="ck-b"><button type="button" class="btn" id="ck-no">Decline</button><button type="button" class="btn btn-primary" id="ck-ok">Accept</button></div></div>
+<script>(function(){var K='vsqc-consent',GA='G-FKCYXWVBCF';
+function load(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA);}
+var c=null;try{c=localStorage.getItem(K)}catch(e){}
+var b=document.getElementById('ck');function set(v){try{localStorage.setItem(K,v)}catch(e){}b.hidden=true;if(v==='ok')load();}
+if(c==='ok')load();else if(c!=='no')b.hidden=false;
+document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electricity bill calculator for Italy 2026: yearly and monthly cost</title>
+<meta name="description" content="Estimate how much you spend on electricity in Italy per year, per month and per bill, with up-to-date reference prices, and compare offers on official and supplier websites.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/electricity-bill/">
+<link rel="alternate" hreflang="it" href="https://vuoisaperequantocosta.it/bolletta-luce/"><link rel="alternate" hreflang="en" href="https://vuoisaperequantocosta.it/en/electricity-bill/"><link rel="alternate" hreflang="x-default" href="https://vuoisaperequantocosta.it/bolletta-luce/">
+<meta property="og:title" content="Electricity bill calculator for Italy 2026: yearly and monthly cost">
+<meta property="og:description" content="Estimate how much you spend on electricity in Italy per year, per month and per bill, with up-to-date reference prices, and compare offers on official and supplier websites.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/en/electricity-bill/">
+<meta property="og:locale" content="en_GB">
+<meta name="theme-color" content="#0e6b63">
+<meta name="google-site-verification" content="kYwrCokb8RvZCkuNno2ew4Bu0Jja8ny4wfENO5Qc8x8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vuoisaperequantocosta.it/en/"}, {"@type": "ListItem", "position": 2, "name": "Home", "item": "https://vuoisaperequantocosta.it/en/#casa"}, {"@type": "ListItem", "position": 3, "name": "Electricity bill", "item": "https://vuoisaperequantocosta.it/en/electricity-bill/"}]}, {"@type": "WebApplication", "name": "Electricity bill", "url": "https://vuoisaperequantocosta.it/en/electricity-bill/", "description": "Estimate how much you spend on electricity in Italy per year, per month and per bill, with up-to-date reference prices, and compare offers on official and supplier websites.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "en", "dateModified": "2026-11-22", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is the electricity cost calculated?", "acceptedAnswer": {"@type": "Answer", "text": "The yearly cost is your usage in kWh multiplied by the average price you pay per kWh, including fixed charges, network costs, system charges, excise duty and VAT. Using an \"all-in\" price is the simplest way to get a reliable estimate: the real bill varies a little depending on when you use energy and on your tariff (fixed or variable price)."}}, {"@type": "Question", "name": "How much electricity does a household use?", "acceptedAnswer": {"@type": "Answer", "text": "A household of 3 uses on average about 2,000–2,500 kWh a year. Homes with a heat pump, induction hob or electric car use much more. You can find the exact figure on your bill under \"consumo annuo\"."}}, {"@type": "Question", "name": "Where can I compare offers?", "acceptedAnswer": {"@type": "Answer", "text": "The Portale Offerte run by ARERA, the public energy regulator, compares all free-market offers neutrally. Private comparison sites are handy, but only show the suppliers they have agreements with."}}]}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/en/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><div class="hdr-r"><nav class="main-nav"><a href="/en/#auto">Car</a><a href="/en/#casa" class=on>Home</a><a href="/en/#lavoro">Work</a><a href="/en/#collezionismo">Collectibles</a><a href="/en/#utilita">Tools</a></nav><a class="lang-switch" href="/bolletta-luce/" hreflang="it" lang="it" title="Versione italiana" aria-label="Versione italiana"><svg width="20" height="14" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg><span>IT</span></a></div></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/en/">Home</a> › <a href="/en/#casa">Home</a></div>
+<h1><span class="ic">💡</span>Electricity bill</h1>
+<p class="lead">Estimate how much you spend on electricity in Italy per year, per month and per bill, with up-to-date reference prices, and compare offers on official and supplier websites.</p>
+<p class="upd">🗓️ Updated on 22 November 2026</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="l_mode"><button class="on" data-m="fam" type="button">I don't know my usage</button><button data-m="kwh" type="button">I have a bill</button></div>
+    <div id="l_fam">
+      <div class="field"><label for="l_pers">People in the household</label><div class="inp"><select id="l_pers"><option value="1200">1 person</option><option value="1700">2 people</option><option value="2200" selected>3 people</option><option value="2700">4 people</option><option value="3200">5 or more</option></select></div></div>
+      <label class="check"><input id="l_heat" type="checkbox"> I heat or cook with electricity (heat pump, induction hob)</label>
+    </div>
+    <div id="l_kwh" style="display:none">
+      <div class="field"><label for="l_cons">Yearly usage <span class="hint">(on your bill, "consumo annuo")</span></label><div class="inp"><input id="l_cons" type="number" inputmode="numeric" value="2200" min="0" step="50"><span class="suf">kWh</span></div></div>
+    </div>
+    <div class="field"><label for="l_prezzo">Average all-in price <span class="hint">(taxes included)</span></label><div class="inp"><input id="l_prezzo" type="number" inputmode="decimal" value="0.4343" min="0" step="0.001"><span class="suf">€/kWh</span></div></div>
+    <p class="note">The starting value is the reference price set by ARERA, the Italian energy regulator, for the typical protected customer, October–December 2026. For your real price: divide the total of a bill by the kWh used in that period.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Estimated yearly cost</div>
+    <div class="big" id="l_anno">–</div>
+    <div class="range" id="l_mese">–</div>
+    <div class="lines">
+      <div class="ln"><span>Yearly usage</span><b id="l_k">–</b></div>
+      <div class="ln"><span>Average two-monthly bill</span><b id="l_bim">–</b></div>
+      <div class="ln"><span>Saving with a 10% lower price</span><b id="l_r10">–</b></div>
+      <div class="ln"><span>Saving with a 20% lower price</span><b id="l_r20">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Compare offers</div>
+    <div class="links" id="l_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Main energy suppliers</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="l_forn"></div></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How is the electricity cost calculated?</h2>
+  <p>The yearly cost is your usage in kWh multiplied by the average price you pay per kWh, including fixed charges, network costs, system charges, excise duty and VAT. Using an "all-in" price is the simplest way to get a reliable estimate: the real bill varies a little depending on when you use energy and on your tariff (fixed or variable price).</p>
+  <h2>How much electricity does a household use?</h2>
+  <p>A household of 3 uses on average about 2,000–2,500 kWh a year. Homes with a heat pump, induction hob or electric car use much more. You can find the exact figure on your bill under "consumo annuo".</p>
+  <h2>Where can I compare offers?</h2>
+  <p>The Portale Offerte run by ARERA, the public energy regulator, compares all free-market offers neutrally. Private comparison sites are handy, but only show the suppliers they have agreements with.</p>
+</article>
+<details class="embed-box"><summary>🧩 Add this calculator to your website or blog</summary>
+<p>Copy this code and paste it into your page: the calculator will appear on your site, free and always up to date.</p>
+<textarea id="emb_code" readonly rows="4">&lt;iframe data-vsqc src=&quot;https://vuoisaperequantocosta.it/en/embed/electricity-bill/&quot; title=&quot;Electricity bill&quot; width=&quot;100%&quot; height=&quot;900&quot; loading=&quot;lazy&quot; style=&quot;border:0;max-width:760px;display:block&quot;&gt;&lt;/iframe&gt;&lt;p style=&quot;font-size:13px;max-width:760px&quot;&gt;Calculator by &lt;a href=&quot;https://vuoisaperequantocosta.it/en/electricity-bill/&quot;&gt;VuoiSapereQuantoCosta.it – Electricity bill&lt;/a&gt;&lt;/p&gt;&lt;script&gt;addEventListener(&quot;message&quot;,function(e){if(e.origin!==&quot;https://vuoisaperequantocosta.it&quot;||!e.data||!e.data.vsqcH)return;document.querySelectorAll(&quot;iframe[data-vsqc]&quot;).forEach(function(f){if(f.contentWindow===e.source)f.style.height=e.data.vsqcH+&quot;px&quot;})})&lt;/script&gt;</textarea>
+<button type="button" class="btn" onclick="var t=document.getElementById('emb_code');t.select();try{navigator.clipboard.writeText(t.value).catch(function(){})}catch(e){};this.textContent='Code copied!'">Copy the code</button></details>
+<section class="related"><h2>More calculators</h2><div class="grid"><a class="card c-casa" href="/en/mortgage-calculator/"><span class="ic">🏠</span><span><h3>Mortgage calculator</h3><p>Monthly payment, total interest and amortisation schedule.</p></span></a><a class="card c-casa" href="/en/loan-calculator/"><span class="ic">💳</span><span><h3>Loan and car finance calculator<span class="new">New</span></h3><p>Monthly payment, interest and real APR of a loan.</p></span></a><a class="card c-casa" href="/en/imu-property-tax/"><span class="ic">🏛️</span><span><h3>IMU property tax and December balance<span class="new">New</span></h3><p>Yearly IMU, June instalment and 16 December balance.</p></span></a><a class="card c-casa" href="/en/gas-bill/"><span class="ic">🔥</span><span><h3>Gas bill<span class="new">New</span></h3><p>Heating, hot water and cooking cost, with links to offers.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/en/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Free calculators, no sign-up needed, to find out in seconds what things really cost in Italy. Everything you type stays in your browser.</p></div>
+<div><h4>Car</h4><a href="/en/used-car-value/">What is my car worth?</a><a href="/en/car-running-costs/">Annual cost of running a car</a><a href="/en/electric-vs-petrol/">Electric or petrol car?</a><a href="/en/car-service-cost/">Car and motorbike service cost</a><a href="/en/car-tax-bollo/">Italian car tax (bollo auto)</a><a href="/en/car-ownership-transfer-cost/">Used car ownership transfer cost</a><a href="/en/road-trip-fuel-cost/">Road trip cost by car</a></div><div><h4>Home</h4><a href="/en/mortgage-calculator/">Mortgage calculator</a><a href="/en/loan-calculator/">Loan and car finance calculator</a><a href="/en/imu-property-tax/">IMU property tax and December balance</a><a href="/en/electricity-bill/">Electricity bill</a><a href="/en/gas-bill/">Gas bill</a><a href="/en/heat-pump-vs-boiler/">Heat pump or gas boiler?</a><a href="/en/home-internet-cost/">Real cost of home internet</a></div><div><h4>Work</h4><a href="/en/thirteenth-month-pay/">13th-month pay (tredicesima) 2026</a><a href="/en/net-salary-italy/">Italian net salary calculator 2026</a><a href="/en/tfr-severance-pay/">TFR severance pay calculator</a><a href="/en/italian-vat-calculator/">Italian VAT (IVA) calculator</a><a href="/en/child-benefit-assegno-unico/">Italian child benefit (assegno unico) 2026</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · Results are estimates and do not replace advice from a professional. · <a href="/en/privacy/" style="display:inline;color:#b7bec8">Privacy and cookies</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Cookie settings</a></div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+let lMode='fam';
+$('l_mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;lMode=b.dataset.m;$('l_mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('l_fam').style.display=lMode==='fam'?'':'none';$('l_kwh').style.display=lMode==='kwh'?'':'none';calcL()});
+function calcL(){
+  const k=lMode==='kwh'?val('l_cons'):(+$('l_pers').value)*($('l_heat').checked?1.6:1),p=val('l_prezzo'),a=k*p;
+  $('l_anno').textContent=eur0(a);$('l_mese').textContent='about '+eur0(a/12)+' a month';$('l_k').textContent=num(k,0)+' kWh';
+  $('l_bim').textContent=eur0(a/6);$('l_r10').textContent=eur0(a*0.1)+' a year';$('l_r20').textContent=eur0(a*0.2)+' a year';
+}
+$('l_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Official, neutral comparison of all offers (ARERA)'],
+  ['https://www.facile.it/','Facile.it','Electricity and gas price comparison'],['https://www.sostariffe.it/','SOStariffe.it','Electricity and gas price comparison'],['https://www.segugio.it/','Segugio.it','Electricity and gas price comparison']]);
+$('l_forn').innerHTML=lk([['https://www.enel.it/','Enel Energia',''],['https://eniplenitude.com/','Plenitude (Eni)',''],['https://www.edisonenergia.it/','Edison Energia',''],['https://www.a2a.it/','A2A Energia',''],
+  ['https://www.irenlucegas.it/','Iren Luce Gas',''],['https://www.sorgenia.it/','Sorgenia',''],['https://octopusenergy.it/','Octopus Energy',''],['https://www.gruppohera.it/','Hera','']]);
+on(['l_pers','l_heat','l_cons','l_prezzo'],calcL);calcL();
+(function(){
+  const hEl=document.querySelector('.tool-head h1');const h1=hEl?[...hEl.childNodes].filter(n=>!(n.classList&&n.classList.contains('ic'))).map(n=>n.textContent).join(''):document.title;
+  const box=document.createElement('div');box.className='share';
+  const EN=(document.documentElement.lang||'').startsWith('en');
+  box.innerHTML='<span>'+(EN?'Share the result':'Condividi il risultato')+'</span><a class="btn wa" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg> WhatsApp</a><button type="button" class="btn cp">'+(EN?'Copy link':'Copia link')+'</button>';
+  const target=document.querySelector('.result')||document.querySelector('.panel');
+  if(!target)return;target.appendChild(box);
+  const url=()=>location.origin+location.pathname+location.search;
+  box.querySelector('.wa').addEventListener('click',function(){
+    const lbl=(document.querySelector('.result .lbl')||{}).textContent,big=(document.querySelector('.result .big')||{}).textContent;
+    const t=big&&big.trim()!=='–'&&lbl?(EN?`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Work out yours for free 👉 ${url()}`:`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Calcola il tuo gratis qui 👉 ${url()}`):(EN?`Check out this free calculator: ${h1.trim()} 👉 ${url()}`:`Guarda questo calcolatore gratuito: ${h1.trim()} 👉 ${url()}`);
+    this.href='https://wa.me/?text='+encodeURIComponent(t);
+    try{if(window.gtag)gtag('event','share',{method:'whatsapp',content_type:'calcolatore',item_id:location.pathname})}catch(e){}
+  });
+  box.querySelector('.cp').addEventListener('click',function(){
+    const b=this;const done=()=>{b.textContent=EN?'Link copied!':'Link copiato!';setTimeout(()=>b.textContent=EN?'Copy link':'Copia link',2000)};
+    try{navigator.clipboard.writeText(url()).then(done,done)}catch(e){done()}
+    try{if(window.gtag)gtag('event','share',{method:'copy_link',item_id:location.pathname})}catch(e){}
+  });
+})();
+
+</script>
+<div id="ck" class="ck" role="dialog" aria-live="polite" aria-label="Cookie" hidden>
+<p><b>We only use cookies for anonymous visit statistics</b>, with Google Analytics, if you agree. Your calculations always stay on your device. <a href="/en/privacy/">Privacy and cookies</a></p>
+<div class="ck-b"><button type="button" class="btn" id="ck-no">Decline</button><button type="button" class="btn btn-primary" id="ck-ok">Accept</button></div></div>
+<script>(function(){var K='vsqc-consent',GA='G-FKCYXWVBCF';
+function load(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA);}
+var c=null;try{c=localStorage.getItem(K)}catch(e){}
+var b=document.getElementById('ck');function set(v){try{localStorage.setItem(K,v)}catch(e){}b.hidden=true;if(v==='ok')load();}
+if(c==='ok')load();else if(c!=='no')b.hidden=false;
+document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>
+</body>
+</html>

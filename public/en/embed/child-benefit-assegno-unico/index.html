@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Italian child benefit (assegno unico) 2026 – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/child-benefit-assegno-unico/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">👶</span><b>Italian child benefit (assegno unico) 2026</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="au_isee">Household ISEE <span class="hint">(leave empty if you don't submit one)</span></label><div class="inp"><input id="au_isee" type="number" inputmode="decimal" value="25000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="lbl-t">Dependent children</div>
+    <div class="row2">
+      <div class="field"><label for="au_0">Under 1 year</label><div class="inp"><input id="au_0" type="number" inputmode="numeric" value="0" min="0" step="1"></div></div>
+      <div class="field"><label for="au_13">Aged 1 to 3</label><div class="inp"><input id="au_13" type="number" inputmode="numeric" value="1" min="0" step="1"></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="au_min">Aged 3 to 17</label><div class="inp"><input id="au_min" type="number" inputmode="numeric" value="1" min="0" step="1"></div></div>
+      <div class="field"><label for="au_mag">Aged 18 to 20 <span class="hint">(students, low-income work…)</span></label><div class="inp"><input id="au_mag" type="number" inputmode="numeric" value="0" min="0" step="1"></div></div>
+    </div>
+    <label class="check"><input id="au_lav" type="checkbox" checked> Both parents work</label>
+    <label class="check"><input id="au_mam" type="checkbox"> The mother is under 21</label>
+    <p class="note">Supplements for children with disabilities are not included. For the exact amount use the INPS simulator.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Estimated monthly child benefit</div>
+    <div class="big" id="au_tot">–</div>
+    <div class="range" id="au_anno">–</div>
+    <div class="lines" id="au_lines"></div>
+    <div style="margin-top:16px;font-weight:600">Useful links</div>
+    <div class="links" id="au_links"></div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How much is the assegno unico in 2026?</h2>
+  <p>For each child under 18 the base amount ranges from €203.80 a month with an ISEE up to €17,468.51, to €58.30 with an ISEE of €46,582.71 or more, or without an ISEE. For children aged 18 to 20 it ranges from €99.10 to €29.10. Between the two thresholds the amount decreases gradually.</p>
+  <h2>What supplements are there?</h2>
+  <p>For children under one the amount increases by 50%; the same applies to children aged 1 to 3 in families with at least three children and an ISEE up to €46,582.71. There are also supplements from the third child on, for each child when both parents work, for mothers under 21, and a flat €150 a month for households with at least four children.</p>
+  <h2>Do I need an ISEE?</h2>
+  <p>No, the benefit is paid even without an ISEE (the Italian household means-test indicator), but in that case you get the minimum amount. If you submit an updated ISEE by 30 June you also recover arrears back to March.</p>
+</article>
+<p class="embed-credit">Free calculator by <a href="https://vuoisaperequantocosta.it/en/child-benefit-assegno-unico/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+const T1=17468.51,T2=46582.71;
+function sc(isee,max,min){if(isee===null)return min;if(isee<=T1)return max;if(isee>=T2)return min;return max-(isee-T1)/(T2-T1)*(max-min)}
+function calcAU(){
+  const raw=$('au_isee').value.trim(),isee=raw===''?null:val('au_isee');
+  const n0=Math.max(0,Math.round(val('au_0'))),n13=Math.max(0,Math.round(val('au_13'))),nm=Math.max(0,Math.round(val('au_min'))),n18=Math.max(0,Math.round(val('au_mag')));
+  const nTot=n0+n13+nm+n18,minori=n0+n13+nm;
+  const baseMin=sc(isee,203.80,58.30),base18=sc(isee,99.10,29.10),terzo=sc(isee,99.10,17.40),lav=$('au_lav').checked?sc(isee,34.90,0):0;
+  const low=isee!==null&&isee<=T2;
+  let b=n0*baseMin*1.5+n13*baseMin*(nTot>=3&&low?1.5:1)+nm*baseMin+n18*base18;
+  const mT=Math.max(0,nTot-2)*terzo,mL=minori*lav,mM=$('au_mam').checked?minori*23.30:0,m4=nTot>=4?150:0,tot=b+mT+mL+mM+m4;
+  $('au_tot').textContent=nTot?eur(tot):'–';$('au_anno').textContent=nTot?'about '+eur0(tot*12)+' a year':'Enter at least one child';
+  const L=[['Base amount for children',b],['Supplement from the third child',mT],['Both parents work',mL],['Mother under 21',mM],['Household with 4 or more children',m4]].filter(x=>x[1]>0.004);
+  $('au_lines').innerHTML=nTot?L.map(([t,v])=>`<div class="ln"><span>${t}</span><b>${eur(v)}</b></div>`).join('')+`<div class="ln" style="opacity:.8;font-size:13px"><span>Base per child under 18 with your ISEE</span><b>${eur(baseMin)}</b></div>`:'';
+}
+$('au_links').innerHTML=lk([['https://www.inps.it/','INPS','Application, simulator, official amounts and pre-filled ISEE (in Italian)']]);
+on(['au_isee','au_0','au_13','au_min','au_mag','au_lav','au_mam'],calcAU);calcAU();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

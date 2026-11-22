@@ -1,0 +1,90 @@
+<!--
+title: What is my car worth in Italy? Free used car value estimate
+h1: What is my car worth?
+desc: Estimate the value of your used car in Italy from year, mileage, fuel type and condition, then compare it straight away with real listings for the same model.
+card: Used car value estimate and real listings to compare.
+icon: 🚗
+cat: Auto
+updated: 2026-11-22
+order: 10
+new: si
+alt: valore-auto
+-->
+<div class="layout">
+  <div class="panel">
+    <h2>Your car</h2>
+    <div class="row2">
+      <div class="field"><label for="a_marca">Make</label><div class="inp"><input id="a_marca" type="text" value="Fiat" placeholder="e.g. Fiat" autocomplete="off"></div></div>
+      <div class="field"><label for="a_modello">Model</label><div class="inp"><input id="a_modello" type="text" value="Panda" placeholder="e.g. Panda" autocomplete="off"></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="a_anno">Year of registration</label><div class="inp"><input id="a_anno" type="number" inputmode="numeric" value="2019" min="1980" step="1"></div></div>
+      <div class="field"><label for="a_km">Mileage</label><div class="inp"><input id="a_km" type="number" inputmode="numeric" value="85000" min="0" step="1000"><span class="suf">km</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="a_alim">Fuel type</label><div class="inp"><select id="a_alim"><option value="benzina" selected>Petrol</option><option value="diesel">Diesel</option><option value="gpl">LPG or methane</option><option value="ibrida">Hybrid</option><option value="elettrica">Electric</option></select></div></div>
+      <div class="field"><label for="a_cond">Condition</label><div class="inp"><select id="a_cond"><option value="1.05">Excellent, full service history</option><option value="1" selected>Good</option><option value="0.93">Normal wear</option><option value="0.8">Needs work</option></select></div></div>
+    </div>
+    <div class="field"><label for="a_fascia">What kind of car is it?</label><div class="inp"><select id="a_fascia">
+      <option value="15000" selected>City car (Panda, i10, Aygo…)</option>
+      <option value="20000">Supermini (Yaris, Clio, Polo, 208…)</option>
+      <option value="27000">Compact or small SUV (Golf, 2008, Captur…)</option>
+      <option value="36000">Family car or mid-size SUV (Tucson, Qashqai, Passat…)</option>
+      <option value="52000">Premium (BMW 3 Series, Audi A4, Mercedes C-Class…)</option>
+      <option value="85000">Luxury or sports car</option>
+      <option value="custom">I know the price when new</option></select></div></div>
+    <div class="field" id="a_customf" style="display:none"><label for="a_listino">Price when new <span class="hint">(list price including options)</span></label><div class="inp"><input id="a_listino" type="number" inputmode="decimal" value="18000" step="500" min="0"><span class="suf">€</span></div></div>
+    <p class="note">If you know the price when new, choose the last option: the estimate becomes more accurate.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Estimated value in a private sale</div>
+    <div class="big" id="a_val">–</div>
+    <div class="range" id="a_range">–</div>
+    <div class="lines">
+      <div class="ln"><span>As a trade-in at a dealer</span><b id="a_perm">–</b></div>
+      <div class="ln"><span>Typical dealer retail price</span><b id="a_dealer">–</b></div>
+      <div class="ln"><span>Age of the car</span><b id="a_eta">–</b></div>
+      <div class="ln"><span>Average km per year</span><b id="a_kmy">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Compare with real listings</div>
+    <div class="links" id="a_links"></div>
+    <div class="small">The estimate is based on a statistical depreciation model. The real price depends on trim, options, colour and area: always check listings for the same model.</div>
+  </div>
+</div>
+<div class="tips"><h3>How to read the listings</h3><ul>
+  <li>Filter by the same year (±1), similar mileage and the same engine.</li>
+  <li>Listing prices are asking prices, not final prices: deals usually close 5–10% lower.</li>
+  <li>Ignore listings far above or below the rest: they are often mistakes or cars with problems.</li>
+</ul></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>How do we estimate your car's value?</h2>
+  <p>On average a car loses about 15–20% of its value in the first year and then a smaller share each year: after 5 years it is typically worth around 60% of the price when new, after 10 years just over a third. On top of age-related depreciation we adjust for mileage (against an average of 15,000 km a year), fuel type and condition.</p>
+  <h2>Private sale, trade-in or dealer?</h2>
+  <p>A private sale gets you the most. A trade-in pays less, because the dealer has to prepare the car, give a warranty and make a profit; in exchange it's hassle-free. The price at which a dealer resells the same car is higher, because it includes warranty and preparation.</p>
+</article>
+<script>
+const RES=[0.85,0.80,0.73,0.67,0.62,0.57,0.52,0.48,0.44,0.40,0.36,0.33,0.30,0.27,0.24,0.22,0.20,0.18,0.16,0.15,0.14];
+const slug=s=>s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+$('a_fascia').addEventListener('change',()=>{$('a_customf').style.display=$('a_fascia').value==='custom'?'':'none'});
+function calcA(){
+  const Y=new Date().getFullYear(),anno=Math.round(val('a_anno')),eta=Math.max(0,Y-anno),km=val('a_km'),alim=$('a_alim').value;
+  const listino=$('a_fascia').value==='custom'?val('a_listino'):+$('a_fascia').value;
+  let r=eta<RES.length?RES[eta]:Math.max(0.08,RES[RES.length-1]*Math.pow(0.92,eta-RES.length+1));
+  let f=1;if(alim==='elettrica'&&eta>=1)f=0.88;else if(alim==='ibrida')f=1.04;else if(alim==='diesel'&&eta>=7)f=0.93;
+  const att=Math.max(eta,0.5)*15000,kadj=Math.min(1.15,Math.max(0.7,1-0.025*(km-att)/10000));
+  const v=listino*r*f*kadj*(+$('a_cond').value),rd=x=>Math.round(x/50)*50;
+  const ok=listino>0&&anno>1950&&anno<=Y;
+  $('a_val').textContent=ok?eur0(rd(v)):'–';
+  $('a_range').textContent=ok?'Range: '+eur0(rd(v*0.88))+' – '+eur0(rd(v*1.12)):'Check the year and price';
+  $('a_perm').textContent=ok?eur0(rd(v*0.8)):'–';$('a_dealer').textContent=ok?eur0(rd(v*1.15)):'–';
+  $('a_eta').textContent=eta===0?'less than 1 year':eta+(eta===1?' year':' years');$('a_kmy').textContent=num(km/Math.max(eta,1),0)+' km';
+  const mm=($('a_marca').value+' '+$('a_modello').value).trim();
+  const as=`https://www.autoscout24.it/lst/${slug($('a_marca').value)}/${slug($('a_modello').value)}?fregfrom=${anno-1}&fregto=${anno+1}`;
+  const L=[[as,'AutoScout24','Listings for the same model, years '+(anno-1)+'–'+(anno+1)],
+    [`https://www.subito.it/annunci-italia/vendita/auto/?q=${qs(mm)}`,'Subito.it','Private and dealer listings in Italy'],
+    [`https://www.ebay.it/sch/i.html?_nkw=${qs(mm+' '+anno)}`,'eBay','Listings and auctions']];
+  $('a_links').innerHTML=mm?L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join(''):'';
+}
+on(['a_marca','a_modello','a_anno','a_km','a_alim','a_cond','a_fascia','a_listino'],calcA);calcA();
+</script>

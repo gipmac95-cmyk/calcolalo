@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electric or petrol car? – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/en/electric-vs-petrol/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">⚡</span><b>Electric or petrol car?</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="row2">
+      <div class="field"><label for="eb_km">Km per year</label><div class="inp"><input id="eb_km" type="number" inputmode="numeric" value="15000" step="500" min="0"><span class="suf">km</span></div></div>
+      <div class="field"><label for="eb_anni">Years of ownership</label><div class="inp"><input id="eb_anni" type="number" inputmode="numeric" value="8" step="1" min="1" max="20"><span class="suf">years</span></div></div>
+    </div>
+    <h2 style="margin-top:4px">⛽ Petrol car</h2>
+    <div class="row2">
+      <div class="field"><label for="eb_bp">Purchase price</label><div class="inp"><input id="eb_bp" type="number" inputmode="decimal" value="24000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="eb_bc">Consumption</label><div class="inp"><input id="eb_bc" type="number" inputmode="decimal" value="6.5" step="0.1" min="0"><span class="suf">L/100 km</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="eb_bprezzo">Petrol price</label><div class="inp"><input id="eb_bprezzo" type="number" inputmode="decimal" value="1.95" step="0.01" min="0"><span class="suf">€/L</span></div></div>
+      <div class="field"><label for="eb_bfix">Car tax + servicing</label><div class="inp"><input id="eb_bfix" type="number" inputmode="decimal" value="530" step="10" min="0"><span class="suf">€/year</span></div></div>
+    </div>
+    <h2 style="margin-top:4px">🔌 Electric car</h2>
+    <div class="row2">
+      <div class="field"><label for="eb_ep">Purchase price <span class="hint">(after incentives)</span></label><div class="inp"><input id="eb_ep" type="number" inputmode="decimal" value="30000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="eb_ec">Consumption</label><div class="inp"><input id="eb_ec" type="number" inputmode="decimal" value="16" step="0.5" min="0"><span class="suf">kWh/100 km</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="eb_casa">Share charged at home</label><div class="inp"><input id="eb_casa" type="number" inputmode="numeric" value="80" step="5" min="0" max="100"><span class="suf">%</span></div></div>
+      <div class="field"><label for="eb_efix">Car tax + servicing</label><div class="inp"><input id="eb_efix" type="number" inputmode="decimal" value="200" step="10" min="0"><span class="suf">€/year</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="eb_pcasa">Home electricity price</label><div class="inp"><input id="eb_pcasa" type="number" inputmode="decimal" value="0.43" step="0.01" min="0"><span class="suf">€/kWh</span></div></div>
+      <div class="field"><label for="eb_ppub">Public charging price</label><div class="inp"><input id="eb_ppub" type="number" inputmode="decimal" value="0.68" step="0.01" min="0"><span class="suf">€/kWh</span></div></div>
+    </div>
+    <p class="note">Starting values: petrol at the Italian average self-service price for November 2026, home electricity at the ARERA reference price for the last quarter of 2026, public charging at the average between slow and fast chargers. With a dedicated electricity tariff or solar panels, home charging costs much less. Many Italian regions exempt electric cars from car tax for the first years.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="eb_win">–</div>
+    <div class="big" id="eb_diff">–</div>
+    <div class="range" id="eb_pay">–</div>
+    <div class="lines">
+      <div class="ln"><span>Petrol – cost per 100 km</span><b id="eb_b100">–</b></div>
+      <div class="ln"><span>Electric – cost per 100 km</span><b id="eb_e100">–</b></div>
+      <div class="ln"><span>Petrol – yearly cost</span><b id="eb_ba">–</b></div>
+      <div class="ln"><span>Electric – yearly cost</span><b id="eb_ea">–</b></div>
+      <div class="ln"><span>Petrol – total cost</span><b id="eb_bt">–</b></div>
+      <div class="ln"><span>Electric – total cost</span><b id="eb_et">–</b></div>
+    </div>
+    <div class="small">The comparison does not include resale value at the end of the period, which can change the result.</div>
+  </div>
+</div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>Is an electric car really cheaper?</h2>
+  <p>An electric car usually costs more to buy, but less to fuel and maintain, since servicing is simpler: no engine oil, spark plugs, timing belt or clutch. The more kilometres you drive and the more often you charge at home, the better the deal. The calculator shows after how many years the yearly savings pay back the higher purchase price.</p>
+  <h2>How much does it cost to charge an electric car in Italy?</h2>
+  <p>It depends a lot on where you charge. At home you pay your electricity bill rate, lower with dedicated tariffs or solar panels. At public chargers the pay-as-you-go price is higher and rises with charging speed; apps and subscriptions bring it down. At 16 kWh per 100 km, every extra 10 cents per kWh costs €1.60 more per 100 km.</p>
+</article>
+<p class="embed-credit">Free calculator by <a href="https://vuoisaperequantocosta.it/en/electric-vs-petrol/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcEB(){
+  const km=val('eb_km'),anni=Math.max(1,Math.round(val('eb_anni'))),casa=Math.min(100,Math.max(0,val('eb_casa')))/100;
+  const b100=val('eb_bc')*val('eb_bprezzo'),pe=casa*val('eb_pcasa')+(1-casa)*val('eb_ppub'),e100=val('eb_ec')*pe;
+  const ba=km/100*b100+val('eb_bfix'),ea=km/100*e100+val('eb_efix'),bt=val('eb_bp')+ba*anni,et=val('eb_ep')+ea*anni;
+  $('eb_b100').textContent=eur(b100);$('eb_e100').textContent=eur(e100);$('eb_ba').textContent=eur0(ba);$('eb_ea').textContent=eur0(ea);$('eb_bt').textContent=eur0(bt);$('eb_et').textContent=eur0(et);
+  const d=bt-et;
+  $('eb_win').textContent=Math.abs(d)<50?'Over '+anni+' years they cost about the same':'Over '+anni+' years the '+(d>0?'electric car':'petrol car')+' is cheaper: you save';
+  $('eb_diff').textContent=Math.abs(d)<50?'≈ 0 €':eur0(Math.abs(d));
+  const gap=val('eb_ep')-val('eb_bp'),save=ba-ea;
+  $('eb_pay').textContent=gap<=0?(save>=0?'The electric car is cheaper from day one':'The electric car is cheaper to buy but costs more each year'):save>0?'The electric car pays for itself after about '+num(gap/save,1)+' years':'With these figures the electric car never pays for itself';
+}
+on(['eb_km','eb_anni','eb_bp','eb_bc','eb_bprezzo','eb_bfix','eb_ep','eb_ec','eb_casa','eb_efix','eb_pcasa','eb_ppub'],calcEB);calcEB();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

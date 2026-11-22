@@ -1,0 +1,70 @@
+<!--
+title: Real cost of home internet in Italy: compare two broadband offers over 24 months
+h1: Real cost of home internet
+desc: Find out what a home internet offer in Italy really costs, counting promotions, the price after the promo, activation and router, and compare two offers over the same period.
+card: Promo, activation and router: what an offer really costs.
+icon: 📶
+cat: Casa
+updated: 2026-11-22
+order: 40
+new: si
+alt: costo-internet
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="n_mesi">Compare over</label><div class="inp"><select id="n_mesi"><option value="12">12 months</option><option value="24" selected>24 months</option><option value="36">36 months</option></select></div></div>
+    <h2 style="margin-top:6px">Offer A</h2>
+    <div class="row2">
+      <div class="field"><label for="a_promo">Promo price</label><div class="inp"><input id="a_promo" type="number" inputmode="decimal" value="24.90" step="0.1" min="0"><span class="suf">€/month</span></div></div>
+      <div class="field"><label for="a_mp">Promo length</label><div class="inp"><input id="a_mp" type="number" inputmode="numeric" value="12" step="1" min="0"><span class="suf">months</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="a_dopo">Price after the promo</label><div class="inp"><input id="a_dopo" type="number" inputmode="decimal" value="32.90" step="0.1" min="0"><span class="suf">€/month</span></div></div>
+      <div class="field"><label for="a_una">Activation + router <span class="hint">(total)</span></label><div class="inp"><input id="a_una" type="number" inputmode="decimal" value="39.90" step="1" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <h2 style="margin-top:6px">Offer B</h2>
+    <div class="row2">
+      <div class="field"><label for="b_promo">Promo price</label><div class="inp"><input id="b_promo" type="number" inputmode="decimal" value="27.95" step="0.1" min="0"><span class="suf">€/month</span></div></div>
+      <div class="field"><label for="b_mp">Promo length</label><div class="inp"><input id="b_mp" type="number" inputmode="numeric" value="0" step="1" min="0"><span class="suf">months</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="b_dopo">Price after the promo</label><div class="inp"><input id="b_dopo" type="number" inputmode="decimal" value="27.95" step="0.1" min="0"><span class="suf">€/month</span></div></div>
+      <div class="field"><label for="b_una">Activation + router <span class="hint">(total)</span></label><div class="inp"><input id="b_una" type="number" inputmode="decimal" value="0" step="1" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <p class="note">If the router is paid in instalments, add up all instalments in the "Activation + router" field. Also remember any early termination fees if you leave before the end of the minimum term.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="n_win">–</div>
+    <div class="big" id="n_diff">–</div>
+    <div class="range" id="n_per">–</div>
+    <div class="lines">
+      <div class="ln"><span>Offer A – total</span><b id="n_ta">–</b></div>
+      <div class="ln"><span>Offer A – real monthly average</span><b id="n_ma">–</b></div>
+      <div class="ln"><span>Offer B – total</span><b id="n_tb">–</b></div>
+      <div class="ln"><span>Offer B – real monthly average</span><b id="n_mb">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Useful tools</div>
+    <div class="links" id="n_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Main internet providers</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="n_op"></div></div>
+<div class="ad">Advertisement</div>
+<article class="info">
+  <h2>Why isn't the advertised price enough?</h2>
+  <p>Many Italian internet offers are discounted only for the first months, then the price goes up. On top of that come the activation fee and the router, often paid in instalments. To really compare two offers you need to add everything up over the same period: the calculator does it for you and shows the real average monthly cost.</p>
+  <h2>Should I check coverage before choosing?</h2>
+  <p>Yes. Speed depends on the technology available at your address (full fibre FTTH, fibre-to-the-cabinet FTTC, or FWA via radio). Check coverage on the provider's website by entering your address. After activation you can measure your real speed with the free tool from AGCOM, the Italian communications regulator.</p>
+</article>
+<script>
+function tot(p,m,d,u,n){m=Math.min(m,n);return p*m+d*(n-m)+u}
+function calcN(){const n=+$('n_mesi').value;
+  const A=tot(val('a_promo'),val('a_mp'),val('a_dopo'),val('a_una'),n),B=tot(val('b_promo'),val('b_mp'),val('b_dopo'),val('b_una'),n);
+  $('n_ta').textContent=eur(A);$('n_tb').textContent=eur(B);$('n_ma').textContent=eur(A/n);$('n_mb').textContent=eur(B/n);
+  const d=Math.abs(A-B);
+  if(d<0.5){$('n_win').textContent='The two offers cost the same';$('n_diff').textContent='≈ 0 €';$('n_per').textContent='over '+n+' months'}
+  else{$('n_win').textContent='Offer '+(A<B?'A':'B')+' is cheaper: you save';$('n_diff').textContent=eur(d);$('n_per').textContent='over '+n+' months, about '+eur(d/n)+' a month'}}
+$('n_links').innerHTML=lk([['https://www.misurainternet.it/','Misura Internet (AGCOM)','Official free speed test (AGCOM)'],
+  ['https://www.sostariffe.it/','SOStariffe.it','Internet offer comparison'],['https://www.facile.it/','Facile.it','Internet offer comparison'],['https://www.segugio.it/','Segugio.it','Internet offer comparison']]);
+$('n_op').innerHTML=lk([['https://www.tim.it/','TIM',''],['https://www.fastweb.it/','Fastweb',''],['https://www.vodafone.it/','Vodafone',''],['https://www.windtre.it/','WINDTRE',''],['https://www.iliad.it/','Iliad',''],['https://www.sky.it/','Sky Wifi','']]);
+on(['n_mesi','a_promo','a_mp','a_dopo','a_una','b_promo','b_mp','b_dopo','b_una'],calcN);calcN();
+</script>
