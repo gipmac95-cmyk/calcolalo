@@ -25,7 +25,7 @@ CATS = [("Auto", "Bollo, passaggio di proprietà, viaggi e valore dell'usato"),
         ("Casa", "Mutuo e spese per la casa"),
         ("Lavoro", "Stipendio, TFR e IVA"),
         ("Collezionismo", "Quanto valgono videogiochi e carte"),
-        ("Utilità", "Calcoli di tutti i giorni")]
+        ("Utilità", "Valore dell'usato e calcoli di tutti i giorni")]
 SLUGCAT = {"Utilità": "utilita"}
 
 def catcls(c): return "c-" + SLUGCAT.get(c, c.lower())
@@ -113,9 +113,11 @@ def home():
     main = f'''<section class="hero"><div class="wrap">
 <span class="eyebrow"><i></i> {len(tools)} calcolatori gratuiti · aggiornati al 2026</span>
 <h1>Vuoi sapere <em>quanto costa?</em></h1>
-<p class="sub">Stipendio netto, bollo, mutuo, valore della tua auto e molto altro. Inserisci i tuoi numeri e scoprilo in pochi secondi.</p>
-<div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-<input id="q" type="search" placeholder="Cerca un calcolatore: bollo, stipendio, mutuo…" autocomplete="off" aria-label="Cerca un calcolatore"></div>
+<p class="sub">Il valore di qualsiasi oggetto usato, il tuo stipendio netto, il bollo, il mutuo e molto altro. Scoprilo in pochi secondi.</p>
+<form class="search" action="/quanto-vale/" method="get" role="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<input id="q" name="q" type="search" placeholder="Cosa vuoi sapere quanto costa? es. iPhone 13, Fiat Panda, bollo…" autocomplete="off" aria-label="Cerca" required style="padding-right:118px">
+<button class="btn btn-primary" type="submit" style="position:absolute;right:6px;top:6px;bottom:6px;font-size:16px;padding:0 20px">Cerca</button></form>
+<p style="font-size:13.5px;color:var(--muted);margin:10px 0 0">Scrivi qualsiasi oggetto: ti mostriamo i prezzi dell'usato su Vinted, eBay e Subito, e il calcolatore giusto se c'è.</p>
 <div class="chips">{chips}</div>
 <div class="stats"><span><b>Gratis</b> e senza registrazione</span><span><b>Dati aggiornati</b> alle regole 2026</span><span><b>Privacy</b>: i calcoli restano sul tuo dispositivo</span></div>
 </div></section>
@@ -128,11 +130,7 @@ def home():
 <div><span style="font-size:24px">🔒</span><h3>Nessun dato salvato</h3><p>Non chiediamo email e non salviamo quello che inserisci.</p></div>
 </section>
 </div>'''
-    script = '''const q=$('q'),cards=[...document.querySelectorAll('.card')],blocks=[...document.querySelectorAll('.cat-block')];
-q.addEventListener('input',()=>{const s=q.value.trim().toLowerCase();let n=0;
-cards.forEach(c=>{const ok=!s||c.dataset.s.includes(s);c.style.display=ok?'':'none';if(ok)n++});
-blocks.forEach(b=>{b.style.display=[...b.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none'});
-$('empty').style.display=n?'none':'block'});'''
+    script = ''
     return page(f"{SITE} Calcolatori gratuiti per le spese di tutti i giorni",
                 "Calcolatori online gratuiti: stipendio netto 2026, bollo auto, passaggio di proprietà, rata del mutuo, valore dell'auto usata, IVA, TFR e altro.",
                 "/", main, script=script)
