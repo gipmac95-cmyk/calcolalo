@@ -167,3 +167,12 @@ body.embed{background:transparent}
 .embed .result{position:static}
 .embed .layout{grid-template-columns:1fr}
 .embed-credit{font-size:13px;color:var(--muted);text-align:center;margin:14px 0 4px}
+.pm-list{display:grid;gap:2px;margin-top:6px}
+.pm-list .check{margin:0;padding:8px 10px;border-radius:9px}
+.pm-list .check:hover{background:#f4f2ec}
+.pm-list .check.off{opacity:.5}
+.pm-cta{background:#fff;color:var(--ink);border-radius:12px;padding:14px 16px;margin-top:16px}
+.pm-cta p{margin:6px 0 10px;font-size:14px;color:var(--ink-2)}
+.pm-cta .btn{background:var(--accent);border-color:var(--accent);color:#3d2700}
+.pm-cta .btn:hover{background:#e0950d;color:#3d2700}
+.embed .pm-cta{display:none}

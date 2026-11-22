@@ -1,0 +1,113 @@
+<!--
+title: Preventivo tagliando e manutenzione auto e moto: quanto costa nel 2026
+h1: Preventivo tagliando e manutenzione
+desc: Stima quanto costano tagliando, freni, cinghia di distribuzione, frizione, gomme, clima e revisione per la tua auto o moto, con ricambi e manodopera separati.
+card: Tagliando, freni, distribuzione, gomme: stima ricambi e manodopera.
+icon: 🔧
+cat: Auto
+updated: 2026-11-22
+order: 15
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="pm_veh"><button class="on" data-v="auto" type="button">🚗 Auto</button><button data-v="moto" type="button">🏍️ Moto e scooter</button></div>
+    <div class="row2">
+      <div class="field"><label for="pm_seg">Tipo di veicolo</label><div class="inp"><select id="pm_seg"></select></div></div>
+      <div class="field" id="pm_alimf"><label for="pm_alim">Motore</label><div class="inp"><select id="pm_alim"><option value="term" selected>Benzina, diesel, GPL</option><option value="ibr">Ibrida</option><option value="ele">Elettrica</option></select></div></div>
+    </div>
+    <div class="field"><label for="pm_rate">Officina</label><div class="inp"><select id="pm_rate"><option value="55" selected>Officina indipendente (circa 55 €/ora + IVA)</option><option value="75">Concessionaria o rete ufficiale (circa 75 €/ora + IVA)</option><option value="custom">Inserisco io la tariffa oraria</option></select></div></div>
+    <div class="field" id="pm_customf" style="display:none"><label for="pm_custom">Tariffa oraria <span class="hint">(IVA esclusa)</span></label><div class="inp"><input id="pm_custom" type="number" inputmode="decimal" value="50" min="0" step="1"><span class="suf">€/ora</span></div></div>
+    <div class="lbl-t" style="margin-top:4px">Cosa devi fare?</div>
+    <div id="pm_list" class="pm-list"></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Preventivo stimato, IVA inclusa</div>
+    <div class="big" id="pm_tot">–</div>
+    <div class="range" id="pm_rng">Scegli almeno un intervento</div>
+    <div class="lines" id="pm_lines"></div>
+    <div class="small">Stima basata su prezzi medi di ricambi di qualità equivalente all'originale e tempi standard di lavoro. Il prezzo reale dipende da modello, motore e condizioni del veicolo: per una cifra esatta serve un preventivo dell'officina.</div>
+    <div class="pm-cta">
+      <div style="font-weight:700;font-size:15px">📍 Sei in zona Rivarolo Canavese (TO)?</div>
+      <p>Chiedi un preventivo preciso a <b>L'Autoriparatore SAS di Campigotto</b>, Via Favria 55A, Rivarolo Canavese.</p>
+      <a class="btn" href="https://www.autoriparatore.net" target="_blank" rel="noopener">Richiedi un preventivo all'officina ↗</a>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Quanto costa un tagliando nel 2026?</h2>
+  <p>Per un'auto, il tagliando base (olio, filtro dell'olio e controlli) costa in genere tra 150 e 400 euro, a seconda del modello e dell'officina. Il tagliando completo, con tutti i filtri, costa di più. Per una moto di media cilindrata il tagliando base costa di solito tra 150 e 200 euro, uno scooter 125 meno. Le auto elettriche spendono meno, perché non hanno olio motore, candele né cinghia di distribuzione.</p>
+  <h2>Come si calcola il preventivo?</h2>
+  <p>Ogni intervento ha due voci: i ricambi e la manodopera. La manodopera si calcola moltiplicando le ore di lavoro previste per la tariffa oraria dell'officina. Nelle officine indipendenti la tariffa media è di circa 45–60 euro all'ora più IVA, nelle concessionarie e nelle reti ufficiali è più alta. Il calcolatore somma ricambi e manodopera, IVA inclusa, e mostra una forchetta tra il caso più economico e quello più caro.</p>
+  <h2>Quando si cambia la cinghia di distribuzione?</h2>
+  <p>Ogni costruttore indica una scadenza in chilometri e anni, spesso tra 60.000 e 160.000 km. È uno degli interventi più costosi, ma rimandarlo è rischioso: se la cinghia si rompe il motore può subire danni gravi, con riparazioni molto più care. Insieme alla cinghia di solito si cambiano tendicinghia e pompa dell'acqua.</p>
+  <h2>Quanto costa la revisione?</h2>
+  <p>La revisione ha una tariffa fissata per legge, uguale in tutta Italia: nei centri privati autorizzati costa 79,02 euro, sia per le auto sia per le moto. Si fa dopo 4 anni dalla prima immatricolazione e poi ogni 2 anni.</p>
+</article>
+<script>
+// ricambi: [min,max] in € IVA inclusa per la fascia base; h = ore di manodopera; ev:false = non esiste su auto elettriche
+const PM={
+ auto:{segs:[['Citycar (Panda, i10, Aygo…)',0.85,1],['Utilitaria (Yaris, Clio, Polo…)',1,1],['Compatta o piccolo SUV (Golf, 2008, Captur…)',1.25,1.1],['Familiare o SUV medio (Qashqai, Tucson…)',1.5,1.2],['Premium o grande (BMW, Audi, Mercedes…)',2,1.3]],
+  items:[
+   ['tb','Tagliando base (olio, filtro olio, controlli)',[70,110],0.8,{ev:0.45}],
+   ['tc','Tagliando completo (olio e tutti i filtri)',[110,170],1.3,{ev:0.45}],
+   ['can','Sostituzione candele (benzina)',[30,60],0.5,{ev:false}],
+   ['pf','Pastiglie freni anteriori',[35,70],1],
+   ['df','Dischi e pastiglie anteriori',[110,200],1.5],
+   ['dist','Cinghia di distribuzione con pompa acqua',[220,420],4,{ev:false}],
+   ['fri','Frizione (kit completo)',[200,400],5,{ev:false}],
+   ['bat','Batteria',[90,160],0.3],
+   ['clima','Ricarica aria condizionata',[30,60],0.7,{seg:false}],
+   ['gomme','Montaggio ed equilibratura 4 gomme (gomme escluse)',[8,15],1,{seg:false}],
+   ['lf','Sostituzione liquido freni',[10,20],0.5,{seg:false}],
+   ['amm','Ammortizzatori anteriori (coppia)',[120,250],2],
+   ['rev','Revisione (tariffa fissa di legge)',[79.02,79.02],0,{fixed:true}]]},
+ moto:{segs:[['Scooter fino a 125 cc',1,1],['Moto o scooter media cilindrata (300–800 cc)',1.6,1.8],['Maxi moto o premium (oltre 800 cc, BMW, Ducati, KTM…)',2.2,2.4]],
+  items:[
+   ['tb','Tagliando base (olio e filtro olio)',[30,50],0.8,{ev:0.4}],
+   ['tc','Tagliando completo (olio, filtri, candele, controlli)',[60,100],1.3,{ev:0.4}],
+   ['valv','Controllo e registrazione gioco valvole',[10,30],2.5,{ev:false}],
+   ['cat','Kit trasmissione (catena, corona, pignone o cinghia variatore)',[80,180],1],
+   ['pf','Pastiglie freni (un asse)',[20,45],0.6],
+   ['gomme','Montaggio 2 gomme (gomme escluse)',[5,10],0.8,{seg:false}],
+   ['bat','Batteria',[50,110],0.3],
+   ['forc','Revisione olio forcella',[20,40],1.5],
+   ['rev','Revisione (tariffa fissa di legge)',[79.02,79.02],0,{fixed:true}]]}
+};
+let pmVeh='auto',sel={auto:new Set(['tb']),moto:new Set(['tb'])};
+function rate(){return($('pm_rate').value==='custom'?val('pm_custom'):+$('pm_rate').value)*1.22}
+function renderPM(){
+  const D=PM[pmVeh];
+  $('pm_seg').innerHTML=D.segs.map((s,i)=>`<option value="${i}"${i===1?' selected':''}>${s[0]}</option>`).join('');
+  $('pm_alimf').style.display=pmVeh==='auto'?'':'none';
+  drawList();calcPM();
+}
+function drawList(){
+  const D=PM[pmVeh],ele=pmVeh==='auto'&&$('pm_alim').value==='ele';
+  $('pm_list').innerHTML=D.items.map(([id,name,,,o])=>{const off=ele&&o&&o.ev===false;
+    return `<label class="check${off?' off':''}"><input type="checkbox" data-id="${id}" ${sel[pmVeh].has(id)&&!off?'checked':''} ${off?'disabled':''}> ${name}${off?' <span class="hint">(non serve sulle elettriche)</span>':''}</label>`}).join('');
+}
+function calcPM(){
+  const D=PM[pmVeh],sg=D.segs[+$('pm_seg').value||0],r=rate(),ele=pmVeh==='auto'&&$('pm_alim').value==='ele',ibr=pmVeh==='auto'&&$('pm_alim').value==='ibr';
+  let lo=0,hi=0,rows='',allFixed=true;
+  D.items.forEach(([id,name,[a,b],h,o])=>{
+    o=o||{};if(!sel[pmVeh].has(id)||(ele&&o.ev===false))return;
+    let pa=a,pb=b,hh=h;
+    if(!o.fixed&&o.seg!==false){pa*=sg[1];pb*=sg[1];hh*=sg[2]}
+    if(ele&&typeof o.ev==='number'){pa*=o.ev;pb*=o.ev;hh*=0.7}
+    if(ibr&&(id==='tb'||id==='tc')){pa*=1.1;pb*=1.1}
+    if(!o.fixed)allFixed=false;const lab=hh*r,l=pa+lab*0.9,u=pb+lab*1.1;lo+=l;hi+=u;
+    rows+=`<div class="ln"><span>${name.replace(/ \(.*\)/,'')}</span><b>${o.fixed?eur(pa):eur0(l)+' – '+eur0(u)}</b></div>`;
+  });
+  if(!rows){$('pm_tot').textContent='–';$('pm_rng').textContent='Scegli almeno un intervento';$('pm_lines').innerHTML='';return}
+  if(allFixed){$('pm_tot').textContent=eur(lo);$('pm_rng').textContent='Tariffa fissa uguale in tutta Italia'}else{$('pm_tot').textContent=eur0((lo+hi)/2);$('pm_rng').textContent='Forchetta: '+eur0(lo)+' – '+eur0(hi)}
+  $('pm_lines').innerHTML=rows+`<div class="ln" style="opacity:.8;font-size:13px"><span>Manodopera calcolata a</span><b>${eur(r)} l'ora IVA inclusa</b></div>`;
+}
+$('pm_veh').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;pmVeh=b.dataset.v;$('pm_veh').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));renderPM()});
+$('pm_list').addEventListener('change',e=>{const id=e.target.dataset.id;if(!id)return;e.target.checked?sel[pmVeh].add(id):sel[pmVeh].delete(id);calcPM()});
+$('pm_rate').addEventListener('change',()=>{$('pm_customf').style.display=$('pm_rate').value==='custom'?'':'none';calcPM()});
+$('pm_alim').addEventListener('change',()=>{drawList();calcPM()});
+on(['pm_seg','pm_custom'],calcPM);
+renderPM();
+</script>
