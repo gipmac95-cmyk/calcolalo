@@ -95,6 +95,7 @@ def page(title, desc, path, main, active="", script=""):
 <meta property="og:type" content="website">
 <meta property="og:url" content="{canon}">
 <meta name="theme-color" content="#0e6b63">
+<meta name="google-site-verification" content="kYwrCokb8RvZCkuNno2ew4Bu0Jja8ny4wfENO5Qc8x8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
