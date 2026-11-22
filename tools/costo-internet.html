@@ -1,0 +1,68 @@
+<!--
+title: Costo reale offerta internet casa: confronta due offerte su 24 mesi
+h1: Costo reale di internet casa
+desc: Scopri quanto ti costa davvero un'offerta internet casa contando promozioni, prezzo dopo la promo, attivazione e modem, e confronta due offerte sugli stessi mesi.
+card: Promo, attivazione e modem: quanto costa davvero un'offerta.
+icon: 📶
+cat: Casa
+order: 40
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="n_mesi">Confronta su</label><div class="inp"><select id="n_mesi"><option value="12">12 mesi</option><option value="24" selected>24 mesi</option><option value="36">36 mesi</option></select></div></div>
+    <h2 style="margin-top:6px">Offerta A</h2>
+    <div class="row2">
+      <div class="field"><label for="a_promo">Prezzo in promozione</label><div class="inp"><input id="a_promo" type="number" inputmode="decimal" value="24.90" step="0.1" min="0"><span class="suf">€/mese</span></div></div>
+      <div class="field"><label for="a_mp">Durata promozione</label><div class="inp"><input id="a_mp" type="number" inputmode="numeric" value="12" step="1" min="0"><span class="suf">mesi</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="a_dopo">Prezzo dopo la promo</label><div class="inp"><input id="a_dopo" type="number" inputmode="decimal" value="32.90" step="0.1" min="0"><span class="suf">€/mese</span></div></div>
+      <div class="field"><label for="a_una">Attivazione + modem <span class="hint">(totale)</span></label><div class="inp"><input id="a_una" type="number" inputmode="decimal" value="39.90" step="1" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <h2 style="margin-top:6px">Offerta B</h2>
+    <div class="row2">
+      <div class="field"><label for="b_promo">Prezzo in promozione</label><div class="inp"><input id="b_promo" type="number" inputmode="decimal" value="27.95" step="0.1" min="0"><span class="suf">€/mese</span></div></div>
+      <div class="field"><label for="b_mp">Durata promozione</label><div class="inp"><input id="b_mp" type="number" inputmode="numeric" value="0" step="1" min="0"><span class="suf">mesi</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="b_dopo">Prezzo dopo la promo</label><div class="inp"><input id="b_dopo" type="number" inputmode="decimal" value="27.95" step="0.1" min="0"><span class="suf">€/mese</span></div></div>
+      <div class="field"><label for="b_una">Attivazione + modem <span class="hint">(totale)</span></label><div class="inp"><input id="b_una" type="number" inputmode="decimal" value="0" step="1" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <p class="note">Se il modem si paga a rate, somma tutte le rate nel campo "Attivazione + modem". Ricorda anche gli eventuali costi di recesso se lasci prima della fine del vincolo.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="n_win">–</div>
+    <div class="big" id="n_diff">–</div>
+    <div class="range" id="n_per">–</div>
+    <div class="lines">
+      <div class="ln"><span>Offerta A – totale</span><b id="n_ta">–</b></div>
+      <div class="ln"><span>Offerta A – media reale al mese</span><b id="n_ma">–</b></div>
+      <div class="ln"><span>Offerta B – totale</span><b id="n_tb">–</b></div>
+      <div class="ln"><span>Offerta B – media reale al mese</span><b id="n_mb">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Strumenti utili</div>
+    <div class="links" id="n_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Siti dei principali operatori</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="n_op"></div></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Perché il prezzo in pubblicità non basta</h2>
+  <p>Molte offerte internet hanno un prezzo scontato solo per i primi mesi, poi salgono. A questo si aggiungono il costo di attivazione e il modem, spesso a rate. Per confrontare davvero due offerte bisogna sommare tutto sullo stesso periodo: il calcolatore lo fa per te e ti mostra la spesa media reale al mese.</p>
+  <h2>Prima di scegliere, controlla la copertura</h2>
+  <p>La velocità dipende dalla tecnologia disponibile a casa tua (fibra fino a casa FTTH, fibra misto rame FTTC, FWA via radio). Verifica la copertura sul sito dell'operatore inserendo il tuo indirizzo. Dopo l'attivazione puoi misurare la velocità reale con lo strumento gratuito di AGCOM.</p>
+</article>
+<script>
+function tot(p,m,d,u,n){m=Math.min(m,n);return p*m+d*(n-m)+u}
+function calcN(){const n=+$('n_mesi').value;
+  const A=tot(val('a_promo'),val('a_mp'),val('a_dopo'),val('a_una'),n),B=tot(val('b_promo'),val('b_mp'),val('b_dopo'),val('b_una'),n);
+  $('n_ta').textContent=eur(A);$('n_tb').textContent=eur(B);$('n_ma').textContent=eur(A/n);$('n_mb').textContent=eur(B/n);
+  const d=Math.abs(A-B);
+  if(d<0.5){$('n_win').textContent='Le due offerte costano uguale';$('n_diff').textContent='≈ 0 €';$('n_per').textContent='in '+n+' mesi'}
+  else{$('n_win').textContent='Conviene l\'offerta '+(A<B?'A':'B')+': risparmi';$('n_diff').textContent=eur(d);$('n_per').textContent='in '+n+' mesi, circa '+eur(d/n)+' al mese'}}
+$('n_links').innerHTML=lk([['https://www.misurainternet.it/','Misura Internet (AGCOM)','Test ufficiale e gratuito della velocità'],
+  ['https://www.sostariffe.it/','SOStariffe.it','Comparatore di offerte internet'],['https://www.facile.it/','Facile.it','Comparatore di offerte internet'],['https://www.segugio.it/','Segugio.it','Comparatore di offerte internet']]);
+$('n_op').innerHTML=lk([['https://www.tim.it/','TIM',''],['https://www.fastweb.it/','Fastweb',''],['https://www.vodafone.it/','Vodafone',''],['https://www.windtre.it/','WINDTRE',''],['https://www.iliad.it/','Iliad',''],['https://www.sky.it/','Sky Wifi','']]);
+on(['n_mesi','a_promo','a_mp','a_dopo','a_una','b_promo','b_mp','b_dopo','b_una'],calcN);calcN();
+</script>

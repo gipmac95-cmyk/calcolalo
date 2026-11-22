@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo bolletta gas 2026: quanto spendi di gas e riscaldamento</title>
+<meta name="description" content="Stima quanto spendi di gas all&#x27;anno per riscaldamento, acqua calda e cucina, in base alla casa e alla zona climatica, e confronta le offerte sui siti ufficiali e dei fornitori.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/bolletta-gas/">
+<meta property="og:title" content="Calcolo bolletta gas 2026: quanto spendi di gas e riscaldamento">
+<meta property="og:description" content="Stima quanto spendi di gas all&#x27;anno per riscaldamento, acqua calda e cucina, in base alla casa e alla zona climatica, e confronta le offerte sui siti ufficiali e dei fornitori.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/bolletta-gas/">
+<meta name="theme-color" content="#0e6b63">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><nav class="main-nav"><a href="/#auto">Auto</a><a href="/#casa" class=on>Casa</a><a href="/#lavoro">Lavoro</a><a href="/#collezionismo">Collezionismo</a><a href="/#utilita">Utilità</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#casa">Casa</a></div>
+<h1><span class="ic">🔥</span>Bolletta del gas</h1>
+<p class="lead">Stima quanto spendi di gas all'anno per riscaldamento, acqua calda e cucina, in base alla casa e alla zona climatica, e confronta le offerte sui siti ufficiali e dei fornitori.</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="g_mode"><button class="on" data-m="casa" type="button">Stima dalla casa</button><button data-m="smc" type="button">Ho la bolletta</button></div>
+    <div id="g_casa">
+      <div class="field"><label for="g_uso">Per cosa usi il gas?</label><div class="inp"><select id="g_uso"><option value="c">Solo cucina</option><option value="ca">Cucina e acqua calda</option><option value="car" selected>Cucina, acqua calda e riscaldamento</option></select></div></div>
+      <div class="row2">
+        <div class="field"><label for="g_pers">Persone in casa</label><div class="inp"><input id="g_pers" type="number" inputmode="numeric" value="3" min="1" step="1"></div></div>
+        <div class="field" id="g_mqf"><label for="g_mq">Superficie riscaldata</label><div class="inp"><input id="g_mq" type="number" inputmode="numeric" value="80" min="0" step="5"><span class="suf">m²</span></div></div>
+      </div>
+      <div class="row2" id="g_heatf">
+        <div class="field"><label for="g_zona">Zona climatica</label><div class="inp"><select id="g_zona"><option value="4">A–B (Sud e isole, costa)</option><option value="6">C (Sud, collina)</option><option value="8">D (Centro)</option><option value="11" selected>E (Nord, Pianura Padana)</option><option value="14">F (Montagna)</option></select></div></div>
+        <div class="field"><label for="g_iso">Isolamento della casa</label><div class="inp"><select id="g_iso"><option value="0.6">Recente o ristrutturata</option><option value="1" selected>Normale</option><option value="1.3">Vecchia, poco isolata</option></select></div></div>
+      </div>
+    </div>
+    <div id="g_smc" style="display:none">
+      <div class="field"><label for="g_cons">Consumo annuo <span class="hint">(in bolletta, "consumo annuo")</span></label><div class="inp"><input id="g_cons" type="number" inputmode="numeric" value="1100" min="0" step="10"><span class="suf">Smc</span></div></div>
+    </div>
+    <div class="field"><label for="g_prezzo">Prezzo medio tutto compreso <span class="hint">(tasse incluse)</span></label><div class="inp"><input id="g_prezzo" type="number" inputmode="decimal" value="1.768" min="0" step="0.01"><span class="suf">€/Smc</span></div></div>
+    <p class="note">Il valore iniziale è il prezzo di riferimento ARERA per il cliente tipo in tutela, ottobre 2026. Per il tuo prezzo reale: dividi il totale di una bolletta per i metri cubi (Smc) consumati.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Spesa annua stimata</div>
+    <div class="big" id="g_anno">–</div>
+    <div class="range" id="g_mese">–</div>
+    <div class="lines">
+      <div class="ln"><span>Consumo annuo stimato</span><b id="g_k">–</b></div>
+      <div class="ln"><span>Di cui riscaldamento</span><b id="g_risc">–</b></div>
+      <div class="ln"><span>Risparmio abbassando di 1 °C il riscaldamento</span><b id="g_r1">–</b></div>
+      <div class="ln"><span>Risparmio con un prezzo più basso del 15%</span><b id="g_r15">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Confronta le offerte</div>
+    <div class="links" id="g_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Siti dei principali fornitori</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="g_forn"></div></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come stimiamo i consumi di gas</h2>
+  <p>Per la cucina contiamo circa 70 metri cubi all'anno e per l'acqua calda circa 130 metri cubi a persona. Il riscaldamento è la voce più pesante: dipende dai metri quadri, dal clima della tua zona e da quanto è isolata la casa. Una casa di 80 m² nella Pianura Padana, con un isolamento normale, consuma circa 900 metri cubi solo per scaldarsi.</p>
+  <h2>Come risparmiare sul riscaldamento</h2>
+  <p>Ogni grado in meno sul termostato fa risparmiare circa il 6–7% del gas usato per il riscaldamento. Valvole termostatiche, manutenzione della caldaia e serramenti ben chiusi aiutano molto. Anche cambiare offerta può far risparmiare: il Portale Offerte di ARERA confronta in modo neutrale tutte le proposte del mercato libero.</p>
+</article>
+<section class="related"><h2>Altri calcolatori</h2><div class="grid"><a class="card c-casa" href="/rata-mutuo/" data-s="rata del mutuo rata mensile, interessi totali e piano di ammortamento. casa"><span class="ic">🏠</span><span><h3>Rata del mutuo</h3><p>Rata mensile, interessi totali e piano di ammortamento.</p></span></a><a class="card c-casa" href="/bolletta-luce/" data-s="bolletta della luce spesa annua e mensile di elettricità, con link alle offerte. casa"><span class="ic">💡</span><span><h3>Bolletta della luce<span class="new">Nuovo</span></h3><p>Spesa annua e mensile di elettricità, con link alle offerte.</p></span></a><a class="card c-casa" href="/costo-internet/" data-s="costo reale di internet casa promo, attivazione e modem: quanto costa davvero un&#x27;offerta. casa"><span class="ic">📶</span><span><h3>Costo reale di internet casa<span class="new">Nuovo</span></h3><p>Promo, attivazione e modem: quanto costa davvero un&#x27;offerta.</p></span></a><a class="card c-auto" href="/valore-auto/" data-s="quanto vale la mia auto stima del valore dell&#x27;usato e confronto con gli annunci reali. auto"><span class="ic">🚗</span><span><h3>Quanto vale la mia auto<span class="new">Nuovo</span></h3><p>Stima del valore dell&#x27;usato e confronto con gli annunci reali.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
+<div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a><a href="/bolletta-luce/">Bolletta della luce</a><a href="/bolletta-gas/">Bolletta del gas</a><a href="/costo-internet/">Costo reale di internet casa</a></div><div><h4>Lavoro</h4><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+let gMode='casa';
+$('g_mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;gMode=b.dataset.m;$('g_mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('g_casa').style.display=gMode==='casa'?'':'none';$('g_smc').style.display=gMode==='smc'?'':'none';calcGas()});
+function calcGas(){
+  const uso=$('g_uso').value,pers=Math.max(1,val('g_pers'));
+  $('g_mqf').style.visibility=uso==='car'?'visible':'hidden';$('g_heatf').style.display=uso==='car'?'':'none';
+  let risc=0,k;
+  if(gMode==='smc'){k=val('g_cons');risc=Math.max(0,k-70-130*pers)}
+  else{risc=uso==='car'?val('g_mq')*(+$('g_zona').value)*(+$('g_iso').value):0;k=70+(uso!=='c'?130*pers:0)+risc}
+  const p=val('g_prezzo'),a=k*p;
+  $('g_anno').textContent=eur0(a);$('g_mese').textContent='circa '+eur0(a/12)+' al mese in media (di più in inverno)';
+  $('g_k').textContent=num(k,0)+' Smc';$('g_risc').textContent=num(risc,0)+' Smc';$('g_r1').textContent=eur0(risc*0.065*p)+' all\'anno';$('g_r15').textContent=eur0(a*0.15)+' all\'anno';
+}
+$('g_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Il confronto ufficiale e neutrale di tutte le offerte'],
+  ['https://www.facile.it/','Facile.it','Comparatore di offerte luce e gas'],['https://www.sostariffe.it/','SOStariffe.it','Comparatore di offerte luce e gas'],['https://www.segugio.it/','Segugio.it','Comparatore di offerte luce e gas']]);
+$('g_forn').innerHTML=lk([['https://www.enel.it/','Enel Energia',''],['https://eniplenitude.com/','Plenitude (Eni)',''],['https://www.edisonenergia.it/','Edison Energia',''],['https://www.a2a.it/','A2A Energia',''],
+  ['https://www.irenlucegas.it/','Iren Luce Gas',''],['https://www.sorgenia.it/','Sorgenia',''],['https://octopusenergy.it/','Octopus Energy',''],['https://www.gruppohera.it/','Hera','']]);
+on(['g_uso','g_pers','g_mq','g_zona','g_iso','g_cons','g_prezzo'],calcGas);calcGas();
+</script>
+</body>
+</html>

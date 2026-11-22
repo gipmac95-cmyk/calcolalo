@@ -1,0 +1,62 @@
+<!--
+title: Calcolo bolletta luce 2026: quanto spendi di elettricità all'anno e al mese
+h1: Bolletta della luce
+desc: Stima quanto spendi di luce all'anno, al mese e a bolletta, con i prezzi di riferimento aggiornati, e confronta subito le offerte sui siti ufficiali e dei fornitori.
+card: Spesa annua e mensile di elettricità, con link alle offerte.
+icon: 💡
+cat: Casa
+order: 20
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="l_mode"><button class="on" data-m="fam" type="button">Non so i miei consumi</button><button data-m="kwh" type="button">Ho la bolletta</button></div>
+    <div id="l_fam">
+      <div class="field"><label for="l_pers">Persone in casa</label><div class="inp"><select id="l_pers"><option value="1200">1 persona</option><option value="1700">2 persone</option><option value="2200" selected>3 persone</option><option value="2700">4 persone</option><option value="3200">5 o più</option></select></div></div>
+      <label class="check"><input id="l_heat" type="checkbox"> Riscaldo o cucino con l'elettricità (pompa di calore, piano a induzione)</label>
+    </div>
+    <div id="l_kwh" style="display:none">
+      <div class="field"><label for="l_cons">Consumo annuo <span class="hint">(in bolletta, "consumo annuo")</span></label><div class="inp"><input id="l_cons" type="number" inputmode="numeric" value="2200" min="0" step="50"><span class="suf">kWh</span></div></div>
+    </div>
+    <div class="field"><label for="l_prezzo">Prezzo medio tutto compreso <span class="hint">(tasse incluse)</span></label><div class="inp"><input id="l_prezzo" type="number" inputmode="decimal" value="0.4343" min="0" step="0.001"><span class="suf">€/kWh</span></div></div>
+    <p class="note">Il valore iniziale è il prezzo di riferimento ARERA per il cliente tipo in tutela, ottobre–dicembre 2026. Per il tuo prezzo reale: dividi il totale di una bolletta per i kWh consumati in quel periodo.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Spesa annua stimata</div>
+    <div class="big" id="l_anno">–</div>
+    <div class="range" id="l_mese">–</div>
+    <div class="lines">
+      <div class="ln"><span>Consumo annuo</span><b id="l_k">–</b></div>
+      <div class="ln"><span>Bolletta bimestrale media</span><b id="l_bim">–</b></div>
+      <div class="ln"><span>Risparmio con un prezzo più basso del 10%</span><b id="l_r10">–</b></div>
+      <div class="ln"><span>Risparmio con un prezzo più basso del 20%</span><b id="l_r20">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Confronta le offerte</div>
+    <div class="links" id="l_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Siti dei principali fornitori</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="l_forn"></div></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola la spesa per la luce</h2>
+  <p>La spesa annua è il consumo in kWh moltiplicato per il prezzo medio che paghi per ogni kWh, comprese quote fisse, trasporto, oneri di sistema, accise e IVA. Usare un prezzo "tutto compreso" è il modo più semplice per una stima affidabile: la bolletta reale cambia un po' a seconda di quando consumi e del tipo di offerta (prezzo fisso o variabile).</p>
+  <h2>Quanto consuma una famiglia</h2>
+  <p>Una famiglia di 3 persone consuma in media circa 2.000–2.500 kWh all'anno. Chi usa pompa di calore, piano a induzione o auto elettrica consuma molto di più. Il dato esatto lo trovi in bolletta alla voce "consumo annuo".</p>
+  <h2>Dove confrontare le offerte</h2>
+  <p>Il Portale Offerte di ARERA, l'autorità pubblica per l'energia, confronta in modo neutrale tutte le offerte del mercato libero. I comparatori privati sono comodi, ma mostrano solo i fornitori con cui hanno accordi.</p>
+</article>
+<script>
+let lMode='fam';
+$('l_mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;lMode=b.dataset.m;$('l_mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('l_fam').style.display=lMode==='fam'?'':'none';$('l_kwh').style.display=lMode==='kwh'?'':'none';calcL()});
+function calcL(){
+  const k=lMode==='kwh'?val('l_cons'):(+$('l_pers').value)*($('l_heat').checked?1.6:1),p=val('l_prezzo'),a=k*p;
+  $('l_anno').textContent=eur0(a);$('l_mese').textContent='circa '+eur0(a/12)+' al mese';$('l_k').textContent=num(k,0)+' kWh';
+  $('l_bim').textContent=eur0(a/6);$('l_r10').textContent=eur0(a*0.1)+' all\'anno';$('l_r20').textContent=eur0(a*0.2)+' all\'anno';
+}
+$('l_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Il confronto ufficiale e neutrale di tutte le offerte'],
+  ['https://www.facile.it/','Facile.it','Comparatore di offerte luce e gas'],['https://www.sostariffe.it/','SOStariffe.it','Comparatore di offerte luce e gas'],['https://www.segugio.it/','Segugio.it','Comparatore di offerte luce e gas']]);
+$('l_forn').innerHTML=lk([['https://www.enel.it/','Enel Energia',''],['https://eniplenitude.com/','Plenitude (Eni)',''],['https://www.edisonenergia.it/','Edison Energia',''],['https://www.a2a.it/','A2A Energia',''],
+  ['https://www.irenlucegas.it/','Iren Luce Gas',''],['https://www.sorgenia.it/','Sorgenia',''],['https://octopusenergy.it/','Octopus Energy',''],['https://www.gruppohera.it/','Hera','']]);
+on(['l_pers','l_heat','l_cons','l_prezzo'],calcL);calcL();
+</script>

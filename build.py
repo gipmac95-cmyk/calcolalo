@@ -22,7 +22,7 @@ SRC, TOOLS, OUT = ROOT / "src", ROOT / "tools", ROOT / "public"
 DOMAIN = "https://vuoisaperequantocosta.it"
 SITE = "Vuoi sapere quanto costa?"
 CATS = [("Auto", "Bollo, passaggio di proprietà, viaggi e valore dell'usato"),
-        ("Casa", "Mutuo e spese per la casa"),
+        ("Casa", "Mutuo, bollette di luce e gas, internet"),
         ("Lavoro", "Stipendio, TFR e IVA"),
         ("Collezionismo", "Quanto valgono videogiochi e carte"),
         ("Utilità", "Valore dell'usato e calcoli di tutti i giorni")]
@@ -113,7 +113,7 @@ def home():
     main = f'''<section class="hero"><div class="wrap">
 <span class="eyebrow"><i></i> {len(tools)} calcolatori gratuiti · aggiornati al 2026</span>
 <h1>Vuoi sapere <em>quanto costa?</em></h1>
-<p class="sub">Il valore di qualsiasi oggetto usato, il tuo stipendio netto, il bollo, il mutuo e molto altro. Scoprilo in pochi secondi.</p>
+<p class="sub">Il valore di qualsiasi oggetto usato, il tuo stipendio netto, le bollette, il bollo, il mutuo e molto altro. Scoprilo in pochi secondi.</p>
 <form class="search" action="/quanto-vale/" method="get" role="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
 <input id="q" name="q" type="search" placeholder="Cosa vuoi sapere quanto costa? es. iPhone 13, Fiat Panda, bollo…" autocomplete="off" aria-label="Cerca" required style="padding-right:118px">
 <button class="btn btn-primary" type="submit" style="position:absolute;right:6px;top:6px;bottom:6px;font-size:16px;padding:0 20px">Cerca</button></form>

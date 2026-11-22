@@ -1,0 +1,72 @@
+<!--
+title: Calcolo bolletta gas 2026: quanto spendi di gas e riscaldamento
+h1: Bolletta del gas
+desc: Stima quanto spendi di gas all'anno per riscaldamento, acqua calda e cucina, in base alla casa e alla zona climatica, e confronta le offerte sui siti ufficiali e dei fornitori.
+card: Spesa per riscaldamento, acqua calda e cucina, con link alle offerte.
+icon: 🔥
+cat: Casa
+order: 30
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="g_mode"><button class="on" data-m="casa" type="button">Stima dalla casa</button><button data-m="smc" type="button">Ho la bolletta</button></div>
+    <div id="g_casa">
+      <div class="field"><label for="g_uso">Per cosa usi il gas?</label><div class="inp"><select id="g_uso"><option value="c">Solo cucina</option><option value="ca">Cucina e acqua calda</option><option value="car" selected>Cucina, acqua calda e riscaldamento</option></select></div></div>
+      <div class="row2">
+        <div class="field"><label for="g_pers">Persone in casa</label><div class="inp"><input id="g_pers" type="number" inputmode="numeric" value="3" min="1" step="1"></div></div>
+        <div class="field" id="g_mqf"><label for="g_mq">Superficie riscaldata</label><div class="inp"><input id="g_mq" type="number" inputmode="numeric" value="80" min="0" step="5"><span class="suf">m²</span></div></div>
+      </div>
+      <div class="row2" id="g_heatf">
+        <div class="field"><label for="g_zona">Zona climatica</label><div class="inp"><select id="g_zona"><option value="4">A–B (Sud e isole, costa)</option><option value="6">C (Sud, collina)</option><option value="8">D (Centro)</option><option value="11" selected>E (Nord, Pianura Padana)</option><option value="14">F (Montagna)</option></select></div></div>
+        <div class="field"><label for="g_iso">Isolamento della casa</label><div class="inp"><select id="g_iso"><option value="0.6">Recente o ristrutturata</option><option value="1" selected>Normale</option><option value="1.3">Vecchia, poco isolata</option></select></div></div>
+      </div>
+    </div>
+    <div id="g_smc" style="display:none">
+      <div class="field"><label for="g_cons">Consumo annuo <span class="hint">(in bolletta, "consumo annuo")</span></label><div class="inp"><input id="g_cons" type="number" inputmode="numeric" value="1100" min="0" step="10"><span class="suf">Smc</span></div></div>
+    </div>
+    <div class="field"><label for="g_prezzo">Prezzo medio tutto compreso <span class="hint">(tasse incluse)</span></label><div class="inp"><input id="g_prezzo" type="number" inputmode="decimal" value="1.768" min="0" step="0.01"><span class="suf">€/Smc</span></div></div>
+    <p class="note">Il valore iniziale è il prezzo di riferimento ARERA per il cliente tipo in tutela, ottobre 2026. Per il tuo prezzo reale: dividi il totale di una bolletta per i metri cubi (Smc) consumati.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Spesa annua stimata</div>
+    <div class="big" id="g_anno">–</div>
+    <div class="range" id="g_mese">–</div>
+    <div class="lines">
+      <div class="ln"><span>Consumo annuo stimato</span><b id="g_k">–</b></div>
+      <div class="ln"><span>Di cui riscaldamento</span><b id="g_risc">–</b></div>
+      <div class="ln"><span>Risparmio abbassando di 1 °C il riscaldamento</span><b id="g_r1">–</b></div>
+      <div class="ln"><span>Risparmio con un prezzo più basso del 15%</span><b id="g_r15">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Confronta le offerte</div>
+    <div class="links" id="g_links"></div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px"><h2>Siti dei principali fornitori</h2><div class="links" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))" id="g_forn"></div></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come stimiamo i consumi di gas</h2>
+  <p>Per la cucina contiamo circa 70 metri cubi all'anno e per l'acqua calda circa 130 metri cubi a persona. Il riscaldamento è la voce più pesante: dipende dai metri quadri, dal clima della tua zona e da quanto è isolata la casa. Una casa di 80 m² nella Pianura Padana, con un isolamento normale, consuma circa 900 metri cubi solo per scaldarsi.</p>
+  <h2>Come risparmiare sul riscaldamento</h2>
+  <p>Ogni grado in meno sul termostato fa risparmiare circa il 6–7% del gas usato per il riscaldamento. Valvole termostatiche, manutenzione della caldaia e serramenti ben chiusi aiutano molto. Anche cambiare offerta può far risparmiare: il Portale Offerte di ARERA confronta in modo neutrale tutte le proposte del mercato libero.</p>
+</article>
+<script>
+let gMode='casa';
+$('g_mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;gMode=b.dataset.m;$('g_mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('g_casa').style.display=gMode==='casa'?'':'none';$('g_smc').style.display=gMode==='smc'?'':'none';calcGas()});
+function calcGas(){
+  const uso=$('g_uso').value,pers=Math.max(1,val('g_pers'));
+  $('g_mqf').style.visibility=uso==='car'?'visible':'hidden';$('g_heatf').style.display=uso==='car'?'':'none';
+  let risc=0,k;
+  if(gMode==='smc'){k=val('g_cons');risc=Math.max(0,k-70-130*pers)}
+  else{risc=uso==='car'?val('g_mq')*(+$('g_zona').value)*(+$('g_iso').value):0;k=70+(uso!=='c'?130*pers:0)+risc}
+  const p=val('g_prezzo'),a=k*p;
+  $('g_anno').textContent=eur0(a);$('g_mese').textContent='circa '+eur0(a/12)+' al mese in media (di più in inverno)';
+  $('g_k').textContent=num(k,0)+' Smc';$('g_risc').textContent=num(risc,0)+' Smc';$('g_r1').textContent=eur0(risc*0.065*p)+' all\'anno';$('g_r15').textContent=eur0(a*0.15)+' all\'anno';
+}
+$('g_links').innerHTML=lk([['https://www.ilportaleofferte.it/portaleOfferte/','Portale Offerte ARERA','Il confronto ufficiale e neutrale di tutte le offerte'],
+  ['https://www.facile.it/','Facile.it','Comparatore di offerte luce e gas'],['https://www.sostariffe.it/','SOStariffe.it','Comparatore di offerte luce e gas'],['https://www.segugio.it/','Segugio.it','Comparatore di offerte luce e gas']]);
+$('g_forn').innerHTML=lk([['https://www.enel.it/','Enel Energia',''],['https://eniplenitude.com/','Plenitude (Eni)',''],['https://www.edisonenergia.it/','Edison Energia',''],['https://www.a2a.it/','A2A Energia',''],
+  ['https://www.irenlucegas.it/','Iren Luce Gas',''],['https://www.sorgenia.it/','Sorgenia',''],['https://octopusenergy.it/','Octopus Energy',''],['https://www.gruppohera.it/','Hera','']]);
+on(['g_uso','g_pers','g_mq','g_zona','g_iso','g_cons','g_prezzo'],calcGas);calcGas();
+</script>
