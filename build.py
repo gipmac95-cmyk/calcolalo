@@ -155,7 +155,7 @@ def home():
 PRIVACY = """<div class="wrap"><div class="tool-head"><div class="crumb"><a href="/">Home</a> › Privacy</div><h1>Privacy e cookie</h1>
 <p class="lead">Come VuoiSapereQuantoCosta.it tratta i dati di chi visita il sito. Ultimo aggiornamento: novembre 2026.</p></div>
 <article class="info">
-<h2>Titolare del trattamento</h2><p>Il gestore di VuoiSapereQuantoCosta.it. I dati di contatto del titolare sono in aggiornamento.</p>
+<h2>Titolare del trattamento</h2><p>Marco, gestore di VuoiSapereQuantoCosta.it. Per qualsiasi richiesta sulla privacy puoi scrivere a <a href="mailto:gipmac95@gmail.com">gipmac95@gmail.com</a> (gipmac95@gmail.com).</p>
 <h2>I dati che inserisci nei calcolatori</h2><p>Tutti i calcoli avvengono direttamente nel tuo browser. I numeri e le parole che scrivi nei calcolatori e nella ricerca non vengono inviati né salvati da noi.</p>
 <h2>Cookie tecnici</h2><p>Salviamo nel tuo browser solo la tua scelta sui cookie, per non chiedertela a ogni visita. Non serve il consenso per questo dato.</p>
 <h2>Statistiche (Google Analytics)</h2><p>Solo se clicchi "Accetta", usiamo Google Analytics 4, un servizio di Google Ireland Limited, per contare in forma aggregata le visite, le pagine viste, il tipo di dispositivo, la provenienza delle visite e i click verso altri siti. Servono a capire quali pagine sono utili e a migliorarle. Google può trattare i dati anche negli Stati Uniti, nell'ambito dell'EU-US Data Privacy Framework. Se rifiuti, Google Analytics non viene caricato. Puoi cambiare idea quando vuoi con il link "Gestisci cookie" in fondo a ogni pagina.</p>
