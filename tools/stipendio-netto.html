@@ -1,0 +1,58 @@
+<!--
+title: Calcolo stipendio netto 2026: dalla RAL al netto in busta paga
+h1: Stipendio netto 2026
+desc: Dalla RAL al netto mensile per i dipendenti del settore privato, con le aliquote IRPEF 2026 (23%, 33%, 43%) e il taglio del cuneo fiscale.
+card: Dalla RAL al netto in busta paga, con le aliquote IRPEF 2026.
+icon: 💶
+cat: Lavoro
+order: 10
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="s_ral">RAL – Retribuzione annua lorda</label><div class="inp"><input id="s_ral" type="number" inputmode="decimal" value="30000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="s_mens">Mensilità</label><div class="inp"><select id="s_mens"><option value="12">12</option><option value="13" selected>13</option><option value="14">14</option></select></div></div>
+      <div class="field"><label for="s_contr">Contributi INPS</label><div class="inp"><input id="s_contr" type="number" inputmode="decimal" value="9.19" step="0.01" min="0"><span class="suf">%</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="s_reg">Addizionale regionale</label><div class="inp"><input id="s_reg" type="number" inputmode="decimal" value="2.0" step="0.01" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="s_com">Addizionale comunale</label><div class="inp"><input id="s_com" type="number" inputmode="decimal" value="0.8" step="0.01" min="0"><span class="suf">%</span></div></div>
+    </div>
+    <p class="note">Le addizionali cambiano da regione a regione e da comune a comune: trovi quelle del tuo comune sul sito del Dipartimento delle Finanze. Il calcolo non considera detrazioni per familiari a carico, bonus aziendali e straordinari.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Netto mensile stimato</div>
+    <div class="big" id="s_mese">–</div>
+    <div class="lines">
+      <div class="ln"><span>Netto annuo</span><b id="s_anno">–</b></div>
+      <div class="ln"><span>Contributi INPS</span><b id="s_inps">–</b></div>
+      <div class="ln"><span>Imponibile fiscale</span><b id="s_imp">–</b></div>
+      <div class="ln"><span>IRPEF lorda</span><b id="s_lorda">–</b></div>
+      <div class="ln"><span>Detrazioni lavoro dipendente</span><b id="s_detr">–</b></div>
+      <div class="ln"><span>IRPEF netta</span><b id="s_irpef">–</b></div>
+      <div class="ln"><span>Addizionali</span><b id="s_add">–</b></div>
+      <div class="ln"><span>Bonus cuneo e trattamento integrativo</span><b id="s_bonus">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola lo stipendio netto</h2>
+  <p>Dalla RAL si tolgono prima i contributi INPS a carico del lavoratore (di solito il 9,19%, più l'1% sulla parte di stipendio sopra 56.224 € nel 2026). Su quello che resta si calcola l'IRPEF: 23% fino a 28.000 €, 33% da 28.000 a 50.000 € e 43% oltre. Dall'IRPEF si sottraggono le detrazioni per lavoro dipendente, poi si aggiungono le addizionali regionale e comunale.</p>
+  <h2>Il taglio del cuneo fiscale</h2>
+  <p>Chi ha un reddito fino a 20.000 € riceve una somma esentasse pari a una percentuale del reddito (7,1%, 5,3% o 4,8% a seconda della fascia). Tra 20.000 e 32.000 € spetta un'ulteriore detrazione di 1.000 €, che scende gradualmente fino a zero a 40.000 €.</p>
+</article>
+<script>
+function irpefLorda(R){let t=Math.min(R,28000)*0.23;if(R>28000)t+=(Math.min(R,50000)-28000)*0.33;if(R>50000)t+=(R-50000)*0.43;return t}
+function detrLavoro(R){let d=0;if(R<=15000)d=1955;else if(R<=28000)d=1910+1190*(28000-R)/13000;else if(R<=50000)d=1910*(50000-R)/22000;if(R>25000&&R<=35000)d+=65;return d}
+function calcS(){
+  const ral=val('s_ral'),mens=+$('s_mens').value,inps=ral*val('s_contr')/100+Math.max(0,ral-56224)*0.01,R=Math.max(0,ral-inps);
+  const lorda=irpefLorda(R),dl=detrLavoro(R);let ult=0;if(R>20000&&R<=32000)ult=1000;else if(R>32000&&R<40000)ult=1000*(40000-R)/8000;
+  const netta=Math.max(0,lorda-dl-ult);let bonus=0;if(R<=8500)bonus=R*0.071;else if(R<=15000)bonus=R*0.053;else if(R<=20000)bonus=R*0.048;
+  let ti=0;if(R>8500&&R<=15000&&lorda>dl-75)ti=1200;
+  const add=netta>0?R*(val('s_reg')+val('s_com'))/100:0,netto=ral-inps-netta-add+bonus+ti;
+  $('s_mese').textContent=eur(netto/mens);$('s_anno').textContent=eur(netto);$('s_inps').textContent='− '+eur(inps);$('s_imp').textContent=eur(R);
+  $('s_lorda').textContent=eur(lorda);$('s_detr').textContent='− '+eur(Math.min(lorda,dl+ult));$('s_irpef').textContent='− '+eur(netta);$('s_add').textContent='− '+eur(add);$('s_bonus').textContent='+ '+eur(bonus+ti);
+}
+on(['s_ral','s_mens','s_contr','s_reg','s_com'],calcS);calcS();
+</script>

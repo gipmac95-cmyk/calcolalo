@@ -1,0 +1,29 @@
+<!--
+title: Calcolo percentuali e sconti online: percentuale, variazione e prezzo scontato
+h1: Percentuali e sconti
+desc: Quattro calcolatori in uno: percentuale di un numero, rapporto percentuale, variazione percentuale e prezzo scontato.
+card: Percentuale di un numero, variazioni e prezzo scontato.
+icon: ％
+cat: Utilità
+order: 10
+-->
+<div class="panel" style="max-width:680px">
+  <div class="mini"><h3>Quanto è il X% di un numero?</h3><div class="inline">Il <input id="p1a" type="number" inputmode="decimal" value="20" aria-label="percentuale"> % di <input id="p1b" type="number" inputmode="decimal" value="250" aria-label="numero"></div><div class="out" id="p1o">–</div></div>
+  <div class="mini"><h3>Che percentuale è un numero rispetto a un altro?</h3><div class="inline"><input id="p2a" type="number" inputmode="decimal" value="45" aria-label="parte"> su <input id="p2b" type="number" inputmode="decimal" value="180" aria-label="totale"></div><div class="out" id="p2o">–</div></div>
+  <div class="mini"><h3>Variazione percentuale (aumento o calo)</h3><div class="inline">Da <input id="p3a" type="number" inputmode="decimal" value="80" aria-label="valore iniziale"> a <input id="p3b" type="number" inputmode="decimal" value="100" aria-label="valore finale"></div><div class="out" id="p3o">–</div></div>
+  <div class="mini"><h3>Prezzo scontato</h3><div class="inline">Prezzo <input id="p4a" type="number" inputmode="decimal" value="59.90" aria-label="prezzo"> € con sconto <input id="p4b" type="number" inputmode="decimal" value="30" aria-label="sconto"> %</div><div class="out" id="p4o">–</div></div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola una percentuale</h2>
+  <p>Per trovare il 20% di 250 si moltiplica 250 per 20 e si divide per 100: il risultato è 50. Per sapere che percentuale è 45 su 180 si fa 45 ÷ 180 × 100 = 25%.</p>
+</article>
+<script>
+function calcP(){
+  const a1=val('p1a'),b1=val('p1b');$('p1o').textContent='= '+num(a1*b1/100,4);
+  const a2=val('p2a'),b2=val('p2b');$('p2o').textContent=b2?'= '+num(a2/b2*100,2)+'%':'–';
+  const a3=val('p3a'),b3=val('p3b');if(a3){const d=(b3-a3)/Math.abs(a3)*100;$('p3o').textContent=(d>=0?'+':'')+num(d,2)+'% '+(d>=0?'(aumento)':'(calo)')}else $('p3o').textContent='–';
+  const a4=val('p4a'),b4=val('p4b');$('p4o').textContent='= '+eur(a4*(1-b4/100))+'  (risparmi '+eur(a4*b4/100)+')';
+}
+on(['p1a','p1b','p2a','p2b','p3a','p3b','p4a','p4b'],calcP);calcP();
+</script>

@@ -1,0 +1,52 @@
+<!--
+title: Calcolo rata mutuo: rata mensile, interessi e piano di ammortamento
+h1: Rata del mutuo
+desc: Calcola la rata mensile del mutuo a tasso fisso con il metodo francese, gli interessi totali e il piano di ammortamento anno per anno.
+card: Rata mensile, interessi totali e piano di ammortamento.
+icon: 🏠
+cat: Casa
+order: 10
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="m_imp">Importo del mutuo</label><div class="inp"><input id="m_imp" type="number" inputmode="decimal" value="150000" step="1000" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="m_tasso">Tasso annuo (TAN)</label><div class="inp"><input id="m_tasso" type="number" inputmode="decimal" value="3.2" step="0.05" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="m_anni">Durata</label><div class="inp"><input id="m_anni" type="number" inputmode="numeric" value="25" step="1" min="1" max="40"><span class="suf">anni</span></div></div>
+    </div>
+    <p class="note">Il calcolo non include spese di istruttoria, perizia, assicurazioni e imposta sostitutiva, che fanno parte del TAEG.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Rata mensile</div>
+    <div class="big" id="m_rata">–</div>
+    <div class="lines">
+      <div class="ln"><span>Numero di rate</span><b id="m_n">–</b></div>
+      <div class="ln"><span>Interessi totali</span><b id="m_int">–</b></div>
+      <div class="ln"><span>Totale restituito</span><b id="m_totale">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px;overflow-x:auto">
+  <h2>Piano di ammortamento annuale</h2>
+  <table class="amort"><thead><tr><th>Anno</th><th>Quota capitale</th><th>Quota interessi</th><th>Debito residuo</th></tr></thead><tbody id="m_tab"></tbody></table>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola la rata del mutuo</h2>
+  <p>Con l'ammortamento alla francese la rata resta uguale per tutta la durata. Nei primi anni è composta soprattutto da interessi, poi la quota di capitale cresce. La formula è: rata = C × i / (1 − (1 + i)<sup>−n</sup>), dove C è il capitale, i il tasso mensile e n il numero di rate.</p>
+  <h2>Che differenza c'è tra TAN e TAEG?</h2>
+  <p>Il TAN è il tasso puro applicato al prestito. Il TAEG comprende anche le spese accessorie ed è il numero giusto per confrontare offerte di banche diverse.</p>
+</article>
+<script>
+function calcM(){
+  const C=val('m_imp'),t=val('m_tasso'),anni=Math.round(val('m_anni')),n=anni*12,i=t/100/12;
+  if(C<=0||n<=0){['m_rata','m_n','m_int','m_totale'].forEach(x=>$(x).textContent='–');$('m_tab').innerHTML='';return}
+  const rata=i===0?C/n:C*i/(1-Math.pow(1+i,-n));
+  $('m_rata').textContent=eur(rata);$('m_n').textContent=n;$('m_int').textContent=eur(rata*n-C);$('m_totale').textContent=eur(rata*n);
+  let deb=C,rows='';
+  for(let y=1;y<=anni;y++){let qc=0,qi=0;for(let m=0;m<12;m++){const int=deb*i,cap=rata-int;qi+=int;qc+=cap;deb-=cap}
+    rows+=`<tr><td>${y}</td><td>${eur(qc)}</td><td>${eur(qi)}</td><td>${eur(Math.max(0,deb))}</td></tr>`}
+  $('m_tab').innerHTML=rows;
+}
+on(['m_imp','m_tasso','m_anni'],calcM);calcM();
+</script>

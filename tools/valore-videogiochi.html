@@ -1,0 +1,77 @@
+<!--
+title: Quanto vale il mio videogioco? Trova il prezzo reale dell'usato
+h1: Quanto vale il mio videogioco
+desc: Scopri quanto vale un videogioco usato o da collezione: apri le vendite reali dello stesso titolo e calcola prezzo medio e prezzo consigliato per vendere.
+card: Prezzo reale dell'usato, dalle vendite concluse.
+icon: 🎮
+cat: Collezionismo
+order: 10
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <h2>1. Il tuo gioco</h2>
+    <div class="field"><label for="g_tit">Titolo</label><div class="inp"><input id="g_tit" type="text" value="Super Mario 64" placeholder="es. The Legend of Zelda" autocomplete="off"></div></div>
+    <div class="row2">
+      <div class="field"><label for="g_plat">Console</label><div class="inp"><select id="g_plat">
+        <option>PS5</option><option>PS4</option><option>PS3</option><option>PS2</option><option value="PS1">PlayStation 1</option><option>PSP</option><option>PS Vita</option>
+        <option>Xbox Series X</option><option>Xbox One</option><option>Xbox 360</option><option>Xbox</option>
+        <option>Nintendo Switch</option><option>Wii U</option><option>Wii</option><option>GameCube</option><option selected>Nintendo 64</option><option>Super Nintendo</option><option>NES</option>
+        <option>Nintendo 3DS</option><option>Nintendo DS</option><option>Game Boy Advance</option><option>Game Boy Color</option><option>Game Boy</option>
+        <option>Sega Mega Drive</option><option>Sega Saturn</option><option>Dreamcast</option><option>PC</option><option value="">Altro</option></select></div></div>
+      <div class="field"><label for="g_cond">Condizione</label><div class="inp"><select id="g_cond"><option value="sigillato">Nuovo sigillato</option><option value="completo" selected>Completo (scatola e manuale)</option><option value="solo">Solo disco o cartuccia</option></select></div></div>
+    </div>
+    <h2 style="margin-top:8px">2. Guarda i prezzi reali</h2>
+    <div class="links" id="g_links" style="margin-bottom:16px"></div>
+    <h2>3. Calcola la media di mercato</h2>
+    <div class="field"><label for="g_prices">Prezzi delle ultime vendite che hai trovato <span class="hint">(uno per riga)</span></label><div class="inp"><textarea id="g_prices" rows="5" style="width:100%;padding:12px;border:1px solid #d5d1c8;border-radius:11px;font:inherit;font-size:16px;resize:vertical" placeholder="es.&#10;45&#10;52,50&#10;48&#10;39,90">45
+52,50
+48
+39,90
+60</textarea></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Prezzo di mercato (mediana delle vendite)</div>
+    <div class="big" id="g_med">–</div>
+    <div class="range" id="g_rng">–</div>
+    <div class="lines">
+      <div class="ln"><span>Media</span><b id="g_avg">–</b></div>
+      <div class="ln"><span>Prezzo consigliato per vendere</span><b id="g_sell">–</b></div>
+      <div class="ln"><span>Per vendere in fretta</span><b id="g_fast">–</b></div>
+      <div class="ln"><span>Vendite considerate</span><b id="g_n">–</b></div>
+    </div>
+    <div class="small" id="g_tip"></div>
+  </div>
+</div>
+<div class="tips"><h3>Consigli per un prezzo giusto</h3><ul>
+  <li>Guarda le vendite <b>concluse</b>, non gli annunci: conta il prezzo a cui il gioco è stato venduto davvero.</li>
+  <li>Confronta solo copie nella stessa condizione e della stessa versione (PAL o NTSC, edizione speciale o normale).</li>
+  <li>Per i giochi retrò la scatola e il manuale fanno la differenza: una copia completa può valere il doppio della sola cartuccia.</li>
+</ul></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Perché non diamo un prezzo fisso</h2>
+  <p>Il valore dei videogiochi usati cambia molto e in fretta: uscite di nuove edizioni, ristampe e mode del collezionismo possono far salire o scendere i prezzi in poche settimane. Per questo il prezzo più affidabile è la media delle vendite reali e recenti dello stesso gioco, nella stessa condizione. Il calcolatore scarta da solo i prezzi anomali (meno della metà o più del doppio della mediana).</p>
+  <h2>Dove conviene vendere</h2>
+  <p>Sui siti di annunci tra privati come Subito e Vinted spesso si incassa di più. Sulle piattaforme con commissioni come eBay il pubblico è più ampio, ma va tolta la commissione dal prezzo. I negozi dell'usato pagano subito, ma molto meno del valore di mercato.</p>
+</article>
+<script>
+function linkHtml(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+function calcG(){
+  const tit=$('g_tit').value.trim(),plat=$('g_plat').value,cond=$('g_cond').value;
+  const extra=cond==='sigillato'?' sigillato':cond==='completo'?' completo':'';
+  const q=(tit+' '+plat).trim();
+  $('g_links').innerHTML=tit?linkHtml([
+    [`https://www.ebay.it/sch/i.html?_nkw=${qs(q+extra)}&LH_Sold=1&LH_Complete=1`,'eBay – vendite concluse','Il riferimento migliore: prezzi a cui è stato venduto davvero'],
+    [`https://www.subito.it/annunci-italia/vendita/usato/?q=${qs(q)}`,'Subito.it','Annunci di privati in Italia'],
+    [`https://www.vinted.it/catalog?search_text=${qs(q)}`,'Vinted','Annunci di privati'],
+    [`https://www.pricecharting.com/search-products?q=${qs(q)}&type=prices`,'PriceCharting','Andamento dei prezzi nel tempo (in dollari)']]):'';
+  const st=priceStats(parsePrices($('g_prices').value));
+  if(!st){['g_med','g_avg','g_sell','g_fast','g_n'].forEach(i=>$(i).textContent='–');$('g_rng').textContent='Inserisci almeno un prezzo';$('g_tip').textContent='';return}
+  $('g_med').textContent=eur(st.med);$('g_rng').textContent='Da '+eur(st.min)+' a '+eur(st.max);
+  $('g_avg').textContent=eur(st.avg);$('g_sell').textContent=eur(Math.round(st.med));$('g_fast').textContent=eur(Math.round(st.fast));
+  $('g_n').textContent=st.used+(st.used<st.n?' (scartati '+(st.n-st.used)+' anomali)':'');
+  $('g_tip').textContent=st.used<5?'Con almeno 5 vendite recenti la media è più affidabile.':'';
+}
+on(['g_tit','g_plat','g_cond','g_prices'],calcG);calcG();
+</script>

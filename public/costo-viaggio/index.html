@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo costo viaggio in auto: carburante, pedaggi e quota a persona</title>
+<meta name="description" content="Scopri quanto costa un viaggio in macchina tra carburante, pedaggi e parcheggio, e quanto paga ciascun passeggero.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/costo-viaggio/">
+<meta property="og:title" content="Calcolo costo viaggio in auto: carburante, pedaggi e quota a persona">
+<meta property="og:description" content="Scopri quanto costa un viaggio in macchina tra carburante, pedaggi e parcheggio, e quanto paga ciascun passeggero.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/costo-viaggio/">
+<meta name="theme-color" content="#0e6b63">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><nav class="main-nav"><a href="/#auto" class=on>Auto</a><a href="/#casa">Casa</a><a href="/#lavoro">Lavoro</a><a href="/#collezionismo">Collezionismo</a><a href="/#utilita">Utilità</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#auto">Auto</a></div>
+<h1><span class="ic">🛣️</span>Costo viaggio in auto</h1>
+<p class="lead">Scopri quanto costa un viaggio in macchina tra carburante, pedaggi e parcheggio, e quanto paga ciascun passeggero.</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="v_km">Distanza (solo andata)</label><div class="inp"><input id="v_km" type="number" inputmode="decimal" value="150" min="0"><span class="suf">km</span></div></div>
+    <label class="check"><input id="v_ar" type="checkbox" checked> Andata e ritorno</label>
+    <div class="seg" id="v_unit"><button class="on" data-u="l100" type="button">L/100 km</button><button data-u="kml" type="button">km/L</button></div>
+    <div class="row2">
+      <div class="field"><label for="v_cons">Consumo</label><div class="inp"><input id="v_cons" type="number" inputmode="decimal" value="6.5" step="0.1" min="0"><span class="suf" id="v_cons_suf">L/100</span></div></div>
+      <div class="field"><label for="v_prezzo">Prezzo carburante</label><div class="inp"><input id="v_prezzo" type="number" inputmode="decimal" value="1.75" step="0.01" min="0"><span class="suf">€/L</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="v_ped">Pedaggi <span class="hint">(totale)</span></label><div class="inp"><input id="v_ped" type="number" inputmode="decimal" value="0" step="0.1" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="v_park">Parcheggio / altro</label><div class="inp"><input id="v_park" type="number" inputmode="decimal" value="0" step="0.5" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="field"><label for="v_pers">Persone in auto</label><div class="inp"><input id="v_pers" type="number" inputmode="numeric" value="1" min="1" step="1"></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Costo totale del viaggio</div>
+    <div class="big" id="v_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>Chilometri totali</span><b id="v_kmt">–</b></div>
+      <div class="ln"><span>Litri di carburante</span><b id="v_litri">–</b></div>
+      <div class="ln"><span>Costo carburante</span><b id="v_carb">–</b></div>
+      <div class="ln"><span>Pedaggi e altro</span><b id="v_extra">–</b></div>
+      <div class="ln"><span>Costo per km</span><b id="v_cpk">–</b></div>
+      <div class="ln" style="font-size:17px"><span>A persona</span><b id="v_pp">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola il costo di un viaggio in auto</h2>
+  <p>Il costo del carburante si ottiene moltiplicando i chilometri per il consumo dell'auto e per il prezzo al litro. Con un consumo di 6,5 litri ogni 100 km e la benzina a 1,75 €/L, 300 km costano circa 34 € di carburante. A questo si aggiungono pedaggi e parcheggi.</p>
+  <h2>Dove trovo il consumo della mia auto?</h2>
+  <p>Il dato più affidabile è quello reale: fai il pieno, azzera il contachilometri parziale e al pieno successivo dividi i litri messi per i km percorsi, poi moltiplica per 100. Il consumo dichiarato dal costruttore di solito è più basso di quello reale.</p>
+</article>
+<section class="related"><h2>Altri calcolatori</h2><div class="grid"><a class="card c-auto" href="/valore-auto/" data-s="quanto vale la mia auto stima del valore dell&#x27;usato e confronto con gli annunci reali. auto"><span class="ic">🚗</span><span><h3>Quanto vale la mia auto<span class="new">Nuovo</span></h3><p>Stima del valore dell&#x27;usato e confronto con gli annunci reali.</p></span></a><a class="card c-auto" href="/bollo-auto/" data-s="bollo auto quanto si paga in base a kw e classe euro, superbollo incluso. auto"><span class="ic">🚙</span><span><h3>Bollo auto</h3><p>Quanto si paga in base a kW e classe Euro, superbollo incluso.</p></span></a><a class="card c-auto" href="/passaggio-proprieta/" data-s="passaggio di proprietà ipt, emolumenti e bolli per un&#x27;auto usata. auto"><span class="ic">🔑</span><span><h3>Passaggio di proprietà</h3><p>IPT, emolumenti e bolli per un&#x27;auto usata.</p></span></a><a class="card c-casa" href="/rata-mutuo/" data-s="rata del mutuo rata mensile, interessi totali e piano di ammortamento. casa"><span class="ic">🏠</span><span><h3>Rata del mutuo</h3><p>Rata mensile, interessi totali e piano di ammortamento.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
+<div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a></div><div><h4>Lavoro</h4><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+
+let vUnit='l100';
+$('v_unit').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||b.dataset.u===vUnit)return;
+  const c=val('v_cons');vUnit=b.dataset.u;
+  $('v_unit').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('v_cons').value=c>0?(Math.round(100/c*10)/10):'';
+  $('v_cons_suf').textContent=vUnit==='l100'?'L/100':'km/L';calcV();
+});
+function calcV(){
+  const km=val('v_km')*($('v_ar').checked?2:1),c=val('v_cons');
+  const l100=vUnit==='l100'?c:(c>0?100/c:0),litri=km*l100/100,carb=litri*val('v_prezzo');
+  const extra=val('v_ped')+val('v_park'),tot=carb+extra,p=Math.max(1,Math.round(val('v_pers'))||1);
+  $('v_tot').textContent=eur(tot);$('v_kmt').textContent=num(km,1)+' km';$('v_litri').textContent=num(litri,1)+' L';
+  $('v_carb').textContent=eur(carb);$('v_extra').textContent=eur(extra);$('v_cpk').textContent=km>0?eur(tot/km):'–';$('v_pp').textContent=eur(tot/p);
+}
+on(['v_km','v_ar','v_cons','v_prezzo','v_ped','v_park','v_pers'],calcV);calcV();
+</script>
+</body>
+</html>

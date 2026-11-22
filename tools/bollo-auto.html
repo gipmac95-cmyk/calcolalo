@@ -1,0 +1,45 @@
+<!--
+title: Calcolo bollo auto 2026: quanto si paga in base a kW e classe Euro
+h1: Bollo auto
+desc: Calcola la tassa automobilistica annuale in base alla potenza in kW e alla classe ambientale, compreso il superbollo per le auto sopra i 185 kW.
+card: Quanto si paga in base a kW e classe Euro, superbollo incluso.
+icon: 🚙
+cat: Auto
+order: 20
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="b_kw">Potenza <span class="hint">(libretto, voce P.2)</span></label><div class="inp"><input id="b_kw" type="number" inputmode="decimal" value="70" step="1" min="0"><span class="suf">kW</span></div></div>
+    <div class="field"><label for="b_euro">Classe ambientale</label><div class="inp"><select id="b_euro"><option value="0">Euro 0</option><option value="1">Euro 1</option><option value="2">Euro 2</option><option value="3">Euro 3</option><option value="4" selected>Euro 4, 5 o 6</option></select></div></div>
+    <div class="field"><label for="b_alim">Alimentazione</label><div class="inp"><select id="b_alim"><option value="std" selected>Benzina o diesel</option><option value="alt">GPL, metano o ibrida</option><option value="ele">Elettrica</option></select></div></div>
+    <div class="field"><label for="b_anni">Anni dalla prima immatricolazione <span class="hint">(per il superbollo)</span></label><div class="inp"><input id="b_anni" type="number" inputmode="numeric" value="3" step="1" min="0"><span class="suf">anni</span></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Bollo annuale (tariffa di riferimento)</div><div class="big" id="b_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>Quota fino a 100 kW</span><b id="b_q1">–</b></div>
+      <div class="ln"><span>Quota oltre 100 kW</span><b id="b_q2">–</b></div>
+      <div class="ln"><span>Superbollo</span><b id="b_sb">–</b></div>
+    </div>
+    <div class="small" id="b_note"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola il bollo auto</h2>
+  <p>Il bollo si paga per ogni kW di potenza, con una tariffa che dipende dalla classe Euro. Per un'auto Euro 4, 5 o 6 la tariffa di riferimento è di 2,58 € per kW fino a 100 kW e 3,87 € per ogni kW oltre i 100. Un'utilitaria Euro 6 da 51 kW paga quindi 131,58 €. Se i kW sul libretto hanno decimali, si considera solo la parte intera (tranne che per le auto elettriche, a GPL o a metano).</p>
+  <h2>Ogni regione ha le sue regole</h2>
+  <p>Il bollo è una tassa regionale: alcune regioni applicano maggiorazioni, altre sconti o esenzioni (per esempio per auto elettriche, ibride o a GPL). Il risultato qui è la tariffa di riferimento nazionale; l'importo esatto lo trovi sul servizio di calcolo dell'ACI o della tua regione.</p>
+  <h2>Il superbollo</h2>
+  <p>Le auto con più di 185 kW pagano in più 20 € per ogni kW oltre la soglia. L'importo scende al 60% dopo 5 anni dall'immatricolazione, al 30% dopo 10 anni e al 15% dopo 15 anni; dopo 20 anni non si paga più.</p>
+</article>
+<script>
+const BOLLO={0:[3.00,4.50],1:[2.90,4.35],2:[2.80,4.20],3:[2.70,4.05],4:[2.58,3.87]};
+function calcB(){const alim=$('b_alim').value;let kw=val('b_kw');if(alim==='std')kw=Math.floor(kw);
+  const [t1,t2]=BOLLO[$('b_euro').value],q1=Math.min(kw,100)*t1,q2=Math.max(0,kw-100)*t2,anni=val('b_anni');
+  let f=1;if(anni>=20)f=0;else if(anni>=15)f=0.15;else if(anni>=10)f=0.30;else if(anni>=5)f=0.60;
+  const sb=Math.max(0,Math.floor(val('b_kw'))-185)*20*f;
+  $('b_q1').textContent=eur(q1);$('b_q2').textContent=eur(q2);$('b_sb').textContent=eur(sb);$('b_tot').textContent=eur(q1+q2+sb);
+  $('b_note').textContent=alim==='ele'?"Le auto elettriche sono esenti dal bollo per i primi 5 anni dall'immatricolazione; dopo, in molte regioni pagano una quota ridotta. Verifica le regole della tua regione.":alim==='alt'?"Per auto a GPL, metano o ibride molte regioni prevedono sconti o esenzioni temporanee. L'importo mostrato è senza agevolazioni.":''}
+on(['b_kw','b_euro','b_alim','b_anni'],calcB);calcB();
+</script>

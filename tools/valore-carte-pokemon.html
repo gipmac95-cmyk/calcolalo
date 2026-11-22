@@ -1,0 +1,76 @@
+<!--
+title: Quanto vale la mia carta Pokémon? Prezzo reale e media di mercato
+h1: Quanto vale la mia carta Pokémon
+desc: Scopri quanto vale una carta Pokémon: apri le vendite reali e le offerte della stessa carta e calcola prezzo medio e prezzo consigliato per vendere.
+card: Prezzo reale delle carte, dalle vendite e da Cardmarket.
+icon: 🃏
+cat: Collezionismo
+order: 20
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <h2>1. La tua carta</h2>
+    <div class="row2">
+      <div class="field"><label for="k_nome">Nome della carta</label><div class="inp"><input id="k_nome" type="text" value="Charizard ex" placeholder="es. Pikachu" autocomplete="off"></div></div>
+      <div class="field"><label for="k_num">Numero <span class="hint">(in basso, es. 199/165)</span></label><div class="inp"><input id="k_num" type="text" value="199/165" placeholder="es. 025/165" autocomplete="off"></div></div>
+    </div>
+    <div class="field"><label for="k_set">Espansione <span class="hint">(facoltativo)</span></label><div class="inp"><input id="k_set" type="text" value="151" placeholder="es. Evoluzioni a Paldea" autocomplete="off"></div></div>
+    <div class="row2">
+      <div class="field"><label for="k_lang">Lingua</label><div class="inp"><select id="k_lang"><option value="ita" selected>Italiano</option><option value="eng">Inglese</option><option value="jap">Giapponese</option><option value="">Altra</option></select></div></div>
+      <div class="field"><label for="k_cond">Condizione</label><div class="inp"><select id="k_cond"><option value="">Near Mint (perfetta)</option><option value="">Excellent / Good</option><option value="">Usata</option><option value="PSA 10">Gradata PSA 10</option><option value="PSA 9">Gradata PSA 9</option><option value="PSA 8">Gradata PSA 8</option><option value="graded">Gradata (altro voto)</option></select></div></div>
+    </div>
+    <h2 style="margin-top:8px">2. Guarda i prezzi reali</h2>
+    <div class="links" id="k_links" style="margin-bottom:16px"></div>
+    <h2>3. Calcola la media di mercato</h2>
+    <div class="field"><label for="k_prices">Prezzi delle ultime vendite o offerte <span class="hint">(uno per riga)</span></label><div class="inp"><textarea id="k_prices" rows="5" style="width:100%;padding:12px;border:1px solid #d5d1c8;border-radius:11px;font:inherit;font-size:16px;resize:vertical" placeholder="es.&#10;12,50&#10;14&#10;11,90">95
+102
+89,90
+110
+98</textarea></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Prezzo di mercato (mediana)</div>
+    <div class="big" id="k_med">–</div>
+    <div class="range" id="k_rng">–</div>
+    <div class="lines">
+      <div class="ln"><span>Media</span><b id="k_avg">–</b></div>
+      <div class="ln"><span>Prezzo consigliato per vendere</span><b id="k_sell">–</b></div>
+      <div class="ln"><span>Per vendere in fretta</span><b id="k_fast">–</b></div>
+      <div class="ln"><span>Prezzi considerati</span><b id="k_n">–</b></div>
+    </div>
+    <div class="small" id="k_tip"></div>
+  </div>
+</div>
+<div class="tips"><h3>Consigli per non sbagliare</h3><ul>
+  <li>Controlla il <b>numero</b> in basso sulla carta: la stessa carta può esistere in versioni diverse (normale, reverse holo, full art) con prezzi molto lontani.</li>
+  <li>Su Cardmarket guarda il "prezzo di tendenza" e filtra per lingua e condizione uguali alla tua carta.</li>
+  <li>Una carta gradata (PSA, BGS, CGC) vale molto di più della stessa carta "raw": confronta solo con lo stesso voto.</li>
+</ul></div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Perché il prezzo cambia così tanto</h2>
+  <p>Il valore delle carte dipende dalla rarità, dalla condizione, dalla lingua e dalla domanda del momento: l'uscita di una nuova espansione o l'interesse dei collezionisti per un Pokémon possono spostare i prezzi in pochi giorni. Il riferimento più affidabile sono le vendite reali e recenti della stessa carta. Il calcolatore scarta da solo i prezzi anomali (meno della metà o più del doppio della mediana).</p>
+  <h2>Come si valuta la condizione</h2>
+  <p>Near Mint vuol dire praticamente perfetta, appena uscita dalla bustina. Excellent e Good indicano piccoli segni sui bordi o sul retro. Una carta con pieghe, graffi evidenti o angoli rovinati è "played" e vale molto meno.</p>
+</article>
+<script>
+function linkHtml(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+function calcK(){
+  const nome=$('k_nome').value.trim(),n=$('k_num').value.trim(),set=$('k_set').value.trim(),lang=$('k_lang').value,cond=$('k_cond').value;
+  const base=(nome+' '+n).trim(),langW=lang==='ita'?' ita':lang==='jap'?' japanese':'';
+  const gr=cond==='graded'?' graded':cond?' '+cond:'';
+  $('k_links').innerHTML=nome?linkHtml([
+    [`https://www.cardmarket.com/it/Pokemon/Products/Search?searchString=${qs(nome+' '+set)}`,'Cardmarket','Il mercato europeo delle carte, con prezzo di tendenza'],
+    [`https://www.ebay.it/sch/i.html?_nkw=${qs(base+langW+gr)}&LH_Sold=1&LH_Complete=1`,'eBay – vendite concluse','Prezzi a cui è stata venduta davvero'],
+    [`https://www.vinted.it/catalog?search_text=${qs('pokemon '+base)}`,'Vinted','Annunci di privati'],
+    [`https://www.pricecharting.com/search-products?q=${qs('pokemon '+base)}&type=prices`,'PriceCharting','Andamento dei prezzi nel tempo (in dollari)']]):'';
+  const st=priceStats(parsePrices($('k_prices').value));
+  if(!st){['k_med','k_avg','k_sell','k_fast','k_n'].forEach(i=>$(i).textContent='–');$('k_rng').textContent='Inserisci almeno un prezzo';$('k_tip').textContent='';return}
+  $('k_med').textContent=eur(st.med);$('k_rng').textContent='Da '+eur(st.min)+' a '+eur(st.max);
+  $('k_avg').textContent=eur(st.avg);$('k_sell').textContent=eur(st.med);$('k_fast').textContent=eur(st.fast);
+  $('k_n').textContent=st.used+(st.used<st.n?' (scartati '+(st.n-st.used)+' anomali)':'');
+  $('k_tip').textContent=st.used<5?'Con almeno 5 prezzi recenti la media è più affidabile.':'';
+}
+on(['k_nome','k_num','k_set','k_lang','k_cond','k_prices'],calcK);calcK();
+</script>

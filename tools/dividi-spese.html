@@ -1,0 +1,32 @@
+<!--
+title: Dividi le spese tra amici: chi deve quanto a chi
+h1: Dividi le spese
+desc: Inserisci chi ha pagato e quanto: il calcolatore divide il totale in parti uguali e ti dice il modo più semplice per pareggiare i conti.
+card: Chi deve quanto a chi, dopo una cena o una vacanza.
+icon: 👥
+cat: Utilità
+order: 20
+-->
+<div class="layout">
+  <div class="panel"><h2>Chi ha pagato e quanto</h2><div id="d_list"></div><button class="btn" id="d_add" type="button">+ Aggiungi persona</button></div>
+  <div class="panel result">
+    <div class="lbl">Quota a testa</div><div class="big" id="d_quota">–</div>
+    <div class="lines"><div class="ln"><span>Totale speso</span><b id="d_tot">–</b></div>
+    <div style="margin-top:10px;font-weight:600">Per pareggiare i conti:</div><div id="d_tr"></div></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info"><h2>Come funziona</h2><p>Il totale viene diviso in parti uguali. Chi ha pagato più della sua quota riceve la differenza, chi ha pagato meno la versa. Il calcolatore riduce al minimo il numero di passaggi di denaro.</p></article>
+<script>
+let people=[{n:'Marco',v:120},{n:'Giulia',v:45},{n:'Luca',v:0}];
+function renderD(){$('d_list').innerHTML=people.map((p,k)=>`<div class="person"><input data-k="${k}" data-f="n" value="${esc(p.n)}" placeholder="Nome" aria-label="Nome"><input data-k="${k}" data-f="v" type="number" inputmode="decimal" step="0.01" value="${p.v}" placeholder="€" aria-label="Importo pagato"><button data-del="${k}" title="Rimuovi" type="button">×</button></div>`).join('');calcD()}
+$('d_list').addEventListener('input',e=>{const t=e.target,k=+t.dataset.k;if(isNaN(k))return;if(t.dataset.f==='n')people[k].n=t.value;else people[k].v=parseFloat(t.value)||0;calcD()});
+$('d_list').addEventListener('click',e=>{const k=e.target.dataset.del;if(k===undefined||people.length<=2)return;people.splice(+k,1);renderD()});
+$('d_add').addEventListener('click',()=>{people.push({n:'Persona '+(people.length+1),v:0});renderD()});
+function calcD(){const tot=people.reduce((s,p)=>s+p.v,0),q=tot/people.length;$('d_tot').textContent=eur(tot);$('d_quota').textContent=eur(q);
+  const bal=people.map(p=>({n:p.n||'?',b:Math.round((p.v-q)*100)}));
+  const cred=bal.filter(x=>x.b>0).sort((a,b)=>b.b-a.b),deb=bal.filter(x=>x.b<0).map(x=>({n:x.n,b:-x.b})).sort((a,b)=>b.b-a.b);
+  let out='',i=0,j=0;while(i<deb.length&&j<cred.length){const m=Math.min(deb[i].b,cred[j].b);if(m>0)out+=`<div class="transfer"><span>${esc(deb[i].n)} → ${esc(cred[j].n)}</span><b>${eur(m/100)}</b></div>`;deb[i].b-=m;cred[j].b-=m;if(deb[i].b===0)i++;if(cred[j].b===0)j++}
+  $('d_tr').innerHTML=out||'<div class="transfer"><span>Conti già in pari</span><b>✓</b></div>'}
+renderD();
+</script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scorporo IVA online: calcola imponibile e IVA al 22%, 10%, 5% e 4%</title>
+<meta name="description" content="Ricava l&#x27;imponibile da un prezzo IVA inclusa, oppure aggiungi l&#x27;IVA a un importo netto. Funziona con tutte le aliquote italiane.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/scorporo-iva/">
+<meta property="og:title" content="Scorporo IVA online: calcola imponibile e IVA al 22%, 10%, 5% e 4%">
+<meta property="og:description" content="Ricava l&#x27;imponibile da un prezzo IVA inclusa, oppure aggiungi l&#x27;IVA a un importo netto. Funziona con tutte le aliquote italiane.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/scorporo-iva/">
+<meta name="theme-color" content="#0e6b63">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><nav class="main-nav"><a href="/#auto">Auto</a><a href="/#casa">Casa</a><a href="/#lavoro" class=on>Lavoro</a><a href="/#collezionismo">Collezionismo</a><a href="/#utilita">Utilità</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#lavoro">Lavoro</a></div>
+<h1><span class="ic">🧾</span>Scorporo e aggiunta IVA</h1>
+<p class="lead">Ricava l'imponibile da un prezzo IVA inclusa, oppure aggiungi l'IVA a un importo netto. Funziona con tutte le aliquote italiane.</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="seg" id="i_mode"><button class="on" data-m="scorpora" type="button">Scorpora IVA</button><button data-m="aggiungi" type="button">Aggiungi IVA</button></div>
+    <div class="field"><label id="i_lbl" for="i_imp">Importo IVA inclusa</label><div class="inp"><input id="i_imp" type="number" inputmode="decimal" value="122" step="0.01" min="0"><span class="suf">€</span></div></div>
+    <div class="field"><label for="i_aliq">Aliquota IVA</label><div class="inp"><select id="i_aliq"><option value="22" selected>22% – ordinaria</option><option value="10">10% – ridotta</option><option value="5">5% – ridotta</option><option value="4">4% – minima</option></select></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl" id="i_bigl">Imponibile (netto)</div>
+    <div class="big" id="i_big">–</div>
+    <div class="lines">
+      <div class="ln"><span>Imponibile</span><b id="i_net">–</b></div>
+      <div class="ln"><span>IVA</span><b id="i_iva">–</b></div>
+      <div class="ln"><span>Totale IVA inclusa</span><b id="i_lordo">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si scorpora l'IVA</h2>
+  <p>Per ricavare l'imponibile si divide il prezzo IVA inclusa per (1 + aliquota/100). Con l'IVA al 22%: 122 € ÷ 1,22 = 100 € di imponibile e 22 € di IVA. Attenzione: non basta togliere il 22% dal prezzo lordo, perché il risultato sarebbe sbagliato (122 − 22% = 95,16 €).</p>
+</article>
+<section class="related"><h2>Altri calcolatori</h2><div class="grid"><a class="card c-lavoro" href="/stipendio-netto/" data-s="stipendio netto 2026 dalla ral al netto in busta paga, con le aliquote irpef 2026. lavoro"><span class="ic">💶</span><span><h3>Stipendio netto 2026</h3><p>Dalla RAL al netto in busta paga, con le aliquote IRPEF 2026.</p></span></a><a class="card c-lavoro" href="/tfr/" data-s="calcolo tfr stima del trattamento di fine rapporto maturato. lavoro"><span class="ic">📈</span><span><h3>Calcolo TFR</h3><p>Stima del trattamento di fine rapporto maturato.</p></span></a><a class="card c-auto" href="/valore-auto/" data-s="quanto vale la mia auto stima del valore dell&#x27;usato e confronto con gli annunci reali. auto"><span class="ic">🚗</span><span><h3>Quanto vale la mia auto<span class="new">Nuovo</span></h3><p>Stima del valore dell&#x27;usato e confronto con gli annunci reali.</p></span></a><a class="card c-auto" href="/bollo-auto/" data-s="bollo auto quanto si paga in base a kw e classe euro, superbollo incluso. auto"><span class="ic">🚙</span><span><h3>Bollo auto</h3><p>Quanto si paga in base a kW e classe Euro, superbollo incluso.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
+<div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a></div><div><h4>Lavoro</h4><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+
+let iMode='scorpora';
+$('i_mode').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;iMode=b.dataset.m;
+  $('i_mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('i_lbl').textContent=iMode==='scorpora'?'Importo IVA inclusa':'Importo netto (imponibile)';
+  $('i_bigl').textContent=iMode==='scorpora'?'Imponibile (netto)':'Totale IVA inclusa';calcI()});
+function calcI(){const v=val('i_imp'),a=parseFloat($('i_aliq').value);let net,lordo;
+  if(iMode==='scorpora'){lordo=v;net=v/(1+a/100)}else{net=v;lordo=v*(1+a/100)}
+  $('i_net').textContent=eur(net);$('i_iva').textContent=eur(lordo-net);$('i_lordo').textContent=eur(lordo);$('i_big').textContent=eur(iMode==='scorpora'?net:lordo)}
+on(['i_imp','i_aliq'],calcI);calcI();
+</script>
+</body>
+</html>

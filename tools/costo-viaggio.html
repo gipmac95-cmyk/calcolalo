@@ -1,0 +1,62 @@
+<!--
+title: Calcolo costo viaggio in auto: carburante, pedaggi e quota a persona
+h1: Costo viaggio in auto
+desc: Scopri quanto costa un viaggio in macchina tra carburante, pedaggi e parcheggio, e quanto paga ciascun passeggero.
+card: Carburante, pedaggi e quota a persona per ogni viaggio.
+icon: 🛣️
+cat: Auto
+order: 40
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="v_km">Distanza (solo andata)</label><div class="inp"><input id="v_km" type="number" inputmode="decimal" value="150" min="0"><span class="suf">km</span></div></div>
+    <label class="check"><input id="v_ar" type="checkbox" checked> Andata e ritorno</label>
+    <div class="seg" id="v_unit"><button class="on" data-u="l100" type="button">L/100 km</button><button data-u="kml" type="button">km/L</button></div>
+    <div class="row2">
+      <div class="field"><label for="v_cons">Consumo</label><div class="inp"><input id="v_cons" type="number" inputmode="decimal" value="6.5" step="0.1" min="0"><span class="suf" id="v_cons_suf">L/100</span></div></div>
+      <div class="field"><label for="v_prezzo">Prezzo carburante</label><div class="inp"><input id="v_prezzo" type="number" inputmode="decimal" value="1.75" step="0.01" min="0"><span class="suf">€/L</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="v_ped">Pedaggi <span class="hint">(totale)</span></label><div class="inp"><input id="v_ped" type="number" inputmode="decimal" value="0" step="0.1" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="v_park">Parcheggio / altro</label><div class="inp"><input id="v_park" type="number" inputmode="decimal" value="0" step="0.5" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="field"><label for="v_pers">Persone in auto</label><div class="inp"><input id="v_pers" type="number" inputmode="numeric" value="1" min="1" step="1"></div></div>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Costo totale del viaggio</div>
+    <div class="big" id="v_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>Chilometri totali</span><b id="v_kmt">–</b></div>
+      <div class="ln"><span>Litri di carburante</span><b id="v_litri">–</b></div>
+      <div class="ln"><span>Costo carburante</span><b id="v_carb">–</b></div>
+      <div class="ln"><span>Pedaggi e altro</span><b id="v_extra">–</b></div>
+      <div class="ln"><span>Costo per km</span><b id="v_cpk">–</b></div>
+      <div class="ln" style="font-size:17px"><span>A persona</span><b id="v_pp">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola il costo di un viaggio in auto</h2>
+  <p>Il costo del carburante si ottiene moltiplicando i chilometri per il consumo dell'auto e per il prezzo al litro. Con un consumo di 6,5 litri ogni 100 km e la benzina a 1,75 €/L, 300 km costano circa 34 € di carburante. A questo si aggiungono pedaggi e parcheggi.</p>
+  <h2>Dove trovo il consumo della mia auto?</h2>
+  <p>Il dato più affidabile è quello reale: fai il pieno, azzera il contachilometri parziale e al pieno successivo dividi i litri messi per i km percorsi, poi moltiplica per 100. Il consumo dichiarato dal costruttore di solito è più basso di quello reale.</p>
+</article>
+<script>
+let vUnit='l100';
+$('v_unit').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||b.dataset.u===vUnit)return;
+  const c=val('v_cons');vUnit=b.dataset.u;
+  $('v_unit').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('v_cons').value=c>0?(Math.round(100/c*10)/10):'';
+  $('v_cons_suf').textContent=vUnit==='l100'?'L/100':'km/L';calcV();
+});
+function calcV(){
+  const km=val('v_km')*($('v_ar').checked?2:1),c=val('v_cons');
+  const l100=vUnit==='l100'?c:(c>0?100/c:0),litri=km*l100/100,carb=litri*val('v_prezzo');
+  const extra=val('v_ped')+val('v_park'),tot=carb+extra,p=Math.max(1,Math.round(val('v_pers'))||1);
+  $('v_tot').textContent=eur(tot);$('v_kmt').textContent=num(km,1)+' km';$('v_litri').textContent=num(litri,1)+' L';
+  $('v_carb').textContent=eur(carb);$('v_extra').textContent=eur(extra);$('v_cpk').textContent=km>0?eur(tot/km):'–';$('v_pp').textContent=eur(tot/p);
+}
+on(['v_km','v_ar','v_cons','v_prezzo','v_ped','v_park','v_pers'],calcV);calcV();
+</script>

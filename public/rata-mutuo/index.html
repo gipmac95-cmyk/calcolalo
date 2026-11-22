@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo rata mutuo: rata mensile, interessi e piano di ammortamento</title>
+<meta name="description" content="Calcola la rata mensile del mutuo a tasso fisso con il metodo francese, gli interessi totali e il piano di ammortamento anno per anno.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/rata-mutuo/">
+<meta property="og:title" content="Calcolo rata mutuo: rata mensile, interessi e piano di ammortamento">
+<meta property="og:description" content="Calcola la rata mensile del mutuo a tasso fisso con il metodo francese, gli interessi totali e il piano di ammortamento anno per anno.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/rata-mutuo/">
+<meta name="theme-color" content="#0e6b63">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><nav class="main-nav"><a href="/#auto">Auto</a><a href="/#casa" class=on>Casa</a><a href="/#lavoro">Lavoro</a><a href="/#collezionismo">Collezionismo</a><a href="/#utilita">Utilità</a></nav></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#casa">Casa</a></div>
+<h1><span class="ic">🏠</span>Rata del mutuo</h1>
+<p class="lead">Calcola la rata mensile del mutuo a tasso fisso con il metodo francese, gli interessi totali e il piano di ammortamento anno per anno.</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="m_imp">Importo del mutuo</label><div class="inp"><input id="m_imp" type="number" inputmode="decimal" value="150000" step="1000" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="m_tasso">Tasso annuo (TAN)</label><div class="inp"><input id="m_tasso" type="number" inputmode="decimal" value="3.2" step="0.05" min="0"><span class="suf">%</span></div></div>
+      <div class="field"><label for="m_anni">Durata</label><div class="inp"><input id="m_anni" type="number" inputmode="numeric" value="25" step="1" min="1" max="40"><span class="suf">anni</span></div></div>
+    </div>
+    <p class="note">Il calcolo non include spese di istruttoria, perizia, assicurazioni e imposta sostitutiva, che fanno parte del TAEG.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Rata mensile</div>
+    <div class="big" id="m_rata">–</div>
+    <div class="lines">
+      <div class="ln"><span>Numero di rate</span><b id="m_n">–</b></div>
+      <div class="ln"><span>Interessi totali</span><b id="m_int">–</b></div>
+      <div class="ln"><span>Totale restituito</span><b id="m_totale">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="panel" style="margin-top:20px;overflow-x:auto">
+  <h2>Piano di ammortamento annuale</h2>
+  <table class="amort"><thead><tr><th>Anno</th><th>Quota capitale</th><th>Quota interessi</th><th>Debito residuo</th></tr></thead><tbody id="m_tab"></tbody></table>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola la rata del mutuo</h2>
+  <p>Con l'ammortamento alla francese la rata resta uguale per tutta la durata. Nei primi anni è composta soprattutto da interessi, poi la quota di capitale cresce. La formula è: rata = C × i / (1 − (1 + i)<sup>−n</sup>), dove C è il capitale, i il tasso mensile e n il numero di rate.</p>
+  <h2>Che differenza c'è tra TAN e TAEG?</h2>
+  <p>Il TAN è il tasso puro applicato al prestito. Il TAEG comprende anche le spese accessorie ed è il numero giusto per confrontare offerte di banche diverse.</p>
+</article>
+<section class="related"><h2>Altri calcolatori</h2><div class="grid"><a class="card c-auto" href="/valore-auto/" data-s="quanto vale la mia auto stima del valore dell&#x27;usato e confronto con gli annunci reali. auto"><span class="ic">🚗</span><span><h3>Quanto vale la mia auto<span class="new">Nuovo</span></h3><p>Stima del valore dell&#x27;usato e confronto con gli annunci reali.</p></span></a><a class="card c-auto" href="/bollo-auto/" data-s="bollo auto quanto si paga in base a kw e classe euro, superbollo incluso. auto"><span class="ic">🚙</span><span><h3>Bollo auto</h3><p>Quanto si paga in base a kW e classe Euro, superbollo incluso.</p></span></a><a class="card c-auto" href="/passaggio-proprieta/" data-s="passaggio di proprietà ipt, emolumenti e bolli per un&#x27;auto usata. auto"><span class="ic">🔑</span><span><h3>Passaggio di proprietà</h3><p>IPT, emolumenti e bolli per un&#x27;auto usata.</p></span></a><a class="card c-auto" href="/costo-viaggio/" data-s="costo viaggio in auto carburante, pedaggi e quota a persona per ogni viaggio. auto"><span class="ic">🛣️</span><span><h3>Costo viaggio in auto</h3><p>Carburante, pedaggi e quota a persona per ogni viaggio.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
+<div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a></div><div><h4>Lavoro</h4><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+
+function calcM(){
+  const C=val('m_imp'),t=val('m_tasso'),anni=Math.round(val('m_anni')),n=anni*12,i=t/100/12;
+  if(C<=0||n<=0){['m_rata','m_n','m_int','m_totale'].forEach(x=>$(x).textContent='–');$('m_tab').innerHTML='';return}
+  const rata=i===0?C/n:C*i/(1-Math.pow(1+i,-n));
+  $('m_rata').textContent=eur(rata);$('m_n').textContent=n;$('m_int').textContent=eur(rata*n-C);$('m_totale').textContent=eur(rata*n);
+  let deb=C,rows='';
+  for(let y=1;y<=anni;y++){let qc=0,qi=0;for(let m=0;m<12;m++){const int=deb*i,cap=rata-int;qi+=int;qc+=cap;deb-=cap}
+    rows+=`<tr><td>${y}</td><td>${eur(qc)}</td><td>${eur(qi)}</td><td>${eur(Math.max(0,deb))}</td></tr>`}
+  $('m_tab').innerHTML=rows;
+}
+on(['m_imp','m_tasso','m_anni'],calcM);calcM();
+</script>
+</body>
+</html>

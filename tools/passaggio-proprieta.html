@@ -1,0 +1,40 @@
+<!--
+title: Costo passaggio di proprietà auto 2026: calcolo IPT, ACI e bolli
+h1: Passaggio di proprietà
+desc: Quanto costa il passaggio di proprietà di un'auto usata nel 2026: imposta provinciale di trascrizione (IPT), emolumenti ACI, diritti della Motorizzazione e imposte di bollo.
+card: IPT, emolumenti e bolli per un'auto usata.
+icon: 🔑
+cat: Auto
+order: 30
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pp_kw">Potenza <span class="hint">(libretto, voce P.2)</span></label><div class="inp"><input id="pp_kw" type="number" inputmode="decimal" value="66" step="1" min="0"><span class="suf">kW</span></div></div>
+    <div class="field"><label for="pp_magg">Maggiorazione della provincia di residenza</label><div class="inp"><select id="pp_magg"><option value="0">Nessuna (0%)</option><option value="10">10%</option><option value="20">20%</option><option value="30" selected>30% (la più diffusa)</option></select></div></div>
+    <label class="check"><input id="pp_aut" type="checkbox" checked> Includi autentica della firma (16 €)</label>
+    <p class="note">Il calcolo comprende solo i costi previsti dalla legge. Agenzie di pratiche auto e delegazioni ACI aggiungono il proprio compenso.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Costo totale del passaggio</div><div class="big" id="pp_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>IPT (imposta provinciale)</span><b id="pp_ipt">–</b></div>
+      <div class="ln"><span>Emolumenti ACI</span><b>27,00 €</b></div>
+      <div class="ln"><span>Diritti Motorizzazione</span><b>10,20 €</b></div>
+      <div class="ln"><span>Bollo istanza unificata</span><b>32,00 €</b></div>
+      <div class="ln"><span>Bollo Documento Unico</span><b>16,00 €</b></div>
+      <div class="ln"><span>Bollo autentica</span><b id="pp_autv">16,00 €</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola l'IPT</h2>
+  <p>Per le auto fino a 53 kW l'IPT è fissa: 150,81 €. Oltre i 53 kW si pagano 3,5119 € per ogni kW di potenza, calcolati su tutti i kW dell'auto. Le province possono aumentare l'importo fino al 30%, e la maggior parte lo fa.</p>
+  <h2>Chi paga il passaggio di proprietà?</h2>
+  <p>Per legge non è stabilito: di solito paga chi compra, ma venditore e acquirente possono accordarsi diversamente. Conviene scriverlo nell'accordo di vendita.</p>
+</article>
+<script>
+function calcPP(){const kw=val('pp_kw'),m=+$('pp_magg').value,ipt=(kw<=53?150.81:3.5119*kw)*(1+m/100),aut=$('pp_aut').checked?16:0;
+  $('pp_ipt').textContent=eur(ipt);$('pp_autv').textContent=eur(aut);$('pp_tot').textContent=eur(ipt+85.20+aut)}
+on(['pp_kw','pp_magg','pp_aut'],calcPP);calcPP();
+</script>
