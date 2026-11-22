@@ -21,12 +21,26 @@ ROOT = Path(__file__).parent
 SRC, TOOLS, OUT = ROOT / "src", ROOT / "tools", ROOT / "public"
 DOMAIN = "https://vuoisaperequantocosta.it"
 SITE = "Vuoi sapere quanto costa?"
+GA_ID = "G-FKCYXWVBCF"
 CATS = [("Auto", "Bollo, passaggio di proprietà, viaggi e valore dell'usato"),
         ("Casa", "Mutuo, bollette di luce e gas, internet"),
         ("Lavoro", "Stipendio, TFR e IVA"),
         ("Collezionismo", "Quanto valgono videogiochi e carte"),
         ("Utilità", "Valore dell'usato e calcoli di tutti i giorni")]
 SLUGCAT = {"Utilità": "utilita"}
+
+
+CONSENT = """<div id="ck" class="ck" role="dialog" aria-live="polite" aria-label="Cookie" hidden>
+<p><b>Usiamo i cookie solo per statistiche anonime</b> sulle visite, con Google Analytics, se ci dai il consenso. I calcoli restano sempre sul tuo dispositivo. <a href="/privacy/">Privacy e cookie</a></p>
+<div class="ck-b"><button type="button" class="btn" id="ck-no">Rifiuta</button><button type="button" class="btn btn-primary" id="ck-ok">Accetta</button></div></div>
+<script>(function(){var K='vsqc-consent',GA='""" + GA_ID + """';
+function load(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA);}
+var c=null;try{c=localStorage.getItem(K)}catch(e){}
+var b=document.getElementById('ck');function set(v){try{localStorage.setItem(K,v)}catch(e){}b.hidden=true;if(v==='ok')load();}
+if(c==='ok')load();else if(c!=='no')b.hidden=false;
+document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>"""
 
 def catcls(c): return "c-" + SLUGCAT.get(c, c.lower())
 
@@ -63,7 +77,7 @@ def footer():
     return f'''<footer class="site-footer"><div class="wrap"><div class="cols">
 <div>{logo()}<p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
 {"".join(cols)}</div>
-<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>'''
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista. · <a href="/privacy/" style="display:inline;color:#b7bec8">Privacy e cookie</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Gestisci cookie</a></div></div></footer>'''
 
 def page(title, desc, path, main, active="", script=""):
     canon = DOMAIN + path
@@ -93,6 +107,7 @@ def page(title, desc, path, main, active="", script=""):
 </main>
 {footer()}
 {js}
+{CONSENT}
 </body>
 </html>
 '''
@@ -135,6 +150,19 @@ def home():
                 "Calcolatori online gratuiti: stipendio netto 2026, bollo auto, passaggio di proprietà, rata del mutuo, valore dell'auto usata, IVA, TFR e altro.",
                 "/", main, script=script)
 
+
+PRIVACY = """<div class="wrap"><div class="tool-head"><div class="crumb"><a href="/">Home</a> › Privacy</div><h1>Privacy e cookie</h1>
+<p class="lead">Come VuoiSapereQuantoCosta.it tratta i dati di chi visita il sito. Ultimo aggiornamento: novembre 2026.</p></div>
+<article class="info">
+<h2>Titolare del trattamento</h2><p>Il gestore di VuoiSapereQuantoCosta.it. I dati di contatto del titolare sono in aggiornamento.</p>
+<h2>I dati che inserisci nei calcolatori</h2><p>Tutti i calcoli avvengono direttamente nel tuo browser. I numeri e le parole che scrivi nei calcolatori e nella ricerca non vengono inviati né salvati da noi.</p>
+<h2>Cookie tecnici</h2><p>Salviamo nel tuo browser solo la tua scelta sui cookie, per non chiedertela a ogni visita. Non serve il consenso per questo dato.</p>
+<h2>Statistiche (Google Analytics)</h2><p>Solo se clicchi "Accetta", usiamo Google Analytics 4, un servizio di Google Ireland Limited, per contare in forma aggregata le visite, le pagine viste, il tipo di dispositivo, la provenienza delle visite e i click verso altri siti. Servono a capire quali pagine sono utili e a migliorarle. Google può trattare i dati anche negli Stati Uniti, nell'ambito dell'EU-US Data Privacy Framework. Se rifiuti, Google Analytics non viene caricato. Puoi cambiare idea quando vuoi con il link "Gestisci cookie" in fondo a ogni pagina.</p>
+<h2>Hosting</h2><p>Il sito è ospitato da Netlify, che per motivi tecnici e di sicurezza può registrare dati come l'indirizzo IP nei registri del server.</p>
+<h2>Link ad altri siti</h2><p>Molte pagine contengono link a siti esterni (per esempio eBay, Vinted, Subito, ARERA, fornitori di luce, gas e internet). Quando li apri, valgono le regole sulla privacy di quei siti.</p>
+<h2>I tuoi diritti</h2><p>Puoi chiedere l'accesso, la rettifica o la cancellazione dei tuoi dati, opporti al trattamento e proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).</p>
+</article></div>"""
+
 def tool_page(t):
     related = [x for x in tools if x["cat"] == t["cat"] and x["slug"] != t["slug"]]
     related += [x for x in tools if x["cat"] != t["cat"]][: max(0, 4 - len(related))]
@@ -158,6 +186,8 @@ for t in tools:
 urls = [DOMAIN + "/"] + [f"{DOMAIN}/{t['slug']}/" for t in tools]
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                  + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+(OUT / "privacy").mkdir()
+(OUT / "privacy" / "index.html").write_text(page("Privacy e cookie – " + SITE, "Informativa sulla privacy e sui cookie di VuoiSapereQuantoCosta.it", "/privacy/", PRIVACY), encoding="utf-8")
 (OUT / "404.html").write_text(page("Pagina non trovata – " + SITE, "Pagina non trovata", "/404",
     '<div class="wrap" style="padding:80px 20px;text-align:center"><h1>Pagina non trovata</h1><p>La pagina che cerchi non esiste.</p><p><a class="btn btn-primary" href="/">Torna ai calcolatori</a></p></div>'), encoding="utf-8")
 print(f"Generate {len(tools)} pagine di calcolatori in {OUT}")

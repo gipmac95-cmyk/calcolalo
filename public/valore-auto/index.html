@@ -82,7 +82,7 @@
 <footer class="site-footer"><div class="wrap"><div class="cols">
 <div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
 <div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a><a href="/bolletta-luce/">Bolletta della luce</a><a href="/bolletta-gas/">Bolletta del gas</a><a href="/costo-internet/">Costo reale di internet casa</a></div><div><h4>Lavoro</h4><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a></div></div>
-<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista.</div></div></footer>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista. · <a href="/privacy/" style="display:inline;color:#b7bec8">Privacy e cookie</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Gestisci cookie</a></div></div></footer>
 <script>
 const $=id=>document.getElementById(id);
 const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
@@ -125,5 +125,16 @@ function calcA(){
 }
 on(['a_marca','a_modello','a_anno','a_km','a_alim','a_cond','a_fascia','a_listino'],calcA);calcA();
 </script>
+<div id="ck" class="ck" role="dialog" aria-live="polite" aria-label="Cookie" hidden>
+<p><b>Usiamo i cookie solo per statistiche anonime</b> sulle visite, con Google Analytics, se ci dai il consenso. I calcoli restano sempre sul tuo dispositivo. <a href="/privacy/">Privacy e cookie</a></p>
+<div class="ck-b"><button type="button" class="btn" id="ck-no">Rifiuta</button><button type="button" class="btn btn-primary" id="ck-ok">Accetta</button></div></div>
+<script>(function(){var K='vsqc-consent',GA='G-FKCYXWVBCF';
+function load(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA);}
+var c=null;try{c=localStorage.getItem(K)}catch(e){}
+var b=document.getElementById('ck');function set(v){try{localStorage.setItem(K,v)}catch(e){}b.hidden=true;if(v==='ok')load();}
+if(c==='ok')load();else if(c!=='no')b.hidden=false;
+document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>
 </body>
 </html>
