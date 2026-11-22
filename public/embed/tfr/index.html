@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo TFR – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/tfr/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">📈</span><b>Calcolo TFR</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="t_ral">Retribuzione annua lorda</label><div class="inp"><input id="t_ral" type="number" inputmode="decimal" value="30000" step="500" min="0"><span class="suf">€</span></div></div>
+    <div class="row2">
+      <div class="field"><label for="t_anni">Anni di lavoro</label><div class="inp"><input id="t_anni" type="number" inputmode="numeric" value="10" step="1" min="1" max="50"><span class="suf">anni</span></div></div>
+      <div class="field"><label for="t_infl">Inflazione media</label><div class="inp"><input id="t_infl" type="number" inputmode="decimal" value="2" step="0.1" min="0"><span class="suf">%</span></div></div>
+    </div>
+    <div class="field"><label for="t_aum">Aumento medio dello stipendio all'anno</label><div class="inp"><input id="t_aum" type="number" inputmode="decimal" value="1.5" step="0.1" min="0"><span class="suf">%</span></div></div>
+    <p class="note">Vale per il TFR lasciato in azienda, non per quello versato a un fondo pensione.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">TFR lordo maturato</div><div class="big" id="t_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>Quote accantonate</span><b id="t_quote">–</b></div>
+      <div class="ln"><span>Rivalutazione</span><b id="t_riv">–</b></div>
+      <div class="ln"><span>Quota del primo anno</span><b id="t_q1">–</b></div>
+      <div class="ln"><span>Tasso di rivalutazione annuo</span><b id="t_tasso">–</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info"><h2>Come si calcola il TFR</h2><p>Ogni anno l'azienda accantona una quota pari alla retribuzione annua divisa per 13,5, meno lo 0,5% della retribuzione che va all'INPS. Il TFR già accumulato viene rivalutato ogni anno dell'1,5% più il 75% dell'inflazione. Alla liquidazione il TFR viene tassato con un'aliquota media calcolata a parte (tassazione separata), quindi il netto è più basso della cifra lorda.</p></article>
+<p class="embed-credit">Calcolatore gratuito di <a href="https://vuoisaperequantocosta.it/tfr/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcT(){const ral=val('t_ral'),anni=Math.round(val('t_anni')),infl=val('t_infl'),aum=val('t_aum'),tasso=1.5+0.75*infl;
+  let fondo=0,quote=0,r=ral,q1=0;for(let y=1;y<=anni;y++){fondo*=1+tasso/100;const q=r/13.5-r*0.005;if(y===1)q1=q;fondo+=q;quote+=q;r*=1+aum/100}
+  $('t_tot').textContent=eur(fondo);$('t_quote').textContent=eur(quote);$('t_riv').textContent=eur(fondo-quote);$('t_q1').textContent=eur(q1);$('t_tasso').textContent=num(tasso,3)+'%'}
+on(['t_ral','t_anni','t_infl','t_aum'],calcT);calcT();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>

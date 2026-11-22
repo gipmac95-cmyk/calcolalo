@@ -141,3 +141,29 @@ table.amort th{color:var(--muted);font-weight:600;font-size:12px;text-transform:
 .ck p{margin:0;font-size:14px;color:var(--ink-2)}
 .ck-b{display:flex;gap:8px;flex:none}
 @media (max-width:600px){.ck{flex-direction:column;align-items:stretch}.ck-b .btn{flex:1}}
+.upd{margin:10px 0 0;font-size:13.5px;color:var(--muted)}
+.news{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-top:26px;box-shadow:var(--shadow)}
+.news h2{font-size:17px;margin:0 0 10px}
+.news ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.news li{display:flex;gap:14px;font-size:14.5px;align-items:baseline}
+.news time{flex:none;color:var(--muted);font-size:13px;min-width:118px}
+.news a{color:var(--ink-2);text-decoration:none}.news a:hover{color:var(--brand)}
+@media (max-width:600px){.news li{flex-direction:column;gap:2px}}
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18)}
+.share span{font-size:14px;opacity:.9;margin-right:4px;flex-basis:100%}
+.panel:not(.result) .share{border-top:1px solid var(--line)}
+.panel:not(.result) .share span{color:var(--muted)}
+.share .wa{background:#25d366;border-color:#25d366;color:#fff}
+.share .wa:hover{background:#1ebe5a;color:#fff}
+.embed-box{margin:22px 0 0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px}
+.embed-box summary{cursor:pointer;font-weight:600;font-size:15px}
+.embed-box p{font-size:14px;color:var(--muted)}
+.embed-box textarea{width:100%;font:12.5px/1.4 ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px;resize:vertical}
+body.embed{background:transparent}
+.embed-wrap{padding:12px}
+.embed-head{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 12px}
+.embed-head .ic{font-size:22px}
+.embed .ad,.embed .info,.embed .tips,.embed .share,.embed .embed-box{display:none}
+.embed .result{position:static}
+.embed .layout{grid-template-columns:1fr}
+.embed-credit{font-size:13px;color:var(--muted);text-align:center;margin:14px 0 4px}

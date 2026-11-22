@@ -14,7 +14,8 @@ new: si (facoltativo)
 -->
 seguito dall'HTML del calcolatore e da un <script> facoltativo.
 """
-import html, re, shutil
+import html, json, re, shutil
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -42,6 +43,14 @@ if(c==='ok')load();else if(c!=='no')b.hidden=false;
 document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
 document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>"""
 
+MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"]
+def itdate(iso):
+    y, m, d = (int(x) for x in iso.split("-"))
+    return f"{d} {MESI[m-1]} {y}"
+def catslug(c): return SLUGCAT.get(c, c.lower())
+def strip_tags(x): return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", x))).strip()
+def jsonld(obj): return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+
 def catcls(c): return "c-" + SLUGCAT.get(c, c.lower())
 
 def parse(p):
@@ -57,10 +66,13 @@ def parse(p):
     if sm:
         script, body = sm.group(1), body[:sm.start()]
     meta.update(slug=p.stem, body=body.strip(), script=script.strip(), order=int(meta.get("order", 50)))
+    meta.setdefault("updated", date.today().isoformat())
     return meta
 
 tools = sorted((parse(p) for p in TOOLS.glob("*.html")), key=lambda t: (t["cat"], t["order"]))
 COMMON_JS = (SRC / "common.js").read_text(encoding="utf-8")
+SHARE_JS = (SRC / "share.js").read_text(encoding="utf-8")
+NEWS = json.loads((SRC / "news.json").read_text(encoding="utf-8"))
 
 def logo():
     return '<a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a>'
@@ -79,7 +91,7 @@ def footer():
 {"".join(cols)}</div>
 <div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista. · <a href="/privacy/" style="display:inline;color:#b7bec8">Privacy e cookie</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Gestisci cookie</a></div></div></footer>'''
 
-def page(title, desc, path, main, active="", script=""):
+def page(title, desc, path, main, active="", script="", head_extra=""):
     canon = DOMAIN + path
     js = f"<script>\n{COMMON_JS}\n{script}\n</script>" if script else ""
     return f'''<!DOCTYPE html>
@@ -100,6 +112,7 @@ def page(title, desc, path, main, active="", script=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+{head_extra}
 </head>
 <body>
 {header(active)}
@@ -138,6 +151,7 @@ def home():
 <div class="stats"><span><b>Gratis</b> e senza registrazione</span><span><b>Dati aggiornati</b> alle regole 2026</span><span><b>Privacy</b>: i calcoli restano sul tuo dispositivo</span></div>
 </div></section>
 <div class="wrap">
+{news_box()}
 {"".join(blocks)}
 <p class="empty" id="empty">Nessun calcolatore trovato. Prova con un'altra parola.</p>
 <section class="why">
@@ -146,10 +160,18 @@ def home():
 <div><span style="font-size:24px">🔒</span><h3>Nessun dato salvato</h3><p>Non chiediamo email e non salviamo quello che inserisci.</p></div>
 </section>
 </div>'''
-    script = ''
+    ld = jsonld({"@context": "https://schema.org", "@type": "WebSite", "name": "Vuoi sapere quanto costa?", "alternateName": "VuoiSapereQuantoCosta.it",
+                 "url": DOMAIN + "/", "inLanguage": "it-IT",
+                 "potentialAction": {"@type": "SearchAction", "target": DOMAIN + "/quanto-vale/?q={search_term_string}", "query-input": "required name=search_term_string"}})
     return page(f"{SITE} Calcolatori gratuiti per le spese di tutti i giorni",
-                "Calcolatori online gratuiti: stipendio netto 2026, bollo auto, passaggio di proprietà, rata del mutuo, valore dell'auto usata, IVA, TFR e altro.",
-                "/", main, script=script)
+                "Calcolatori online gratuiti: stipendio netto 2026, bollo auto, passaggio di proprietà, rata del mutuo, bollette di luce e gas, valore dell'auto usata, IVA, TFR e altro.",
+                "/", main, head_extra=ld)
+
+def news_box():
+    items = sorted(NEWS, key=lambda n: n["date"], reverse=True)[:4]
+    if not items: return ""
+    li = "".join(f'<li><time datetime="{n["date"]}">{itdate(n["date"])}</time><a href="{n["url"]}">{html.escape(n["text"])}</a></li>' for n in items)
+    return f'<section class="news"><h2>🔔 Ultimi aggiornamenti</h2><ul>{li}</ul></section>'
 
 
 PRIVACY = """<div class="wrap"><div class="tool-head"><div class="crumb"><a href="/">Home</a> › Privacy</div><h1>Privacy e cookie</h1>
@@ -170,11 +192,52 @@ def tool_page(t):
     main = f'''<div class="wrap">
 <div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#{SLUGCAT.get(t["cat"], t["cat"].lower())}">{t["cat"]}</a></div>
 <h1><span class="ic">{t["icon"]}</span>{html.escape(t["h1"])}</h1>
-<p class="lead">{t["desc"]}</p></div>
+<p class="lead">{t["desc"]}</p>
+<p class="upd">🗓️ Aggiornato il {itdate(t["updated"])}</p></div>
 {t["body"]}
+{embed_box(t)}
 <section class="related"><h2>Altri calcolatori</h2><div class="grid">{"".join(card(x) for x in related[:4])}</div></section>
 </div>'''
-    return page(t["title"], t["desc"], f"/{t['slug']}/", main, active=t["cat"], script=t["script"])
+    url = f"{DOMAIN}/{t['slug']}/"
+    faq = re.findall(r"<h2>(.*?)</h2>\s*<p>(.*?)</p>", t["body"].split('<article class="info">')[-1], re.S) if '<article class="info">' in t["body"] else []
+    graph = [
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN + "/"},
+            {"@type": "ListItem", "position": 2, "name": t["cat"], "item": f"{DOMAIN}/#{catslug(t['cat'])}"},
+            {"@type": "ListItem", "position": 3, "name": t["h1"], "item": url}]},
+        {"@type": "WebApplication", "name": t["h1"], "url": url, "description": t["desc"], "applicationCategory": "FinanceApplication",
+         "operatingSystem": "Any", "inLanguage": "it-IT", "dateModified": t["updated"], "isAccessibleForFree": True,
+         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}]
+    if faq:
+        graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": strip_tags(q),
+                      "acceptedAnswer": {"@type": "Answer", "text": strip_tags(a)}} for q, a in faq]})
+    ld = jsonld({"@context": "https://schema.org", "@graph": graph})
+    return page(t["title"], t["desc"], f"/{t['slug']}/", main, active=t["cat"], script=t["script"] + "\n" + SHARE_JS, head_extra=ld)
+
+def embed_box(t):
+    code = (f'<iframe data-vsqc src="{DOMAIN}/embed/{t["slug"]}/" title="{html.escape(t["h1"])}" width="100%" height="900" loading="lazy" style="border:0;max-width:760px;display:block"></iframe>'
+            f'<p style="font-size:13px;max-width:760px">Calcolatore offerto da <a href="{DOMAIN}/{t["slug"]}/">VuoiSapereQuantoCosta.it – {html.escape(t["h1"])}</a></p>'
+            '<script>addEventListener("message",function(e){if(e.origin!=="' + DOMAIN + '"||!e.data||!e.data.vsqcH)return;document.querySelectorAll("iframe[data-vsqc]").forEach(function(f){if(f.contentWindow===e.source)f.style.height=e.data.vsqcH+"px"})})</script>')
+    return f'''<details class="embed-box"><summary>🧩 Aggiungi questo calcolatore al tuo sito o blog</summary>
+<p>Copia questo codice e incollalo nella tua pagina: il calcolatore apparirà sul tuo sito, gratis e sempre aggiornato.</p>
+<textarea id="emb_code" readonly rows="4">{html.escape(code)}</textarea>
+<button type="button" class="btn" onclick="var t=document.getElementById('emb_code');t.select();try{{navigator.clipboard.writeText(t.value).catch(function(){{}})}}catch(e){{}};this.textContent='Codice copiato!'">Copia il codice</button></details>'''
+
+def embed_page(t):
+    js = f"<script>\n{COMMON_JS}\n{t['script']}\n</script>"
+    return f'''<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(t["h1"])} – {SITE}</title><meta name="robots" content="noindex">
+<link rel="canonical" href="{DOMAIN}/{t["slug"]}/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">{t["icon"]}</span><b>{html.escape(t["h1"])}</b></div>
+{t["body"]}
+<p class="embed-credit">Calcolatore gratuito di <a href="{DOMAIN}/{t["slug"]}/">VuoiSapereQuantoCosta.it</a></p>
+</div>{js}
+<script>(function(){{function s(){{try{{parent.postMessage({{vsqcH:document.documentElement.scrollHeight}},"*")}}catch(e){{}}}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)}})();</script>
+</body></html>'''
 
 if OUT.exists(): shutil.rmtree(OUT)
 OUT.mkdir()
@@ -183,10 +246,13 @@ shutil.copy(SRC / "style.css", OUT / "style.css")
 for t in tools:
     d = OUT / t["slug"]; d.mkdir()
     (d / "index.html").write_text(tool_page(t), encoding="utf-8")
+    e = OUT / "embed" / t["slug"]; e.mkdir(parents=True)
+    (e / "index.html").write_text(embed_page(t), encoding="utf-8")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
-urls = [DOMAIN + "/"] + [f"{DOMAIN}/{t['slug']}/" for t in tools]
+latest = max(t["updated"] for t in tools)
+urls = [(DOMAIN + "/", latest)] + [(f"{DOMAIN}/{t['slug']}/", t["updated"]) for t in tools]
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-                                 + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+                                 + "".join(f"  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
 (OUT / "privacy").mkdir()
 (OUT / "privacy" / "index.html").write_text(page("Privacy e cookie – " + SITE, "Informativa sulla privacy e sui cookie di VuoiSapereQuantoCosta.it", "/privacy/", PRIVACY), encoding="utf-8")
 (OUT / "404.html").write_text(page("Pagina non trovata – " + SITE, "Pagina non trovata", "/404",

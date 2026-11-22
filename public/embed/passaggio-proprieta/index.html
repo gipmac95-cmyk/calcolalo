@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passaggio di proprietà – Vuoi sapere quanto costa?</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/passaggio-proprieta/"><base target="_blank">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"></head>
+<body class="embed"><div class="embed-wrap">
+<div class="embed-head"><span class="ic">🔑</span><b>Passaggio di proprietà</b></div>
+<div class="layout">
+  <div class="panel">
+    <div class="field"><label for="pp_kw">Potenza <span class="hint">(libretto, voce P.2)</span></label><div class="inp"><input id="pp_kw" type="number" inputmode="decimal" value="66" step="1" min="0"><span class="suf">kW</span></div></div>
+    <div class="field"><label for="pp_magg">Maggiorazione della provincia di residenza</label><div class="inp"><select id="pp_magg"><option value="0">Nessuna (0%)</option><option value="10">10%</option><option value="20">20%</option><option value="30" selected>30% (la più diffusa)</option></select></div></div>
+    <label class="check"><input id="pp_aut" type="checkbox" checked> Includi autentica della firma (16 €)</label>
+    <p class="note">Il calcolo comprende solo i costi previsti dalla legge. Agenzie di pratiche auto e delegazioni ACI aggiungono il proprio compenso.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Costo totale del passaggio</div><div class="big" id="pp_tot">–</div>
+    <div class="lines">
+      <div class="ln"><span>IPT (imposta provinciale)</span><b id="pp_ipt">–</b></div>
+      <div class="ln"><span>Emolumenti ACI</span><b>27,00 €</b></div>
+      <div class="ln"><span>Diritti Motorizzazione</span><b>10,20 €</b></div>
+      <div class="ln"><span>Bollo istanza unificata</span><b>32,00 €</b></div>
+      <div class="ln"><span>Bollo Documento Unico</span><b>16,00 €</b></div>
+      <div class="ln"><span>Bollo autentica</span><b id="pp_autv">16,00 €</b></div>
+    </div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Come si calcola l'IPT</h2>
+  <p>Per le auto fino a 53 kW l'IPT è fissa: 150,81 €. Oltre i 53 kW si pagano 3,5119 € per ogni kW di potenza, calcolati su tutti i kW dell'auto. Le province possono aumentare l'importo fino al 30%, e la maggior parte lo fa.</p>
+  <h2>Chi paga il passaggio di proprietà?</h2>
+  <p>Per legge non è stabilito: di solito paga chi compra, ma venditore e acquirente possono accordarsi diversamente. Conviene scriverlo nell'accordo di vendita.</p>
+</article>
+<p class="embed-credit">Calcolatore gratuito di <a href="https://vuoisaperequantocosta.it/passaggio-proprieta/">VuoiSapereQuantoCosta.it</a></p>
+</div><script>
+const $=id=>document.getElementById(id);
+const eur=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>s.replace(/[€]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function calcPP(){const kw=val('pp_kw'),m=+$('pp_magg').value,ipt=(kw<=53?150.81:3.5119*kw)*(1+m/100),aut=$('pp_aut').checked?16:0;
+  $('pp_ipt').textContent=eur(ipt);$('pp_autv').textContent=eur(aut);$('pp_tot').textContent=eur(ipt+85.20+aut)}
+on(['pp_kw','pp_magg','pp_aut'],calcPP);calcPP();
+</script>
+<script>(function(){function s(){try{parent.postMessage({vsqcH:document.documentElement.scrollHeight},"*")}catch(e){}}s();if(window.ResizeObserver)new ResizeObserver(s).observe(document.body);addEventListener("load",s)})();</script>
+</body></html>
