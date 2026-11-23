@@ -1,0 +1,78 @@
+<!--
+title: Calcolo interesse composto con versamenti mensili, tasse e bollo
+h1: Interesse composto e piano di risparmio
+desc: Calcola quanto diventano i tuoi risparmi con l'interesse composto: capitale iniziale, versamenti mensili, rendimento, tasse al 26% o 12,5% e imposta di bollo.
+card: Quanto crescono i risparmi con l'interesse composto.
+icon: 📈
+cat: Utilità
+updated: 2026-11-23
+order: 15
+new: si
+-->
+<div class="layout">
+  <div class="panel">
+    <div class="row2">
+      <div class="field"><label for="ic_cap">Capitale iniziale</label><div class="inp"><input id="ic_cap" type="number" inputmode="decimal" value="10000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="ic_ver">Versamento mensile</label><div class="inp"><input id="ic_ver" type="number" inputmode="decimal" value="200" step="50" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ic_rend">Rendimento annuo lordo</label><div class="inp"><input id="ic_rend" type="number" inputmode="decimal" value="3" step="0.1" min="0" max="30"><span class="suf">%</span></div></div>
+      <div class="field"><label for="ic_anni">Durata</label><div class="inp"><input id="ic_anni" type="number" inputmode="numeric" value="20" step="1" min="1" max="60"><span class="suf">anni</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ic_tax">Tasse sugli interessi</label><div class="inp"><select id="ic_tax"><option value="26" selected>26% (conti deposito, fondi, ETF, azioni)</option><option value="12.5">12,5% (BTP e titoli di Stato)</option><option value="0">Nessuna</option></select></div></div>
+      <div class="field"><label for="ic_bollo">Imposta di bollo</label><div class="inp"><select id="ic_bollo"><option value="0.2" selected>Sì, 0,20% all'anno</option><option value="0">No</option></select></div></div>
+    </div>
+    <p class="note">Calcolo indicativo con capitalizzazione mensile e versamenti a fine mese. Le tasse sono calcolate alla fine sul guadagno lordo, come in un investimento ad accumulo. I rendimenti futuri non sono garantiti.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Capitale finale netto</div>
+    <div class="big" id="ic_fin">–</div>
+    <div class="range" id="ic_sub">–</div>
+    <div class="lines">
+      <div class="ln"><span>Totale versato</span><b id="ic_tot">–</b></div>
+      <div class="ln"><span>Interessi lordi</span><b id="ic_int">–</b></div>
+      <div class="ln"><span>Imposta di bollo pagata</span><b id="ic_bol">–</b></div>
+      <div class="ln"><span>Tasse sugli interessi</span><b id="ic_tas">–</b></div>
+      <div class="ln"><span>Guadagno netto</span><b id="ic_gua">–</b></div>
+      <div class="ln"><span>Senza versamenti mensili</span><b id="ic_solo">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Approfondisci</div>
+    <div class="links" id="ic_links"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Cos'è l'interesse composto?</h2>
+  <p>Con l'interesse composto gli interessi maturati si sommano al capitale e a loro volta producono interessi. La formula base è capitale finale = capitale × (1 + r)<sup>n</sup>, dove r è il rendimento annuo e n il numero di anni. Più è lungo il periodo, più l'effetto cresce: 10.000 € al 5% diventano circa 16.289 € lordi in 10 anni e circa 26.533 € in 20 anni.</p>
+  <h2>Quante tasse si pagano sugli interessi?</h2>
+  <p>In Italia gli interessi e i guadagni finanziari sono tassati al 26% (conti deposito, conti correnti, fondi, ETF, azioni, obbligazioni societarie). I titoli di Stato italiani ed esteri della "white list", come BTP e BOT, sono tassati al 12,5%. Sui conti deposito la ritenuta viene trattenuta direttamente dalla banca.</p>
+  <h2>Cos'è l'imposta di bollo dello 0,20%?</h2>
+  <p>Sui prodotti finanziari (conti deposito, titoli, fondi, ETF) si paga ogni anno un'imposta di bollo dello 0,20% sul valore. Sui conti correnti e libretti si paga invece un importo fisso di 34,20 € all'anno, solo se la giacenza media supera 5.000 €. Il calcolatore applica lo 0,20% a fine di ogni anno sul saldo.</p>
+  <h2>Cos'è la regola del 72?</h2>
+  <p>È un modo rapido per capire in quanti anni un capitale raddoppia: dividi 72 per il rendimento annuo. Al 3% servono circa 24 anni, al 6% circa 12 anni. Ricorda però che tasse, costi e inflazione riducono il rendimento reale.</p>
+  <h2>Dove trovo i rendimenti dei titoli di Stato?</h2>
+  <p>I rendimenti aggiornati dei BTP sono sul sito del <a href="https://www.dt.mef.gov.it/it/debito_pubblico/" target="_blank" rel="noopener">Dipartimento del Tesoro</a> e su quello di <a href="https://www.borsaitaliana.it/" target="_blank" rel="noopener">Borsa Italiana</a>. Per confrontare i conti deposito puoi usare i comparatori online.</p>
+</article>
+<script>
+function simIC(C,pmt,r,anni,bollo){
+  const m=Math.pow(1+r,1/12)-1;let b=C,bol=0;
+  for(let y=0;y<anni;y++){for(let k=0;k<12;k++)b=b*(1+m)+pmt;const x=b*bollo;bol+=x;b-=x}
+  return {b,bol};
+}
+function calcIC(){
+  const C=val('ic_cap'),pmt=val('ic_ver'),r=val('ic_rend')/100,anni=Math.max(1,Math.round(val('ic_anni'))),t=parseFloat($('ic_tax').value)/100,bo=parseFloat($('ic_bollo').value)/100;
+  const ids=['ic_fin','ic_tot','ic_int','ic_bol','ic_tas','ic_gua','ic_solo'];
+  if(C<=0&&pmt<=0){ids.forEach(x=>$(x).textContent='–');$('ic_sub').textContent='–';return}
+  const vers=C+pmt*12*anni,s=simIC(C,pmt,r,anni,bo);
+  const gNoBollo=simIC(C,pmt,r,anni,0).b-vers;           // interessi lordi maturati
+  const gain=s.b-vers,tax=Math.max(0,gain)*t,fin=s.b-tax;
+  const s0=simIC(C,0,r,anni,bo),fin0=s0.b-Math.max(0,s0.b-C)*t;
+  $('ic_fin').textContent=eur(fin);
+  $('ic_sub').textContent='Dopo '+anni+(anni===1?' anno':' anni')+' · guadagno netto '+(fin>=vers?'+':'')+num((fin-vers)/vers*100,1)+'% su quanto versato';
+  $('ic_tot').textContent=eur(vers);$('ic_int').textContent=eur(gNoBollo);$('ic_bol').textContent=eur(s.bol);
+  $('ic_tas').textContent=eur(tax);$('ic_gua').textContent=eur(fin-vers);$('ic_solo').textContent=C>0?eur(fin0):'–';
+}
+$('ic_links').innerHTML=lk([['https://www.dt.mef.gov.it/it/debito_pubblico/','Dipartimento del Tesoro','Titoli di Stato e BTP'],['https://www.agenziaentrate.gov.it/','Agenzia delle Entrate','Tassazione delle rendite finanziarie'],['https://economiapertutti.bancaditalia.it/','Banca d\'Italia','Educazione finanziaria']]);
+on(['ic_cap','ic_ver','ic_rend','ic_anni','ic_tax','ic_bollo'],calcIC);calcIC();
+</script>

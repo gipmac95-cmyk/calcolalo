@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo interesse composto con versamenti mensili, tasse e bollo</title>
+<meta name="description" content="Calcola quanto diventano i tuoi risparmi con l&#x27;interesse composto: capitale iniziale, versamenti mensili, rendimento, tasse al 26% o 12,5% e imposta di bollo.">
+<link rel="canonical" href="https://vuoisaperequantocosta.it/interesse-composto/">
+<link rel="alternate" hreflang="it" href="https://vuoisaperequantocosta.it/interesse-composto/"><link rel="alternate" hreflang="en" href="https://vuoisaperequantocosta.it/en/compound-interest-calculator/"><link rel="alternate" hreflang="x-default" href="https://vuoisaperequantocosta.it/interesse-composto/">
+<meta property="og:title" content="Calcolo interesse composto con versamenti mensili, tasse e bollo">
+<meta property="og:description" content="Calcola quanto diventano i tuoi risparmi con l&#x27;interesse composto: capitale iniziale, versamenti mensili, rendimento, tasse al 26% o 12,5% e imposta di bollo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vuoisaperequantocosta.it/interesse-composto/">
+<meta property="og:locale" content="it_IT">
+<meta name="theme-color" content="#0e6b63">
+<meta name="google-site-verification" content="kYwrCokb8RvZCkuNno2ew4Bu0Jja8ny4wfENO5Qc8x8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230e6b63'/><text x='32' y='43' font-size='30' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>€?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://vuoisaperequantocosta.it/"}, {"@type": "ListItem", "position": 2, "name": "Utilità", "item": "https://vuoisaperequantocosta.it/#utilita"}, {"@type": "ListItem", "position": 3, "name": "Interesse composto e piano di risparmio", "item": "https://vuoisaperequantocosta.it/interesse-composto/"}]}, {"@type": "WebApplication", "name": "Interesse composto e piano di risparmio", "url": "https://vuoisaperequantocosta.it/interesse-composto/", "description": "Calcola quanto diventano i tuoi risparmi con l'interesse composto: capitale iniziale, versamenti mensili, rendimento, tasse al 26% o 12,5% e imposta di bollo.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "it-IT", "dateModified": "2026-11-23", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Cos'è l'interesse composto?", "acceptedAnswer": {"@type": "Answer", "text": "Con l'interesse composto gli interessi maturati si sommano al capitale e a loro volta producono interessi. La formula base è capitale finale = capitale × (1 + r)n, dove r è il rendimento annuo e n il numero di anni. Più è lungo il periodo, più l'effetto cresce: 10.000 € al 5% diventano circa 16.289 € lordi in 10 anni e circa 26.533 € in 20 anni."}}, {"@type": "Question", "name": "Quante tasse si pagano sugli interessi?", "acceptedAnswer": {"@type": "Answer", "text": "In Italia gli interessi e i guadagni finanziari sono tassati al 26% (conti deposito, conti correnti, fondi, ETF, azioni, obbligazioni societarie). I titoli di Stato italiani ed esteri della \"white list\", come BTP e BOT, sono tassati al 12,5%. Sui conti deposito la ritenuta viene trattenuta direttamente dalla banca."}}, {"@type": "Question", "name": "Cos'è l'imposta di bollo dello 0,20%?", "acceptedAnswer": {"@type": "Answer", "text": "Sui prodotti finanziari (conti deposito, titoli, fondi, ETF) si paga ogni anno un'imposta di bollo dello 0,20% sul valore. Sui conti correnti e libretti si paga invece un importo fisso di 34,20 € all'anno, solo se la giacenza media supera 5.000 €. Il calcolatore applica lo 0,20% a fine di ogni anno sul saldo."}}, {"@type": "Question", "name": "Cos'è la regola del 72?", "acceptedAnswer": {"@type": "Answer", "text": "È un modo rapido per capire in quanti anni un capitale raddoppia: dividi 72 per il rendimento annuo. Al 3% servono circa 24 anni, al 6% circa 12 anni. Ricorda però che tasse, costi e inflazione riducono il rendimento reale."}}, {"@type": "Question", "name": "Dove trovo i rendimenti dei titoli di Stato?", "acceptedAnswer": {"@type": "Answer", "text": "I rendimenti aggiornati dei BTP sono sul sito del Dipartimento del Tesoro e su quello di Borsa Italiana. Per confrontare i conti deposito puoi usare i comparatori online."}}]}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><div class="hdr-r"><nav class="main-nav"><a href="/#auto">Auto</a><a href="/#casa">Casa</a><a href="/#lavoro">Lavoro</a><a href="/#collezionismo">Collezionismo</a><a href="/#utilita" class=on>Utilità</a></nav><a class="lang-switch" href="/en/compound-interest-calculator/" hreflang="en" lang="en" title="English version" aria-label="English version"><svg width="20" height="14" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="gbc"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#gbc)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg><span>EN</span></a></div></div></header>
+<main>
+<div class="wrap">
+<div class="tool-head"><div class="crumb"><a href="/">Home</a> › <a href="/#utilita">Utilità</a></div>
+<h1><span class="ic">📈</span>Interesse composto e piano di risparmio</h1>
+<p class="lead">Calcola quanto diventano i tuoi risparmi con l'interesse composto: capitale iniziale, versamenti mensili, rendimento, tasse al 26% o 12,5% e imposta di bollo.</p>
+<p class="upd">🗓️ Aggiornato il 23 novembre 2026</p></div>
+<div class="layout">
+  <div class="panel">
+    <div class="row2">
+      <div class="field"><label for="ic_cap">Capitale iniziale</label><div class="inp"><input id="ic_cap" type="number" inputmode="decimal" value="10000" step="500" min="0"><span class="suf">€</span></div></div>
+      <div class="field"><label for="ic_ver">Versamento mensile</label><div class="inp"><input id="ic_ver" type="number" inputmode="decimal" value="200" step="50" min="0"><span class="suf">€</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ic_rend">Rendimento annuo lordo</label><div class="inp"><input id="ic_rend" type="number" inputmode="decimal" value="3" step="0.1" min="0" max="30"><span class="suf">%</span></div></div>
+      <div class="field"><label for="ic_anni">Durata</label><div class="inp"><input id="ic_anni" type="number" inputmode="numeric" value="20" step="1" min="1" max="60"><span class="suf">anni</span></div></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="ic_tax">Tasse sugli interessi</label><div class="inp"><select id="ic_tax"><option value="26" selected>26% (conti deposito, fondi, ETF, azioni)</option><option value="12.5">12,5% (BTP e titoli di Stato)</option><option value="0">Nessuna</option></select></div></div>
+      <div class="field"><label for="ic_bollo">Imposta di bollo</label><div class="inp"><select id="ic_bollo"><option value="0.2" selected>Sì, 0,20% all'anno</option><option value="0">No</option></select></div></div>
+    </div>
+    <p class="note">Calcolo indicativo con capitalizzazione mensile e versamenti a fine mese. Le tasse sono calcolate alla fine sul guadagno lordo, come in un investimento ad accumulo. I rendimenti futuri non sono garantiti.</p>
+  </div>
+  <div class="panel result">
+    <div class="lbl">Capitale finale netto</div>
+    <div class="big" id="ic_fin">–</div>
+    <div class="range" id="ic_sub">–</div>
+    <div class="lines">
+      <div class="ln"><span>Totale versato</span><b id="ic_tot">–</b></div>
+      <div class="ln"><span>Interessi lordi</span><b id="ic_int">–</b></div>
+      <div class="ln"><span>Imposta di bollo pagata</span><b id="ic_bol">–</b></div>
+      <div class="ln"><span>Tasse sugli interessi</span><b id="ic_tas">–</b></div>
+      <div class="ln"><span>Guadagno netto</span><b id="ic_gua">–</b></div>
+      <div class="ln"><span>Senza versamenti mensili</span><b id="ic_solo">–</b></div>
+    </div>
+    <div style="margin-top:16px;font-weight:600">Approfondisci</div>
+    <div class="links" id="ic_links"></div>
+  </div>
+</div>
+<div class="ad">Spazio pubblicitario</div>
+<article class="info">
+  <h2>Cos'è l'interesse composto?</h2>
+  <p>Con l'interesse composto gli interessi maturati si sommano al capitale e a loro volta producono interessi. La formula base è capitale finale = capitale × (1 + r)<sup>n</sup>, dove r è il rendimento annuo e n il numero di anni. Più è lungo il periodo, più l'effetto cresce: 10.000 € al 5% diventano circa 16.289 € lordi in 10 anni e circa 26.533 € in 20 anni.</p>
+  <h2>Quante tasse si pagano sugli interessi?</h2>
+  <p>In Italia gli interessi e i guadagni finanziari sono tassati al 26% (conti deposito, conti correnti, fondi, ETF, azioni, obbligazioni societarie). I titoli di Stato italiani ed esteri della "white list", come BTP e BOT, sono tassati al 12,5%. Sui conti deposito la ritenuta viene trattenuta direttamente dalla banca.</p>
+  <h2>Cos'è l'imposta di bollo dello 0,20%?</h2>
+  <p>Sui prodotti finanziari (conti deposito, titoli, fondi, ETF) si paga ogni anno un'imposta di bollo dello 0,20% sul valore. Sui conti correnti e libretti si paga invece un importo fisso di 34,20 € all'anno, solo se la giacenza media supera 5.000 €. Il calcolatore applica lo 0,20% a fine di ogni anno sul saldo.</p>
+  <h2>Cos'è la regola del 72?</h2>
+  <p>È un modo rapido per capire in quanti anni un capitale raddoppia: dividi 72 per il rendimento annuo. Al 3% servono circa 24 anni, al 6% circa 12 anni. Ricorda però che tasse, costi e inflazione riducono il rendimento reale.</p>
+  <h2>Dove trovo i rendimenti dei titoli di Stato?</h2>
+  <p>I rendimenti aggiornati dei BTP sono sul sito del <a href="https://www.dt.mef.gov.it/it/debito_pubblico/" target="_blank" rel="noopener">Dipartimento del Tesoro</a> e su quello di <a href="https://www.borsaitaliana.it/" target="_blank" rel="noopener">Borsa Italiana</a>. Per confrontare i conti deposito puoi usare i comparatori online.</p>
+</article>
+<details class="embed-box"><summary>🧩 Aggiungi questo calcolatore al tuo sito o blog</summary>
+<p>Copia questo codice e incollalo nella tua pagina: il calcolatore apparirà sul tuo sito, gratis e sempre aggiornato.</p>
+<textarea id="emb_code" readonly rows="4">&lt;iframe data-vsqc src=&quot;https://vuoisaperequantocosta.it/embed/interesse-composto/&quot; title=&quot;Interesse composto e piano di risparmio&quot; width=&quot;100%&quot; height=&quot;900&quot; loading=&quot;lazy&quot; style=&quot;border:0;max-width:760px;display:block&quot;&gt;&lt;/iframe&gt;&lt;p style=&quot;font-size:13px;max-width:760px&quot;&gt;Calcolatore offerto da &lt;a href=&quot;https://vuoisaperequantocosta.it/interesse-composto/&quot;&gt;VuoiSapereQuantoCosta.it – Interesse composto e piano di risparmio&lt;/a&gt;&lt;/p&gt;&lt;script&gt;addEventListener(&quot;message&quot;,function(e){if(e.origin!==&quot;https://vuoisaperequantocosta.it&quot;||!e.data||!e.data.vsqcH)return;document.querySelectorAll(&quot;iframe[data-vsqc]&quot;).forEach(function(f){if(f.contentWindow===e.source)f.style.height=e.data.vsqcH+&quot;px&quot;})})&lt;/script&gt;</textarea>
+<button type="button" class="btn" onclick="var t=document.getElementById('emb_code');t.select();try{navigator.clipboard.writeText(t.value).catch(function(){})}catch(e){};this.textContent='Codice copiato!'">Copia il codice</button></details>
+<section class="related"><h2>Altri calcolatori</h2><div class="grid"><a class="card c-utilita" href="/quanto-vale/"><span class="ic">🔎</span><span><h3>Quanto vale?<span class="new">Nuovo</span></h3><p>Cerca qualsiasi oggetto e scopri quanto vale usato.</p></span></a><a class="card c-utilita" href="/percentuali/"><span class="ic">％</span><span><h3>Percentuali e sconti</h3><p>Percentuale di un numero, variazioni e prezzo scontato.</p></span></a><a class="card c-utilita" href="/dividi-spese/"><span class="ic">👥</span><span><h3>Dividi le spese</h3><p>Chi deve quanto a chi, dopo una cena o una vacanza.</p></span></a><a class="card c-auto" href="/valore-auto/"><span class="ic">🚗</span><span><h3>Quanto vale la mia auto<span class="new">Nuovo</span></h3><p>Stima del valore dell&#x27;usato e confronto con gli annunci reali.</p></span></a></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap"><div class="cols">
+<div><a class="logo" href="/"><span class="logo-mark">€?</span><span>Vuoi sapere <b>quanto costa?</b></span></a><p>Calcolatori gratuiti e senza registrazione per sapere in pochi secondi quanto costa davvero una spesa. I dati inseriti restano nel tuo browser.</p></div>
+<div><h4>Auto</h4><a href="/valore-auto/">Quanto vale la mia auto</a><a href="/costo-auto-anno/">Quanto costa un&#x27;auto all&#x27;anno</a><a href="/elettrica-o-benzina/">Auto elettrica o benzina?</a><a href="/preventivo-manutenzione/">Preventivo tagliando e manutenzione</a><a href="/bollo-auto/">Bollo auto</a><a href="/passaggio-proprieta/">Passaggio di proprietà</a><a href="/costo-viaggio/">Costo viaggio in auto</a></div><div><h4>Casa</h4><a href="/rata-mutuo/">Rata del mutuo</a><a href="/rata-prestito/">Rata del prestito o finanziamento</a><a href="/imu/">Calcolo IMU e saldo di dicembre</a><a href="/bolletta-luce/">Bolletta della luce</a><a href="/bolletta-gas/">Bolletta del gas</a><a href="/pompa-di-calore/">Pompa di calore o caldaia?</a><a href="/costo-internet/">Costo reale di internet casa</a></div><div><h4>Lavoro</h4><a href="/tredicesima/">Tredicesima 2026</a><a href="/stipendio-netto/">Stipendio netto 2026</a><a href="/tfr/">Calcolo TFR</a><a href="/scorporo-iva/">Scorporo e aggiunta IVA</a><a href="/assegno-unico/">Assegno unico 2026</a></div></div>
+<div class="bottom">© 2026 VuoiSapereQuantoCosta.it · I risultati sono stime indicative e non sostituiscono il parere di un professionista. · <a href="/privacy/" style="display:inline;color:#b7bec8">Privacy e cookie</a> · <a href="#" data-ck style="display:inline;color:#b7bec8">Gestisci cookie</a></div></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const LANG=(document.documentElement.lang||'it').slice(0,2),LOC=LANG==='en'?'en-IE':'it-IT';
+const eur=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR'}):'–';
+const eur0=v=>isFinite(v)?v.toLocaleString(LOC,{style:'currency',currency:'EUR',maximumFractionDigits:0}):'–';
+const num=(v,d=2)=>isFinite(v)?v.toLocaleString(LOC,{maximumFractionDigits:d,minimumFractionDigits:0}):'–';
+const val=id=>{const x=parseFloat(String($(id).value).replace(',','.'));return isNaN(x)?0:x};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const on=(ids,fn)=>ids.forEach(i=>{const e=$(i);if(e){e.addEventListener('input',fn);e.addEventListener('change',fn)}});
+const qs=s=>encodeURIComponent(s.trim().replace(/\s+/g,' '));
+function parsePrices(txt){return String(txt).split(/[\s;]+/).map(s=>{s=s.replace(/[€$£]/g,'');return LANG==='en'?s.replace(/,/g,''):s.replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')}).map(parseFloat).filter(x=>isFinite(x)&&x>0)}
+function priceStats(arr){
+  if(!arr.length)return null;
+  const s=[...arr].sort((a,b)=>a-b),med=a=>a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;
+  const m0=med(s),clean=s.filter(x=>x>=m0*0.5&&x<=m0*2),m=med(clean),avg=clean.reduce((t,x)=>t+x,0)/clean.length;
+  return {n:s.length,used:clean.length,min:clean[0],max:clean[clean.length-1],avg,med:m,fast:m*0.85};
+}
+function lk(L){return L.map(([u,t,s])=>`<a href="${u}" target="_blank" rel="noopener nofollow" style="border:1px solid var(--line)"><span>${t}<small>${esc(s)}</small></span><span class="arr">↗</span></a>`).join('')}
+
+function simIC(C,pmt,r,anni,bollo){
+  const m=Math.pow(1+r,1/12)-1;let b=C,bol=0;
+  for(let y=0;y<anni;y++){for(let k=0;k<12;k++)b=b*(1+m)+pmt;const x=b*bollo;bol+=x;b-=x}
+  return {b,bol};
+}
+function calcIC(){
+  const C=val('ic_cap'),pmt=val('ic_ver'),r=val('ic_rend')/100,anni=Math.max(1,Math.round(val('ic_anni'))),t=parseFloat($('ic_tax').value)/100,bo=parseFloat($('ic_bollo').value)/100;
+  const ids=['ic_fin','ic_tot','ic_int','ic_bol','ic_tas','ic_gua','ic_solo'];
+  if(C<=0&&pmt<=0){ids.forEach(x=>$(x).textContent='–');$('ic_sub').textContent='–';return}
+  const vers=C+pmt*12*anni,s=simIC(C,pmt,r,anni,bo);
+  const gNoBollo=simIC(C,pmt,r,anni,0).b-vers;           // interessi lordi maturati
+  const gain=s.b-vers,tax=Math.max(0,gain)*t,fin=s.b-tax;
+  const s0=simIC(C,0,r,anni,bo),fin0=s0.b-Math.max(0,s0.b-C)*t;
+  $('ic_fin').textContent=eur(fin);
+  $('ic_sub').textContent='Dopo '+anni+(anni===1?' anno':' anni')+' · guadagno netto '+(fin>=vers?'+':'')+num((fin-vers)/vers*100,1)+'% su quanto versato';
+  $('ic_tot').textContent=eur(vers);$('ic_int').textContent=eur(gNoBollo);$('ic_bol').textContent=eur(s.bol);
+  $('ic_tas').textContent=eur(tax);$('ic_gua').textContent=eur(fin-vers);$('ic_solo').textContent=C>0?eur(fin0):'–';
+}
+$('ic_links').innerHTML=lk([['https://www.dt.mef.gov.it/it/debito_pubblico/','Dipartimento del Tesoro','Titoli di Stato e BTP'],['https://www.agenziaentrate.gov.it/','Agenzia delle Entrate','Tassazione delle rendite finanziarie'],['https://economiapertutti.bancaditalia.it/','Banca d\'Italia','Educazione finanziaria']]);
+on(['ic_cap','ic_ver','ic_rend','ic_anni','ic_tax','ic_bollo'],calcIC);calcIC();
+(function(){
+  const hEl=document.querySelector('.tool-head h1');const h1=hEl?[...hEl.childNodes].filter(n=>!(n.classList&&n.classList.contains('ic'))).map(n=>n.textContent).join(''):document.title;
+  const box=document.createElement('div');box.className='share';
+  const EN=(document.documentElement.lang||'').startsWith('en');
+  box.innerHTML='<span>'+(EN?'Share the result':'Condividi il risultato')+'</span><a class="btn wa" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg> WhatsApp</a><button type="button" class="btn cp">'+(EN?'Copy link':'Copia link')+'</button>';
+  const target=document.querySelector('.result')||document.querySelector('.panel');
+  if(!target)return;target.appendChild(box);
+  const url=()=>location.origin+location.pathname+location.search;
+  box.querySelector('.wa').addEventListener('click',function(){
+    const lbl=(document.querySelector('.result .lbl')||{}).textContent,big=(document.querySelector('.result .big')||{}).textContent;
+    const t=big&&big.trim()!=='–'&&lbl?(EN?`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Work out yours for free 👉 ${url()}`:`${h1.trim()} – ${lbl.trim()}: ${big.trim()}. Calcola il tuo gratis qui 👉 ${url()}`):(EN?`Check out this free calculator: ${h1.trim()} 👉 ${url()}`:`Guarda questo calcolatore gratuito: ${h1.trim()} 👉 ${url()}`);
+    this.href='https://wa.me/?text='+encodeURIComponent(t);
+    try{if(window.gtag)gtag('event','share',{method:'whatsapp',content_type:'calcolatore',item_id:location.pathname})}catch(e){}
+  });
+  box.querySelector('.cp').addEventListener('click',function(){
+    const b=this;const done=()=>{b.textContent=EN?'Link copied!':'Link copiato!';setTimeout(()=>b.textContent=EN?'Copy link':'Copia link',2000)};
+    try{navigator.clipboard.writeText(url()).then(done,done)}catch(e){done()}
+    try{if(window.gtag)gtag('event','share',{method:'copy_link',item_id:location.pathname})}catch(e){}
+  });
+})();
+
+</script>
+<div id="ck" class="ck" role="dialog" aria-live="polite" aria-label="Cookie" hidden>
+<p><b>Usiamo i cookie solo per statistiche anonime</b> sulle visite, con Google Analytics, se ci dai il consenso. I calcoli restano sempre sul tuo dispositivo. <a href="/privacy/">Privacy e cookie</a></p>
+<div class="ck-b"><button type="button" class="btn" id="ck-no">Rifiuta</button><button type="button" class="btn btn-primary" id="ck-ok">Accetta</button></div></div>
+<script>(function(){var K='vsqc-consent',GA='G-FKCYXWVBCF';
+function load(){if(window.__ga)return;window.__ga=1;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA);}
+var c=null;try{c=localStorage.getItem(K)}catch(e){}
+var b=document.getElementById('ck');function set(v){try{localStorage.setItem(K,v)}catch(e){}b.hidden=true;if(v==='ok')load();}
+if(c==='ok')load();else if(c!=='no')b.hidden=false;
+document.getElementById('ck-ok').onclick=function(){set('ok')};document.getElementById('ck-no').onclick=function(){set('no')};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-ck]');if(t){e.preventDefault();b.hidden=false;}});})();</script>
+</body>
+</html>

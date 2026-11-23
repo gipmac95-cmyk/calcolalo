@@ -1,6 +1,11 @@
 [
   {
     "date": "2026-11-23",
+    "text": "Nuovo: calcolo dell'interesse composto con versamenti mensili, tasse al 26% o 12,5% e imposta di bollo.",
+    "url": "/interesse-composto/"
+  },
+  {
+    "date": "2026-11-23",
     "text": "Novità: il sito è disponibile anche in inglese, con il tasto della bandiera in alto a destra.",
     "url": "/en/"
   },
